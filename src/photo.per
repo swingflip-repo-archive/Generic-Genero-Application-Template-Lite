@@ -1,6 +1,6 @@
 LAYOUT (TEXT="")   
 VBOX 
-GROUP (TEXT="Photo Uploads")
+GROUP (TEXT=%"photo.per.Title")
 GRID
 {
 [words                                                                                                                                                                                     ]
@@ -28,12 +28,12 @@ END  #LAYOUT
 ATTRIBUTES
 #use textedit
 TEXTEDIT words=FORMONLY.words, NOENTRY, SCROLLBARS=VERTICAL, SIZEPOLICY=FIXED, STRETCH=X;
-BUTTON bt_takep : bt_takep, TEXT=%"Take Photo";
-BUTTON bt_choosep : bt_choosep, TEXT=%"Choose Photo";
+BUTTON bt_takep : bt_takep, TEXT=%"photo.per.Take_Photo";
+BUTTON bt_choosep : bt_choosep, TEXT=%"photo.per.Choose_Photo";
 TEXTEDIT status=FORMONLY.status, NOENTRY, SCROLLBARS=NONE, SIZEPOLICY=FIXED, STRETCH=BOTH;
-BUTTON bt_cancel : bt_cancel, TEXT=%"Cancel Photos", STYLE="redButton";
-BUTTON bt_confirm : bt_confirm, TEXT=%"Upload Images", STYLE="greenButton";
-BUTTON bt_go_back : bt_go_back, TEXT=%"Go Back";
+BUTTON bt_cancel : bt_cancel, TEXT=%"photo.per.Cancel_Photos", STYLE="redButton";
+BUTTON bt_confirm : bt_confirm, TEXT=%"photo.per.Upload_Images", STYLE="greenButton";
+BUTTON bt_go_back : bt_go_back, TEXT=%"photo.per.Go_Back";
 
 END
 

@@ -10,13 +10,11 @@ SCHEMA local_db
 FUNCTION generate_about()
 
 		LET g_application_about = g_application_title || " " || g_application_version || "\n\n" ||
-														  "Logged in as: " || g_user || "\n" ||
-															"User Type: " || g_user_type || "\n" ||
-													 	  "Logged in at: " || util.Datetime.format(g_logged_in, g_date_format) || "\n" ||
-															"Genero Version: " || FGL_GETVERSION() || "\n\n" || 
-													 	  "This is a template application developed by Ryan hamlin to provide a platform for GMA,GBC,GDC applications which are capable of managing local encrypted logins and the ability to work in an onfline environment." || "\n" ||
-														  "This application also comes bundled with a basic PHP driven webservice to allow remote connection to a INFORMIX database to enable network database connections." || "\n" ||
-														  "If you have any questions feel free to email me at ryan@ryanhamlin.co.uk" 													
+														  %"function.lib.string.Logged_In_As" || g_user || "\n" ||
+															%"function.lib.string.User_Type" || g_user_type || "\n" ||
+													 	  %"function.lib.string.Logged_In_At" || util.Datetime.format(g_logged_in, g_date_format) || "\n" ||
+															%"function.lib.string.Genero_Version" || FGL_GETVERSION() || "\n\n" || 
+													 	  %"function.lib.string.About_Explanation" 													
 END FUNCTION
 #
 #
@@ -90,7 +88,7 @@ FUNCTION capture_local_stats(f_info)
 
 		IF sqlca.sqlcode <> 0
 		THEN
-				CALL fgl_winmessage("Fatal Error!", "ERROR 1002:\nFailed To Initialise Tracking Variables.", "stop")
+				CALL fgl_winmessage(%"function.lib.string.Fatal_Error", %"function.lib.string.ERROR_1002", "stop")
         EXIT PROGRAM 1002
 		ELSE
 				LET f_ok = TRUE
@@ -107,7 +105,7 @@ FUNCTION capture_local_stats(f_info)
 
 				IF sqlca.sqlcode <> 0
 				THEN
-						CALL fgl_winmessage("Fatal Error!", "ERROR 1003:\nFailed To Prune Local Stat Table.", "stop")
+						CALL fgl_winmessage(%"function.lib.string.Fatal_Error", %"function.lib.string.ERROR_1003", "stop")
 						EXIT PROGRAM 1003
 				END IF
 		END IF
@@ -191,7 +189,7 @@ FUNCTION get_local_remember()
 		THEN
 				LET f_ok = TRUE
 		ELSE
-				CALL fgl_winmessage("Fatal Error!", "ERROR 1004:\nFailed To Get Local Settings.", "stop")
+				CALL fgl_winmessage(%"function.lib.string.Fatal_Error", %"function.lib.string.ERROR_1004", "stop")
         EXIT PROGRAM 1004
 		END IF
 
@@ -218,7 +216,7 @@ FUNCTION refresh_local_remember(f_username,f_remember)
 
 		IF sqlca.sqlcode <> 0
 		THEN
-				CALL fgl_winmessage("Fatal Error!", "ERROR 1005:\nFailed To Refresh Local Settings.", "stop")
+				CALL fgl_winmessage(%"function.lib.string.Fatal_Error", %"function.lib.string.ERROR_1005", "stop")
         EXIT PROGRAM 1005
 		ELSE
 				LET f_ok = TRUE
@@ -253,7 +251,7 @@ FUNCTION test_connectivity(f_deployment_type)
 						IF f_resp.getStatusCode() != 200 THEN
 								#DISPLAY "HTTP Error (" || f_resp.getStatusCode() || ") " || f_resp.getStatusDescription()
 								LET f_connectivity = "NONE"
-								MESSAGE "Working Offline"
+								MESSAGE %"function.lib.string.Working_Offline"
 						ELSE
 								#HTTP Code of 200 means we have some level of internet connection so lets set the the f_connectivity to "WIFI" like a mobile WIFI connection
 								LET f_connectivity = "WIFI"
@@ -263,7 +261,7 @@ FUNCTION test_connectivity(f_deployment_type)
 				CATCH
 						#DISPLAY "ERROR :" || STATUS || " (" || SQLCA.SQLERRM || ")"
 						LET f_connectivity = "NONE"
-						MESSAGE "Working Offline"
+						MESSAGE %"function.lib.string.Working_Offline"
 				END TRY
 		END IF
 
@@ -284,7 +282,7 @@ FUNCTION timed_upload_queue_data()
 				IF f_count = 0
 				THEN
 						CALL upload_image_payload(TRUE)
-								MESSAGE "Uploaded " || g_OK_uploads || " images OK, " || g_FAILED_uploads || " images failed."
+								MESSAGE %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed"
 				END IF
 		END IF
 		
@@ -316,7 +314,7 @@ FUNCTION load_payload(f_user,f_type,f_payload)
 
 		IF sqlca.sqlcode <> 0
 		THEN
-				CALL fgl_winmessage("Fatal Error!", "ERROR 1006:\nFailed To Load Payload In To Queue.", "stop")
+				CALL fgl_winmessage(%"function.lib.string.Fatal_Error", %"function.lib.string.ERROR_1006", "stop")
         EXIT PROGRAM 1006
 		ELSE
 				LET f_ok = TRUE
@@ -381,7 +379,7 @@ FUNCTION upload_image_payload(f_silent)
 		THEN
 				IF f_silent = FALSE
 				THEN
-						CALL fgl_winmessage("Image Upload", "There is no images in the queue to upload!", "information")
+						CALL fgl_winmessage(%"Image Upload", %"function.lib.string.No_Images_To_Upload", "information")
 				END IF
 		ELSE
 				CALL ws_funcs_check_service(g_client_key)
@@ -391,7 +389,7 @@ FUNCTION upload_image_payload(f_silent)
 				THEN
 						IF f_silent = FALSE
 						THEN
-								CALL fgl_winmessage("Warning!", "Unable to communicate with image webserver at this time!", "information")
+								CALL fgl_winmessage(%"function.lib.string.Warning_Title", %"function.lib.string.Unable_To_Communicate", "information")
 						END IF
 				END IF
 
@@ -423,7 +421,7 @@ FUNCTION upload_image_payload(f_silent)
 						END FOR
 						IF f_silent = FALSE
 						THEN
-								CALL fgl_winmessage("Image Upload", "Uploaded " || g_OK_uploads || " images OK, " || g_FAILED_uploads || " images failed.", "information")
+								CALL fgl_winmessage(%"function.lib.string.Image_Upload", %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed", "information")
 						END IF
 				END IF
 		END IF

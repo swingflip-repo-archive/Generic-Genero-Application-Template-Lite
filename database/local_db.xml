@@ -1,57 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <AG version="7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gst/3.10/agmodel.xsd">
-  <Database name="local_db" schemaFile="C:\DEV\RyanMobileDevTest\database\local_db.4dbx">
+  <Database name="local_db" schemaFile="C:\DEV\GGAT\database\local_db.4dbx">
     <Table name="payload_queue">
-      <DynamicProperties>
-        <DynamicProperty name="description" value=""/>
-      </DynamicProperties>
       <DBColumn datatype="INTEGER" defaultValue="" fglDatatype="INTEGER" fglLength="4" length="11" name="p_q_index" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="p_q_index"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="requested_by" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="requested_by"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
-      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="requested_date" notNull="1">
+      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="requested_date" notNull="1" qualifier1="YEAR" qualifier2="SECOND">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="requested_date"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
-      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="last_attempted" notNull="0">
+      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="last_attempted" notNull="0" qualifier1="YEAR" qualifier2="SECOND">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="last_attempted"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="destination" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="destination"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(64)" defaultValue="" fglDatatype="VARCHAR2(64)" fglLength="64" length="64" name="payload_type" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="payload_type"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="BYTE" defaultValue="" fglDatatype="BYTE" fglLength="56" length="1024" name="payload" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="payload"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBConstraint constraint="primaryKey" name="primary_key_payload_queue">
@@ -62,63 +52,52 @@
       </DBIndex>
     </Table>
     <Table name="local_stat">
-      <DynamicProperties>
-        <DynamicProperty name="description" value=""/>
-      </DynamicProperties>
       <DBColumn datatype="INTEGER" defaultValue="" fglDatatype="INTEGER" fglLength="4" length="11" name="l_s_index" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="l_s_index"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="deployment_type" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="deployment_type"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="os_type" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="os_type"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="ip" notNull="0">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="ip"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="device_name" notNull="0">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="device_name"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="resolution" notNull="0">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="resolution"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="geo_location" notNull="0">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="geo_location"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
-      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="last_load" notNull="1">
+      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="last_load" notNull="1" qualifier1="YEAR" qualifier2="SECOND">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="last_load"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBConstraint constraint="primaryKey" name="sqlite_autoindex_local_stat_1">
@@ -129,35 +108,28 @@
       </DBIndex>
     </Table>
     <Table name="local_remember">
-      <DynamicProperties>
-        <DynamicProperty name="description" value=""/>
-      </DynamicProperties>
       <DBColumn datatype="INTEGER" defaultValue="" fglDatatype="INTEGER" fglLength="4" length="11" name="l_r_index" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="l_r_index"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="username" notNull="0">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="username"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="SMALLINT" defaultValue="" fglDatatype="SMALLINT" fglLength="2" length="6" name="remember" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="remember"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
-      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="last_modified" notNull="0">
+      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="last_modified" notNull="0" qualifier1="YEAR" qualifier2="SECOND">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="last_modified"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBConstraint constraint="primaryKey" name="primary_key_local_remember">
@@ -168,56 +140,46 @@
       </DBIndex>
     </Table>
     <Table name="local_accounts">
-      <DynamicProperties>
-        <DynamicProperty name="description" value=""/>
-      </DynamicProperties>
       <DBColumn datatype="INTEGER" defaultValue="" fglDatatype="INTEGER" fglLength="4" length="11" name="l_u_index" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="l_u_index"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="username" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="username"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="password" notNull="1">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="password"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(255)" defaultValue="" fglDatatype="VARCHAR2(255)" fglLength="255" length="255" name="email" notNull="0">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="email"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="INTEGER" defaultValue="" fglDatatype="INTEGER" fglLength="4" length="11" name="phone" notNull="0">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="phone"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
-      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="last_login" notNull="0">
+      <DBColumn datatype="DATETIME YEAR TO SECOND" defaultValue="" fglDatatype="DATETIME YEAR TO SECOND" fglLength="3594" length="25" name="last_login" notNull="0" qualifier1="YEAR" qualifier2="SECOND">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="last_login"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBColumn datatype="VARCHAR(5)" defaultValue="" fglDatatype="VARCHAR2(5)" fglLength="5" length="5" name="user_type" notNull="0">
         <DynamicProperties>
           <DynamicProperty name="widget" value="Edit"/>
           <DynamicProperty name="label" value="user_type"/>
-          <DynamicProperty name="description" value=""/>
         </DynamicProperties>
       </DBColumn>
       <DBConstraint constraint="primaryKey" name="primary_key_local_accounts">

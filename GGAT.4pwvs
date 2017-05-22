@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<WorkspaceViewState version="1.0">
+  <ExpandedNodes>
+    <Node path="GGAT.4pw" type="pm/main-project"/>
+    <Node path="GGAT.4pw/Packages" type="pm/group"/>
+    <Node path="GGAT.4pw/Project" type="pm/group"/>
+    <Node path="GGAT.4pw/Project/Application" type="pm/application"/>
+    <Node path="GGAT.4pw/Project/Localisation Files" type="pm/library"/>
+    <Node path="GGAT.4pw/Project/Localisation Files/____README____" type="pm/virtual-folder"/>
+    <Node path="GGAT.4pw/Project/Localisation Files/defaults (en)" type="pm/virtual-folder"/>
+  </ExpandedNodes>
+  <OpenDocuments>
+    <Document container="true" filePath="src/Lang_Readme_EN.txt" locator="36:1" module="mod-ce3"/>
+    <Document container="true" filePath="src/main_per.str" locator="1:1" module="mod-ce3"/>
+    <Document container="true" filePath="src/main_strings.str" locator="2:32" module="mod-ce3"/>
+  </OpenDocuments>
+  <CurrentDocument filePath="src/main_strings.str" module="mod-ce3"/>
+</WorkspaceViewState>

@@ -20,11 +20,11 @@ ATTRIBUTES
 #use textedit
 IMAGE splash:splash, STYLE="splash", IMAGE="splash", #CHANGE IMAGE TO REFLECT IMAGE FILENAME WITHIN THE PROJECT/IMAGES/ FOLDER
 			WIDTH=100 PIXELS, HEIGHT=100 PIXELS, AUTOSCALE; #IMAGE SIZE IS AUTO ON MOBILE AND DICTATED VIA SETTINGS IN GDC. SEE MAIN.
-EDIT username=formonly.username, COMMENT=%"Username", JUSTIFY=CENTER;
-EDIT password=formonly.password, INVISIBLE, COMMENT=%"Password", JUSTIFY=CENTER;
-CHECKBOX cb=formonly.remember, NOT NULL, REQUIRED,VALUECHECKED="1", VALUEUNCHECKED="0", TEXT=%"Remember Me";
+EDIT username=formonly.username, COMMENT=%"main.per.Username", JUSTIFY=CENTER;
+EDIT password=formonly.password, INVISIBLE, COMMENT=%"main.per.Password", JUSTIFY=CENTER;
+CHECKBOX cb=formonly.remember, NOT NULL, REQUIRED,VALUECHECKED="1", VALUEUNCHECKED="0", TEXT=%"main.per.Remember_Me";
 TEXTEDIT spacer=FORMONLY.spacer, NOENTRY, SCROLLBARS=NONE, SIZEPOLICY=FIXED, STRETCH=BOTH;
-BUTTON bt_login : bt_login, TEXT=%"Login";
+BUTTON bt_login : bt_login, TEXT=%"main.per.Login";
 
 END
 
