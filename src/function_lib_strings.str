@@ -17,3 +17,5 @@
 "function.lib.string.No_Images_To_Upload"="There is no images in the queue to upload!"
 "function.lib.string.Warning_Title"="Warning!"
 "function.lib.string.Unable_To_Communicate"="Unable to communicate with image webserver at this time!"
+"function.lib.string.global_dump"="Global Config"
+"function.lib.string.Config_Dump_Text"="Application global config dump: \n\n"

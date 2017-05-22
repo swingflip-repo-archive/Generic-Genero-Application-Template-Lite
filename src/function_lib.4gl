@@ -10,22 +10,30 @@ SCHEMA local_db
 #
 FUNCTION generate_about()
 
-		LET g_application_about = g_application_title || " " || g_application_version || "\n\n" ||
-														  %"function.lib.string.Logged_In_As" || g_user || "\n" ||
-															%"function.lib.string.User_Type" || g_user_type || "\n" ||
-													 	  %"function.lib.string.Logged_In_At" || util.Datetime.format(g_logged_in, g_date_format) || "\n" ||
-															%"function.lib.string.Genero_Version" || FGL_GETVERSION() || "\n\n" || 
-													 	  %"function.lib.string.About_Explanation" 													
+		IF g_enable_login = TRUE
+		THEN
+				LET g_application_about = g_application_title || " " || g_application_version || "\n\n" ||
+																	%"function.lib.string.Logged_In_As" || g_user || "\n" ||
+																	%"function.lib.string.User_Type" || g_user_type || "\n" ||
+																	%"function.lib.string.Logged_In_At" || util.Datetime.format(g_logged_in, g_date_format) || "\n" ||
+																	%"function.lib.string.Genero_Version" || FGL_GETVERSION() || "\n\n" || 
+																	%"function.lib.string.About_Explanation" 	
+		ELSE
+				LET g_application_about = g_application_title || " " || g_application_version || "\n\n" ||
+																	%"function.lib.string.Genero_Version" || FGL_GETVERSION() || "\n\n" || 
+																	%"function.lib.string.About_Explanation" 		
+		END IF
 END FUNCTION
 #
 #
 #
 #
-FUNCTION initialize_globals(f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_limit,f_online_ping_URL,
+FUNCTION initialize_globals(f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_limit,f_online_ping_URL,
 														f_enable_timed_connect,f_timed_connect_time,f_date_format,f_image_dest,
 														f_enable_timed_image_upload) #Set up global variables
 		DEFINE
 				f_ok SMALLINT,
+				f_enable_login SMALLINT,
 				f_splash_w STRING,
 				f_splash_h STRING,
 				f_geo SMALLINT,
@@ -40,6 +48,7 @@ FUNCTION initialize_globals(f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_l
 
 		LET f_ok = FALSE
 
+		LET g_enable_login = f_enable_login
 		LET g_splash_width = f_splash_w
 		LET g_splash_height = f_splash_h
 		LET g_enable_geolocation = f_geo
@@ -55,6 +64,30 @@ FUNCTION initialize_globals(f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_l
 		LET f_ok = TRUE
 				
 		RETURN f_ok
+END FUNCTION
+#
+#
+#
+#
+FUNCTION print_debug_global_config()
+		DEFINE
+				f_msg STRING
+
+		LET f_msg = %"function.lib.string.Config_Dump_Text" ||
+								"g_enable_login = " || g_enable_login || "\n" ||
+								"g_splash_width = " || g_splash_width || "\n" ||
+								"g_splash_height = " || g_splash_height || "\n" ||
+								"g_enable_geolocation = " || g_enable_geolocation || "\n" ||
+								"g_enable_mobile_title = " || g_enable_mobile_title || "\n" ||
+								"g_local_stat_limit = " || g_local_stat_limit || "\n" ||
+								"g_online_ping_URL = " || g_online_ping_URL || "\n" ||
+								"g_enable_timed_connect = " || g_enable_timed_connect || "\n" ||
+								"g_timed_checks_time = " || g_timed_checks_time || "\n" ||
+								"g_date_format = " || g_date_format || "\n" ||
+								"g_image_dest = " || g_image_dest || "\n" ||
+								"g_enable_timed_image_upload = " || g_enable_timed_image_upload
+
+		CALL fgl_winmessage(%"function.lib.string.global_dump",f_msg, "information")
 END FUNCTION
 #
 #
@@ -78,7 +111,7 @@ FUNCTION capture_local_stats(f_info)
 				f_ok SMALLINT,
 				f_count INTEGER
 
-		CALL openDB("local_db.db",TRUE)
+		CALL openDB("local_db.db",FALSE)
 		
 		LET f_ok = FALSE
 		LET f_concat_geo = f_info.geo_lat || "*" || f_info.geo_lon #* is the delimeter.
@@ -180,7 +213,7 @@ FUNCTION get_local_remember()
 				f_username LIKE local_accounts.username,
 				f_ok SMALLINT
 
-		CALL openDB("local_db.db",TRUE)
+		CALL openDB("local_db.db",FALSE)
 
 		LET f_ok = FALSE
 
@@ -208,7 +241,7 @@ FUNCTION refresh_local_remember(f_username,f_remember)
 				f_username LIKE local_accounts.username,
 				f_ok SMALLINT
 
-		CALL openDB("local_db.db",TRUE)
+		CALL openDB("local_db.db",FALSE)
 
 		LET f_ok = FALSE
 		WHENEVER ERROR CONTINUE
@@ -276,14 +309,15 @@ FUNCTION timed_upload_queue_data()
 
 		DEFINE
 				f_count INTEGER
-				
-		IF g_enable_timed_image_upload = TRUE AND g_online = TRUE
+
+		IF g_enable_timed_image_upload = TRUE AND g_online != "NONE"
 		THEN
 				SELECT COUNT(*) INTO f_count FROM payload_queue WHERE payload_type = 'IMAGE'
-				IF f_count = 0
+				IF f_count != 0
 				THEN
+						DISPLAY "Uploading images..."
 						CALL upload_image_payload(TRUE)
-								MESSAGE %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed"
+						MESSAGE %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed"
 				END IF
 		END IF
 		
@@ -302,7 +336,7 @@ FUNCTION load_payload(f_user,f_type,f_payload)
 				f_destination STRING,
 				f_ok SMALLINT
 
-		CALL openDB("local_db.db",TRUE)
+		CALL openDB("local_db.db",FALSE)
 
 		LET f_ok = FALSE
 
@@ -368,7 +402,7 @@ FUNCTION upload_image_payload(f_silent)
 				f_silent SMALLINT,
 				f_count INTEGER
 
-		CALL openDB("local_db.db",TRUE)
+		CALL openDB("local_db.db",FALSE)
 
 		PREPARE s1
 				FROM "SELECT * FROM payload_queue WHERE payload_type = 'IMAGE'"

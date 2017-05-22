@@ -6,6 +6,10 @@
 
 GLOBALS
 
+################################################################################
+# CONFIG GLOBALS
+################################################################################
+
 		DEFINE
 		#Application Information
 				g_application_title STRING,						#Application Title
@@ -30,11 +34,13 @@ GLOBALS
 				g_enable_timed_image_upload SMALLINT,	#Enable timed image queue uploads (Could have a performance impact!)
 
 		#General application variables
+				g_enable_login SMALLINT,							#Boot in to login menu or straight into application (open_application())
 				g_local_stat_limit INTEGER,						#Number of max local stat records before pruning
 				g_online_ping_URL STRING,							#URL of public site to test internet connectivity (i.e. http://www.google.com) 
 				g_date_format STRING									#Datetime format. i.e.  "%d/%m/%Y %H:%M"
 
-
+################################################################################
+				
 		#Global variables used within the application,
 		#These variables contain useful data used during runtime, these variables aren't used for app configuration...
 		DEFINE

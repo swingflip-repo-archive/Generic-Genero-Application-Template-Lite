@@ -77,14 +77,6 @@ MAIN
 								"Resolution: " || m_info.resolution || "\n" ||
 								"-------------------\n"}
 		END IF
-
-		{IF m_info.deployment_type = "GMI" OR m_info.deployment_type = "GMA" #os.path.exists
-		THEN
-				CALL os.Path.copy(os.path.join(base.Application.getProgramDir(),"local_db.db"),os.Path.pwd())
-				RETURNING m_ok
-
-				DISPLAY m_ok
-		END IF}
 		
 		LET m_string_tokenizer = base.StringTokenizer.create(m_info.resolution,"x")
 
@@ -101,6 +93,7 @@ MAIN
 #******************************************************************************#
 # HERE IS WHERE YOU CONFIGURE GOBAL SWITCHES FOR THE APPLICATION
 # ADJUST THESE AS YOU SEEM FIT. BELOW IS A LIST OF OPTIONS IN ORDER:
+#				g_enable_login SMALLINT								#Boot in to login menu or straight into application (open_application())
 #				g_splash_width STRING, 								#Login menu splash width when not in mobile
 #				g_splash_height STRING, 							#Login menu splash height when not in mobile
 #				g_enable_geolocation SMALLINT,				#Toggle to enable geolocation
@@ -109,16 +102,27 @@ MAIN
 #				g_online_ping_URL STRING,							#URL of public site to test internet connectivity (i.e. http://www.google.com) 
 #				g_enable_timed_connect SMALLINT,			#Enable timed connectivity checks
 #				g_timed_checks_time INTEGER						#Time in seconds before checking connectivity (g_enable_timed_connect has to be enabled)
+#				g_date_format STRING									#Datetime format. i.e.  "%d/%m/%Y %H:%M"
 #				g_image_dest STRING										#Webserver destination for image payloads. i.e. "Webservice_1" (Not used as of yet)
 #				g_enable_timed_image_upload SMALLINT,	#Enable timed image queue uploads (Could have a performance impact!)
 # Here are globals not included in initialize_globals function due to sheer size of the arguement data...
 #				g_client_key STRING,									#Unique Client key for webservice purposes
 
-		CALL initialize_globals("500px","281px",FALSE,FALSE,100,"http://www.google.com",
-														TRUE,10,"%d/%m/%Y %H:%M","webserver1",TRUE) #function_lib *IMPORTANT*
+		CALL initialize_globals(TRUE,											#g_enable_login SMALLINT
+														"500px",									#g_splash_width STRING
+														"281px",									#g_splash_height STRING
+														TRUE,											#g_enable_geolocation SMALLINT
+														FALSE,										#g_enable_mobile_title SMALLINT
+														100,											#g_local_stat_limit INTEGER
+														"http://www.google.com",	#g_online_ping_URL STRING
+														TRUE,											#g_enable_timed_connect SMALLINT
+														10,												#g_timed_checks_time INTEGER
+														"%d/%m/%Y %H:%M",					#g_date_format STRING
+														"webserver1",							#g_image_dest STRING	
+														TRUE)											#g_enable_timed_image_upload SMALLINT
 				RETURNING m_ok
 				
-		LET g_client_key = "znbi58mCGZXSBNkJ5GouFuKPLqByReHvtrGj7aXXuJmHGFr89Xp7uCqDcVCv"
+		LET g_client_key = "znbi58mCGZXSBNkJ5GouFuKPLqByReHvtrGj7aXXuJmHGFr89Xp7uCqDcVCv"			#g_client_key STRING
 				
 #******************************************************************************#
 
@@ -149,12 +153,19 @@ MAIN
 		END IF
 
 		CALL test_connectivity(m_info.deployment_type)
+		CALL capture_local_stats(m_info.*)
+				RETURNING m_ok
 
 		CLOSE WINDOW SCREEN #Just incase
 		
 #We are now initialised, we now just need to run each individual window functions...
-		CALL login_screen() 
-
+		IF g_enable_login = TRUE
+		THEN
+				CALL login_screen() 
+		ELSE
+				CALL open_application()
+		END IF
+		
 END MAIN
 
 ################################################################################
@@ -209,8 +220,6 @@ FUNCTION login_screen() #Local login handler
 				
 				BEFORE INPUT
 						CALL connection_test()
-						CALL capture_local_stats(m_info.*)
-								RETURNING m_ok
 						LET m_form = m_window.getForm()
 						CALL DIALOG.setActionHidden("accept",1)
 						CALL DIALOG.setActionHidden("cancel",1)
@@ -412,6 +421,8 @@ FUNCTION admin_tools() #Development tools to showcase an admin login
 						ON ACTION CLOSE
 								LET TERMINATE = TRUE
 								EXIT MENU
+						ON ACTION bt_dump
+								CALL print_debug_global_config()
 						ON ACTION bt_create
 								LET m_instruction = "bt_create"
 								LET TERMINATE = TRUE
@@ -434,11 +445,11 @@ FUNCTION admin_tools() #Development tools to showcase an admin login
 
 		CASE m_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
 				WHEN "bt_create"
-						RUN "fglrun ../dbbin/CreateUser.42r"
+						RUN "fglrun ../toolbin/CreateUser.42r"
 				WHEN "bt_check"
-						RUN "fglrun ../dbbin/CheckPassword.42r"
+						RUN "fglrun ../toolbin/CheckPassword.42r"
 				WHEN "bt_hash"
-						RUN "fglrun ../dbbin/HashGenerator.42r"
+						RUN "fglrun ../toolbin/HashGenerator.42r"
 				WHEN "go_back"
 						CLOSE WINDOW w
 						CALL open_application()
@@ -465,8 +476,7 @@ FUNCTION image_program()
 				f_temp_img_queue DYNAMIC ARRAY OF STRING,
 				f_index INTEGER,
 				f_queue_count INTEGER,
-				f_payload STRING,
-				f_count INTEGER
+				f_payload STRING
 
 		OPEN WINDOW w WITH FORM "photo" ATTRIBUTE (STYLE="main")
 
