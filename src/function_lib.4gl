@@ -1,6 +1,7 @@
 IMPORT SECURITY
 IMPORT com
 IMPORT util
+IMPORT os
 GLOBALS "globals.4gl"
 SCHEMA local_db
 #
@@ -77,7 +78,7 @@ FUNCTION capture_local_stats(f_info)
 				f_ok SMALLINT,
 				f_count INTEGER
 
-		DATABASE local_db
+		CALL openDB("local_db.db",TRUE)
 		
 		LET f_ok = FALSE
 		LET f_concat_geo = f_info.geo_lat || "*" || f_info.geo_lon #* is the delimeter.
@@ -179,7 +180,7 @@ FUNCTION get_local_remember()
 				f_username LIKE local_accounts.username,
 				f_ok SMALLINT
 
-		DATABASE local_db
+		CALL openDB("local_db.db",TRUE)
 
 		LET f_ok = FALSE
 
@@ -207,7 +208,7 @@ FUNCTION refresh_local_remember(f_username,f_remember)
 				f_username LIKE local_accounts.username,
 				f_ok SMALLINT
 
-		DATABASE local_db
+		CALL openDB("local_db.db",TRUE)
 
 		LET f_ok = FALSE
 		WHENEVER ERROR CONTINUE
@@ -301,7 +302,7 @@ FUNCTION load_payload(f_user,f_type,f_payload)
 				f_destination STRING,
 				f_ok SMALLINT
 
-		DATABASE local_db
+		CALL openDB("local_db.db",TRUE)
 
 		LET f_ok = FALSE
 
@@ -367,7 +368,7 @@ FUNCTION upload_image_payload(f_silent)
 				f_silent SMALLINT,
 				f_count INTEGER
 
-		DATABASE local_db
+		CALL openDB("local_db.db",TRUE)
 
 		PREPARE s1
 				FROM "SELECT * FROM payload_queue WHERE payload_type = 'IMAGE'"
@@ -379,7 +380,7 @@ FUNCTION upload_image_payload(f_silent)
 		THEN
 				IF f_silent = FALSE
 				THEN
-						CALL fgl_winmessage(%"Image Upload", %"function.lib.string.No_Images_To_Upload", "information")
+						CALL fgl_winmessage(%"function.lib.string.Image_Upload", %"function.lib.string.No_Images_To_Upload", "information")
 				END IF
 		ELSE
 				CALL ws_funcs_check_service(g_client_key)
@@ -450,6 +451,52 @@ FUNCTION reply_yn(f_default,f_title,f_question)
      RETURN f_answer = "yes"
 
 END FUNCTION # reply_yn
+#
+#
+#
+#
+FUNCTION openDB(f_dbname,f_debug)
+
+		DEFINE 
+				f_dbname STRING,
+				f_dbpath STRING,
+				f_msg STRING,
+				f_debug SMALLINT
+
+		LET f_dbpath = os.path.join(os.path.pwd(), f_dbname)
+        
+		IF NOT os.path.exists(f_dbpath) #Check Documents for local_db.db
+		THEN
+				LET f_msg = "db missing, "
+				IF NOT os.path.exists(os.path.join(base.Application.getProgramDir(),f_dbname)) #Check appdir for local_db.db
+				THEN
+						#If you get to this point you have done something drastically wrong...
+						DISPLAY "FATAL ERROR: You don't have a database set up! Run the CreateDatabase application within the toolbox!"
+						EXIT PROGRAM 9999
+				ELSE
+						IF os.path.copy(os.path.join(base.Application.getProgramDir(),f_dbname), f_dbpath)
+						THEN
+								LET f_msg = f_msg.append("Copied ")
+						ELSE
+								LET f_msg = f_msg.append("Database Copy failed! ")
+						END IF
+				END IF
+		ELSE
+				LET f_msg = "db exists, "
+		END IF
+		TRY
+				DATABASE f_dbpath
+				LET f_msg = f_msg.append("Connected OK")
+		CATCH
+				DISPLAY STATUS, f_msg||SQLERRMESSAGE
+		END TRY
+	
+		IF f_debug = TRUE
+		THEN
+				DISPLAY f_msg
+		END IF
+		
+END FUNCTION
 #
 #
 #

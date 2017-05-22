@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <WorkspaceDatabase fileContentsEncoding="fglutf8" version="2.0">
-<File m="main" n="src/main.4gl" ts="20170516131716705">
+<File m="main" n="src/main.4gl" ts="20170519103854348">
 <Ref t="src/globals.4gl"/>
 <Fct c="10" el="687" l="673" n="update_connection_image(f_image STRING)" t="F"/>
 <Fct c="10" el="668" l="647" n="connection_test()" t="F">
@@ -66,7 +66,7 @@
 <Call c="8" l="156" n="login_screen" t="F"/>
 </Fct>
 </File>
-<File m="local_db_dbxconstraints" n="database/local_db_dbxconstraints.4gl" ts="20170516131716785">
+<File m="local_db_dbxconstraints" n="database/local_db_dbxconstraints.4gl" ts="20170519103854289">
 <Fct c="17" el="969" l="938" n="local_db_dbxconstraints_local_accounts_sqlite_autoindex_local_accounts_1_checkFKConstraint(p_data RECORD)" t="F">
 <Call c="22" l="961" n="libdbapp_utilBuildErrorNoAndErrorMsg" t="F"/>
 </Fct>
@@ -191,7 +191,7 @@
 <Call c="10" l="56" n="libdbapp_utilBuildErrorNoAndErrorMsg" t="F"/>
 </Fct>
 </File>
-<File m="local_db_dbxdata" n="database/local_db_dbxdata.4gl" ts="20170516131716757">
+<File m="local_db_dbxdata" n="database/local_db_dbxdata.4gl" ts="20170519103854319">
 <Dep t="database/local_db_dbxconstraints.4gl"/>
 <Fct c="17" el="1385" l="1355" n="local_db_dbxdata_local_accounts_sqlite_autoindex_local_accounts_1_getPK(p_key RECORD)" t="F"/>
 <Fct c="17" el="1345" l="1338" n="local_db_dbxdata_local_accounts_setDefaultValuesFromDBSchema()" t="F"/>
@@ -355,42 +355,53 @@
 </Fct>
 <Fct c="17" el="65" l="32" n="local_db_dbxdata_payload_queue_primary_key_payload_queue_selectRowByKey(p_key RECORD,p_lock BOOLEAN)" t="F"/>
 </File>
-<File m="function_lib" n="src/function_lib.4gl" ts="20170516131716614">
+<File m="database_funcs" n="src/database_funcs.4gl" ts="20170517150020469">
+<Fct c="10" el="79" l="70" n="db_drop_tables()" t="F"/>
+<Fct c="10" el="63" l="56" n="db_create_defaults()" t="F"/>
+<Fct c="10" el="49" l="6" n="db_create_tables()" t="F"/>
+</File>
+<File m="function_lib" n="src/function_lib.4gl" ts="20170519103854261">
 <Ref t="src/globals.4gl"/>
-<Fct c="10" el="460" l="457" n="close_app()" t="F"/>
-<Fct c="10" el="452" l="433" n="reply_yn(f_default STRING,f_title STRING,f_question STRING)" t="F">
-<Call c="21" l="448" n="FGL_WINQUESTION" t="F"/>
+<Fct c="10" el="507" l="504" n="close_app()" t="F"/>
+<Fct c="10" el="499" l="458" n="openDB(f_dbname STRING,f_debug SMALLINT)" t="F"/>
+<Fct c="10" el="453" l="434" n="reply_yn(f_default STRING,f_title STRING,f_question STRING)" t="F">
+<Call c="21" l="449" n="FGL_WINQUESTION" t="F"/>
 </Fct>
-<Fct c="10" el="428" l="348" n="upload_image_payload(f_silent SMALLINT)" t="F">
-<Call c="12" l="382" n="fgl_winmessage" t="F"/>
-<Call c="10" l="385" n="ws_funcs_check_service" p="src/imageWS_imageWSPort.4gl" t="F"/>
-<Call c="14" l="392" n="fgl_winmessage" t="F"/>
-<Call c="14" l="403" n="ws_funcs_process_image" p="src/imageWS_imageWSPort.4gl" t="F"/>
-<Call c="14" l="424" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="429" l="349" n="upload_image_payload(f_silent SMALLINT)" t="F">
+<Call c="8" l="371" n="openDB" t="F"/>
+<Call c="12" l="383" n="fgl_winmessage" t="F"/>
+<Call c="10" l="386" n="ws_funcs_check_service" p="src/imageWS_imageWSPort.4gl" t="F"/>
+<Call c="14" l="393" n="fgl_winmessage" t="F"/>
+<Call c="14" l="404" n="ws_funcs_process_image" p="src/imageWS_imageWSPort.4gl" t="F"/>
+<Call c="14" l="425" n="fgl_winmessage" t="F"/>
 </Fct>
-<Fct c="10" el="343" l="329" n="get_payload_destination(f_type STRING)" t="F"/>
-<Fct c="10" el="324" l="295" n="load_payload(f_user STRING,f_type STRING,f_payload STRING)" t="F">
-<Call c="8" l="308" n="get_payload_destination" t="F"/>
-<Call c="10" l="317" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="344" l="330" n="get_payload_destination(f_type STRING)" t="F"/>
+<Fct c="10" el="325" l="296" n="load_payload(f_user STRING,f_type STRING,f_payload STRING)" t="F">
+<Call c="8" l="305" n="openDB" t="F"/>
+<Call c="8" l="309" n="get_payload_destination" t="F"/>
+<Call c="10" l="318" n="fgl_winmessage" t="F"/>
 </Fct>
-<Fct c="10" el="290" l="274" n="timed_upload_queue_data()" t="F">
-<Call c="12" l="284" n="upload_image_payload" t="F"/>
+<Fct c="10" el="291" l="275" n="timed_upload_queue_data()" t="F">
+<Call c="12" l="285" n="upload_image_payload" t="F"/>
 </Fct>
-<Fct c="10" el="269" l="232" n="test_connectivity(f_deployment_type STRING)" t="F"/>
-<Fct c="10" el="227" l="203" n="refresh_local_remember(f_username unknown,f_remember SMALLINT)" t="F">
-<Call c="10" l="219" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="270" l="233" n="test_connectivity(f_deployment_type STRING)" t="F"/>
+<Fct c="10" el="228" l="204" n="refresh_local_remember(f_username unknown,f_remember SMALLINT)" t="F">
+<Call c="8" l="211" n="openDB" t="F"/>
+<Call c="10" l="220" n="fgl_winmessage" t="F"/>
 </Fct>
-<Fct c="10" el="198" l="175" n="get_local_remember()" t="F">
-<Call c="10" l="192" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="199" l="176" n="get_local_remember()" t="F">
+<Call c="8" l="183" n="openDB" t="F"/>
+<Call c="10" l="193" n="fgl_winmessage" t="F"/>
 </Fct>
-<Fct c="10" el="170" l="143" n="check_password(f_user STRING,f_pass STRING)" t="F"/>
-<Fct c="10" el="138" l="119" n="hash_password(f_pass STRING)" t="F"/>
-<Fct c="10" el="114" l="62" n="capture_local_stats(f_info RECORD)" t="F">
-<Call c="10" l="91" n="fgl_winmessage" t="F"/>
-<Call c="12" l="108" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="171" l="144" n="check_password(f_user STRING,f_pass STRING)" t="F"/>
+<Fct c="10" el="139" l="120" n="hash_password(f_pass STRING)" t="F"/>
+<Fct c="10" el="115" l="63" n="capture_local_stats(f_info RECORD)" t="F">
+<Call c="8" l="81" n="openDB" t="F"/>
+<Call c="10" l="92" n="fgl_winmessage" t="F"/>
+<Call c="12" l="109" n="fgl_winmessage" t="F"/>
 </Fct>
-<Fct c="10" el="57" l="23" n="initialize_globals(f_splash_w STRING,f_splash_h STRING,f_geo SMALLINT,f_mobile_title SMALLINT,f_local_limit INTEGER,f_online_ping_URL STRING,f_enable_timed_connect SMALLINT,f_timed_connect_time INTEGER,f_date_format STRING,f_image_dest STRING,f_enable_timed_image_upload SMALLINT)" t="F"/>
-<Fct c="10" el="18" l="10" n="generate_about()" t="F"/>
+<Fct c="10" el="58" l="24" n="initialize_globals(f_splash_w STRING,f_splash_h STRING,f_geo SMALLINT,f_mobile_title SMALLINT,f_local_limit INTEGER,f_online_ping_URL STRING,f_enable_timed_connect SMALLINT,f_timed_connect_time INTEGER,f_date_format STRING,f_image_dest STRING,f_enable_timed_image_upload SMALLINT)" t="F"/>
+<Fct c="10" el="19" l="11" n="generate_about()" t="F"/>
 </File>
 <File m="globals" n="src/globals.4gl" ts="20170516131716538"/>
 <File m="imageWS_imageWSPort" n="src/imageWS_imageWSPort.4gl" ts="20170516131716818">
@@ -538,14 +549,11 @@
 <Call c="10" l="27" n="fgl_winmessage" t="F"/>
 </Fct>
 </File>
-<File m="local_db_sqt_x" n="toolsrc/local_db_sqt_x.4gl" ts="20170516131716681">
-<Fct c="10" el="94" l="85" n="db_drop_tables()" t="F"/>
-<Fct c="10" el="78" l="71" n="db_create_defaults()" t="F"/>
-<Fct c="10" el="64" l="21" n="db_create_tables()" t="F"/>
+<File m="local_db_sqt_x" n="toolsrc/local_db_sqt_x.4gl" ts="20170517145938828">
 <Fct c="1" el="14" l="8" n="main()" t="F">
-<Call c="10" l="11" n="db_drop_tables" t="F"/>
-<Call c="10" l="12" n="db_create_tables" t="F"/>
-<Call c="8" l="13" n="db_create_defaults" t="F"/>
+<Call c="10" l="11" n="db_drop_tables" p="src/database_funcs.4gl" t="F"/>
+<Call c="10" l="12" n="db_create_tables" p="src/database_funcs.4gl" t="F"/>
+<Call c="8" l="13" n="db_create_defaults" p="src/database_funcs.4gl" t="F"/>
 </Fct>
 </File>
 <File m="user_generator" n="toolsrc/user_generator.4gl" ts="20170516131716588">

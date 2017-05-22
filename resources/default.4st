@@ -72,6 +72,9 @@
      <StyleAttribute name="toolBarPosition" value="none" />
      <StyleAttribute name="statusBarType" value="none" />
   </Style>
+	<Style name=".noBorder">
+		 <StyleAttribute value="none" name="border" />
+	</Style>
 	<Style name=".centerImages">
 		 <StyleAttribute value="center" name="alignment" />
 	</Style>

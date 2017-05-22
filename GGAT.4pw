@@ -75,7 +75,8 @@
       <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
-      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
@@ -104,7 +105,8 @@
       <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
-      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
@@ -117,7 +119,8 @@
       <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
-      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
@@ -141,12 +144,13 @@
       <File filePath="database/local_db.db"/>
     </Library>
     <Library binaryName="Library" dependencies="455109296" id="212784684" label="Library">
+      <File filePath="src/database_funcs.4gl"/>
       <File filePath="src/function_lib.4gl"/>
       <File filePath="src/globals.4gl"/>
       <File filePath="src/imageWS_imageWSPort.4gl"/>
       <File filePath="src/imageWS_imageWSPort.inc"/>
     </Library>
-    <Library binaryName="Localisation Files" id="250541541" label="Localisation Files" targetDirectory="$(ProjectDir)/bin/defaults">
+    <Library binaryName="Localisation Files (defaults)" id="250541541" label="Localisation Files (defaults)" targetDirectory="$(ProjectDir)/bin/defaults">
       <VirtualFolder label="____README____">
         <File filePath="src/Lang_Readme_EN.txt"/>
       </VirtualFolder>
@@ -168,19 +172,19 @@
     <Library binaryName="____README____" id="685968248" label="____README____">
       <File filePath="toolsrc/Toolbox_Readme_EN.txt"/>
     </Library>
-    <Application binaryName="CheckPassword" dependencies="212784684,455109296" id="95693868" label="CheckPassword">
+    <Application binaryName="CheckPassword" dependencies="212784684,455109296,250541541" id="95693868" label="CheckPassword">
       <File filePath="toolsrc/check_password.4gl"/>
     </Application>
-    <Application binaryName="CreateDatabase" dependencies="455109296,212784684" id="184075814" label="CreateDatabase">
+    <Application binaryName="CreateDatabase" dependencies="455109296,212784684,250541541" id="184075814" label="CreateDatabase">
       <File filePath="toolsrc/local_db_sqt_x.4gl"/>
     </Application>
-    <Application binaryName="CreateUser" dependencies="212784684,455109296" id="441158400" label="CreateUser">
+    <Application binaryName="CreateUser" dependencies="212784684,455109296,250541541" id="441158400" label="CreateUser">
       <File filePath="toolsrc/user_generator.4gl"/>
     </Application>
-    <Application binaryName="HashGenerator" dependencies="212784684,455109296" id="12983004" label="HashGenerator">
+    <Application binaryName="HashGenerator" dependencies="212784684,455109296,250541541" id="12983004" label="HashGenerator">
       <File filePath="toolsrc/hash_generator.4gl"/>
     </Application>
-    <Application binaryName="StringExtractor" dependencies="212784684,455109296" id="95621097" label="StringExtractor">
+    <Application binaryName="StringExtractor" dependencies="212784684,455109296,250541541" id="95621097" label="StringExtractor">
       <File filePath="toolsrc/string_extract.4gl"/>
     </Application>
   </Group>

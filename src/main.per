@@ -4,6 +4,13 @@ GROUP (TEXT="")
 GRID
 {
 [splash                                                                                                                                                                                    ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
 [username                                                                                                                                                                                  ]
 [password                                                                                                                                                                                  ]
 [cb                                                                                                                                                                                        ]
@@ -23,7 +30,8 @@ IMAGE splash:splash, STYLE="splash", IMAGE="splash", #CHANGE IMAGE TO REFLECT IM
 EDIT username=formonly.username, COMMENT=%"main.per.Username", JUSTIFY=CENTER;
 EDIT password=formonly.password, INVISIBLE, COMMENT=%"main.per.Password", JUSTIFY=CENTER;
 CHECKBOX cb=formonly.remember, NOT NULL, REQUIRED,VALUECHECKED="1", VALUEUNCHECKED="0", TEXT=%"main.per.Remember_Me";
-TEXTEDIT spacer=FORMONLY.spacer, NOENTRY, SCROLLBARS=NONE, SIZEPOLICY=FIXED, STRETCH=BOTH;
+TEXTEDIT spacer=FORMONLY.spacer, NOENTRY, SCROLLBARS=NONE, SIZEPOLICY=FIXED,STRETCH=BOTH, STYLE="noBorder";
+#IMAGE spacer : spacer1, IMAGE="spacer", STRETCH=Y, STYLE="noBorder";
 BUTTON bt_login : bt_login, TEXT=%"main.per.Login";
 
 END

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <AG version="7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gst/3.10/agmodel.xsd">
-  <Database name="local_db" schemaFile="C:\DEV\GGAT\database\local_db.4dbx">
+  <Database name="local_db" schemaFile="C:\DEV\GGATv0.7\database\local_db.4dbx">
     <Table name="payload_queue">
       <DBColumn datatype="INTEGER" defaultValue="" fglDatatype="INTEGER" fglLength="4" length="11" name="p_q_index" notNull="1">
         <DynamicProperties>

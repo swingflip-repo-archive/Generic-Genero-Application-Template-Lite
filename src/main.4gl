@@ -78,13 +78,13 @@ MAIN
 								"-------------------\n"}
 		END IF
 
-		IF m_info.deployment_type = "GMI"
+		{IF m_info.deployment_type = "GMI" OR m_info.deployment_type = "GMA" #os.path.exists
 		THEN
 				CALL os.Path.copy(os.path.join(base.Application.getProgramDir(),"local_db.db"),os.Path.pwd())
 				RETURNING m_ok
 
 				DISPLAY m_ok
-		END IF
+		END IF}
 		
 		LET m_string_tokenizer = base.StringTokenizer.create(m_info.resolution,"x")
 
@@ -583,7 +583,7 @@ FUNCTION image_program()
 																RETURNING m_ok
 												END IF
 										END FOR
-										IF reply_yn("Y"," ",%"Images loaded successfully! Do you wish to upload them now?")
+										IF reply_yn("Y"," ",%"main.string.Images_Loaded_Successfully")
 										THEN
 												CALL connection_test()
 												IF g_online = "NONE"

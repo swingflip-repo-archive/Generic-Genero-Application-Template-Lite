@@ -1,5 +1,5 @@
 "main.string.App_Title"="Genero Generic Application Template"
-"main.string.App_Version"="v0.6 Alpha"
+"main.string.App_Version"="v0.7 Beta"
 "main.string.ERROR_1001"="ERROR 1001:\nFailed to Initialise Global Variables."
 "main.string.Incorrect_Username"="Incorrect Username or Password"
 "main.string.Admin_Explanation"="These are a selection of \"VERY\" basic development tools which should be run in the gdc.\n\nThese functions have no input validating so should only be used for testing purposes only!It WILL crash the app if you don't use them properly...\n\nThis section's main purpose is to showcase an 'admin only section' within the application."
