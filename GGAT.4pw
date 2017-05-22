@@ -68,7 +68,7 @@
       <DynamicProperty name="icon-xxhdpi" value="$(ProjectDir)/images/icon/xxhdpi.png"/>
       <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
       <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
-      <DynamicProperty name="packageVersionName" value="0.6"/>
+      <DynamicProperty name="packageVersionName" value="0.7"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
@@ -98,7 +98,7 @@
       <DynamicProperty name="icon87x87" value="$(ProjectDir)/images/icon/Icon-Small@3x.png"/>
       <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
       <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
-      <DynamicProperty name="packageVersionName" value="0.6"/>
+      <DynamicProperty name="packageVersionName" value="0.7"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>

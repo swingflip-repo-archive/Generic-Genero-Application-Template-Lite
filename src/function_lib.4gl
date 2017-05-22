@@ -460,19 +460,32 @@ FUNCTION openDB(f_dbname,f_debug)
 		DEFINE 
 				f_dbname STRING,
 				f_dbpath STRING,
+				f_db_dbname STRING,
 				f_msg STRING,
 				f_debug SMALLINT
 
 		LET f_dbpath = os.path.join(os.path.pwd(), f_dbname)
+		LET f_db_dbname = os.path.join("..","database")
+		LET f_db_dbname = os.path.join(base.Application.getProgramDir(),f_db_dbname)
         
-		IF NOT os.path.exists(f_dbpath) #Check Documents for local_db.db
+		IF NOT os.path.exists(f_dbpath) #Check working directory for local_db.db
 		THEN
 				LET f_msg = "db missing, "
-				IF NOT os.path.exists(os.path.join(base.Application.getProgramDir(),f_dbname)) #Check appdir for local_db.db
+				IF NOT os.path.exists(os.path.join(base.Application.getProgramDir(),f_dbname)) #Check app directory for local_db.db
 				THEN
-						#If you get to this point you have done something drastically wrong...
-						DISPLAY "FATAL ERROR: You don't have a database set up! Run the CreateDatabase application within the toolbox!"
-						EXIT PROGRAM 9999
+						IF NOT os.path.exists(os.path.join(f_db_dbname,f_dbname)) # Check app/../databse for local_db.db
+						THEN
+								#If you get to this point you have done something drastically wrong...
+								DISPLAY "FATAL ERROR: You don't have a database set up! Run the CreateDatabase application within the toolbox!"
+								EXIT PROGRAM 9999
+						ELSE
+								IF os.path.copy(os.path.join(f_db_dbname,f_dbname), f_dbpath)
+								THEN
+										LET f_msg = f_msg.append("Copied ")
+								ELSE
+										LET f_msg = f_msg.append("Database Copy failed! ")
+								END IF
+						END IF
 				ELSE
 						IF os.path.copy(os.path.join(base.Application.getProgramDir(),f_dbname), f_dbpath)
 						THEN

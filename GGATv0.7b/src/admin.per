@@ -1,0 +1,33 @@
+LAYOUT (TEXT="")   
+VBOX 
+GROUP (TEXT="")
+GRID
+{
+[words                                                                                                                                                                                     ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[bt_create                                                                                                                                                                                 ]
+[bt_check                                                                                                                                                                                  ]
+[bt_hash                                                                                                                                                                                   ]
+[bt_go_back                                                                                                                                                                                ]
+}
+END
+END #GROUP
+END #VBOX
+END  #LAYOUT
+
+ATTRIBUTES
+#use textedit
+TEXTEDIT words=FORMONLY.words, NOENTRY, SCROLLBARS=VERTICAL, SIZEPOLICY=FIXED, STRETCH=BOTH;
+BUTTON bt_create : bt_create, TEXT=%"admin.per.Create_User";
+BUTTON bt_check : bt_check, TEXT=%"admin.per.Check_Password";
+BUTTON bt_hash : bt_hash, TEXT=%"admin.per.Hash_Generator";
+BUTTON bt_go_back : bt_go_back, TEXT=%"admin.per.Go_Back";
+
+END
+
+

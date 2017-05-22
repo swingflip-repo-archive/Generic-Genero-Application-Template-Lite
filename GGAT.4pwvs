@@ -4,7 +4,14 @@
     <Node path="GGAT.4pw" type="pm/main-project"/>
     <Node path="GGAT.4pw/Packages" type="pm/group"/>
     <Node path="GGAT.4pw/Project" type="pm/group"/>
+    <Node path="GGAT.4pw/Project/Library" type="pm/library"/>
+    <Node path="GGAT.4pw/Project/Localisation Files (defaults)" type="pm/library"/>
+    <Node path="GGAT.4pw/Project/Localisation Files (defaults)/defaults (en)" type="pm/virtual-folder"/>
     <Node path="GGAT.4pw/ToolBox" type="pm/group"/>
   </ExpandedNodes>
-  <OpenDocuments/>
+  <OpenDocuments>
+    <Document container="true" filePath="src/function_lib.4gl" locator="481:11" module="mod-ce3"/>
+    <Document container="true" filePath="src/main_strings.str" locator="19:39" module="mod-ce3"/>
+  </OpenDocuments>
+  <CurrentDocument filePath="src/main_strings.str" module="mod-ce3"/>
 </WorkspaceViewState>

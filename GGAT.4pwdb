@@ -66,7 +66,7 @@
 <Call c="8" l="156" n="login_screen" t="F"/>
 </Fct>
 </File>
-<File m="local_db_dbxconstraints" n="database/local_db_dbxconstraints.4gl" ts="20170519103854289">
+<File m="local_db_dbxconstraints" n="database/local_db_dbxconstraints.4gl" ts="20170519125854324">
 <Fct c="17" el="969" l="938" n="local_db_dbxconstraints_local_accounts_sqlite_autoindex_local_accounts_1_checkFKConstraint(p_data RECORD)" t="F">
 <Call c="22" l="961" n="libdbapp_utilBuildErrorNoAndErrorMsg" t="F"/>
 </Fct>
@@ -191,7 +191,7 @@
 <Call c="10" l="56" n="libdbapp_utilBuildErrorNoAndErrorMsg" t="F"/>
 </Fct>
 </File>
-<File m="local_db_dbxdata" n="database/local_db_dbxdata.4gl" ts="20170519103854319">
+<File m="local_db_dbxdata" n="database/local_db_dbxdata.4gl" ts="20170519125854358">
 <Dep t="database/local_db_dbxconstraints.4gl"/>
 <Fct c="17" el="1385" l="1355" n="local_db_dbxdata_local_accounts_sqlite_autoindex_local_accounts_1_getPK(p_key RECORD)" t="F"/>
 <Fct c="17" el="1345" l="1338" n="local_db_dbxdata_local_accounts_setDefaultValuesFromDBSchema()" t="F"/>
@@ -360,10 +360,10 @@
 <Fct c="10" el="63" l="56" n="db_create_defaults()" t="F"/>
 <Fct c="10" el="49" l="6" n="db_create_tables()" t="F"/>
 </File>
-<File m="function_lib" n="src/function_lib.4gl" ts="20170519103854261">
+<File m="function_lib" n="src/function_lib.4gl" ts="20170519125522561">
 <Ref t="src/globals.4gl"/>
-<Fct c="10" el="507" l="504" n="close_app()" t="F"/>
-<Fct c="10" el="499" l="458" n="openDB(f_dbname STRING,f_debug SMALLINT)" t="F"/>
+<Fct c="10" el="520" l="517" n="close_app()" t="F"/>
+<Fct c="10" el="512" l="458" n="openDB(f_dbname STRING,f_debug SMALLINT)" t="F"/>
 <Fct c="10" el="453" l="434" n="reply_yn(f_default STRING,f_title STRING,f_question STRING)" t="F">
 <Call c="21" l="449" n="FGL_WINQUESTION" t="F"/>
 </Fct>

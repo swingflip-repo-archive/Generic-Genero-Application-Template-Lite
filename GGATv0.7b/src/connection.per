@@ -1,0 +1,41 @@
+LAYOUT (TEXT="")   
+VBOX 
+GROUP (TEXT=%"connection.per.Welcome_Message")
+GRID
+{
+[splash                                                                                                                                                                                    ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[connected                                                                                                                                                                                 ]
+[status                                                                                                                                                                                    ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[bt_photo                                                                                                                                                                                  ]
+[bt_sync                                                                                                                                                                                   ]
+[bt_admint                                                                                                                                                                                 ]
+[bt_logout                                                                                                                                                                                 ]
+}
+END
+END #GROUP
+END #VBOX
+END  #LAYOUT
+
+ATTRIBUTES
+#use textedit
+IMAGE splash:splash, STYLE="centerImages", IMAGE="disconnected",
+			WIDTH=100 PIXELS, HEIGHT=100 PIXELS;
+LABEL connected=FORMONLY.connected, JUSTIFY=CENTER;
+TEXTEDIT status=FORMONLY.status, NOENTRY, SCROLLBARS=VERTICAL, SIZEPOLICY=FIXED, STRETCH=BOTH;
+BUTTON bt_photo : bt_photo, TEXT=%"connection.per.Image_Upload_Demo", HIDDEN;
+BUTTON bt_sync : bt_sync, TEXT=%"connection.per.Sync_With_Network";
+BUTTON bt_admint : bt_admint, TEXT=%"connection.per.Admin_Tools", HIDDEN;
+BUTTON bt_logout : bt_logout, TEXT=%"connection.per.Logout";
+
+END
+
+

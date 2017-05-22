@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Schema gstVersion="30a03" id="{b77912c7-1608-4e61-a440-399ab86be759}" version="4.0">
+  <AGSettings version="1.1">
+    <DynamicProperties version="2">
+      <DynamicProperty description="Constraints (Column)" filePath="$(Dir)/$(BaseName)_dbxconstraints.4gl" isDefaultInherited="false" isHidden="false" label="Constraints (Column)" locator="/\\{&lt;POINT Name=&quot;fct.$(../@name)_$(./@name)_checkColumnConstraints.user&quot;[^&gt;]*&gt;\\}" name="cl_column_constraints" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Constraints" filePath="$(Dir)/$(BaseName)_dbxconstraints.4gl" isDefaultInherited="false" isHidden="false" label="Constraints" locator="/\\{&lt;POINT Name=&quot;user.functions[^&gt;]*&gt;\\}" name="cl_schema_file_dbxconstraints" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Data" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Data" locator="/\\{&lt;POINT Name=&quot;user.functions[^&gt;]*&gt;\\}" name="cl_schema_file_dbxdata" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Cascade Delete" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Cascade Delete" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_.*_deleteReferencingRowsByKey.afterDelete&quot;[^&gt;]*&gt;\\}" name="cl_table_cascadeDelete" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Constraints (Table)" filePath="$(Dir)/$(BaseName)_dbxconstraints.4gl" isDefaultInherited="false" isHidden="false" label="Constraints (Table)" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_checkTableConstraints.user&quot;[^&gt;]*&gt;\\}" name="cl_table_constraints" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Defaults" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Defaults" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_setDefaultValuesFromDBSchema.init&quot;[^&gt;]*&gt;\\}" name="cl_table_defaults" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Delete" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Delete" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_.*_deleteRowByKey.afterDelete&quot;[^&gt;]*&gt;\\}" name="cl_table_delete" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Delete (Concurrent)" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Delete (Concurrent)" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_.*_deleteRowByKeyWithConcurrentAccess.afterDelete&quot;[^&gt;]*&gt;\\}" name="cl_table_deleteConcurrent" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Insert (after)" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Insert (after)" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_insertRowByKey.afterInsert&quot;[^&gt;]*&gt;\\}" name="cl_table_insertAfter" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Insert (before)" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Insert (before)" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_insertRowByKey.beforeInsert&quot;[^&gt;]*&gt;\\}" name="cl_table_insertBefore" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Key Exists" filePath="$(Dir)/$(BaseName)_dbxconstraints.4gl" isDefaultInherited="false" isHidden="false" label="Key Exists" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_.*_checkFKConstraint.define&quot;[^&gt;]*&gt;\\}" name="cl_table_keyExists" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Key Uniqueness" filePath="$(Dir)/$(BaseName)_dbxconstraints.4gl" isDefaultInherited="false" isHidden="false" label="Key Uniqueness" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_.*_checkUniqueConstraint.user&quot;[^&gt;]*&gt;\\}" name="cl_table_keyUniqueness" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Optimistic Locking" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Optimistic Locking" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_.*_checkRowByKeyWithConcurrentAccess.afterCheck&quot;[^&gt;]*&gt;\\}" name="cl_table_optimisticLocking" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Select" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Select" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_.*_selectRowByKey.afterSelect&quot;[^&gt;]*&gt;\\}" name="cl_table_select" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Update" filePath="$(Dir)/$(BaseName)_dbxdata.4gl" isDefaultInherited="false" isHidden="false" label="Update" locator="/\\{&lt;POINT Name=&quot;fct.$(./@name)_.*_updateRowByKey.afterUpdate&quot;[^&gt;]*&gt;\\}" name="cl_table_update" readOnly="false" type="LOCATOR"/>
+      <DynamicProperty description="Associated label when generating form" initialValue="" isDefaultInherited="false" isHidden="false" label="Label" name="label" readOnly="false" type="TEXT"/>
+      <DynamicProperty description="Associated widget" editorInfo="contains:ButtonEdit|CheckBox|ComboBox|DateEdit|DateTimeEdit|Edit|FFImage|FFLabel|Field|Phantom|ProgressBar|RadioGroup|Slider|SpinEdit|TextEdit|TimeEdit" initialValue="Edit" isDefaultInherited="false" isHidden="false" label="Widget" name="widget" readOnly="false" type="ENUM"/>
+      <DynamicPropertyGroup collapsed="false" description="Put user code to customize the application" label="Code Files" name="codeFiles" properties="cl_schema_file_dbxdata;cl_schema_file_dbxconstraints"/>
+      <DynamicPropertyGroup collapsed="false" description="Put user code to customize the application" label="Code Links" name="codeLinks" properties="cl_table_constraints;cl_table_keyUniqueness;cl_table_keyExists;cl_table_select;cl_table_insertBefore;cl_table_insertAfter;cl_table_update;cl_table_delete;cl_table_deleteConcurrent;cl_table_cascadeDelete;cl_table_optimisticLocking;cl_table_defaults;cl_column_constraints"/>
+      <DynamicPropertyGroup collapsed="false" description="Formfied properties" label="Formfield" name="formfieldGroup" properties="label;widget"/>
+    </DynamicProperties>
+    <NodeInfos version="1">
+      <NodeInfo mimeType="db/schema" properties="cl_schema_file_dbxdata;cl_schema_file_dbxconstraints"/>
+      <NodeInfo mimeType="db/table" properties="cl_table_constraints;cl_table_keyUniqueness;cl_table_keyExists;cl_table_select;cl_table_insertBefore;cl_table_insertAfter;cl_table_update;cl_table_delete;cl_table_deleteConcurrent;cl_table_cascadeDelete;cl_table_optimisticLocking;cl_table_defaults"/>
+      <NodeInfo mimeType="db/column" properties="widget;label;cl_column_constraints"/>
+    </NodeInfos>
+  </AGSettings>
+  <ExtractionSettings last="SQLite">
+    <ExtractionOptions casens="LowerCase" cvmeth="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" ignerr="true" systab="false" type="SQLite"/>
+  </ExtractionSettings>
+  <GenerationSettings>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="IBM Informix"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="PostgreSQL (&lt;8.4)"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="Oracle 10g+"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="PostgreSQL 8.4+"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="Oracle 8.x"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="Oracle 9.x"/>
+    <GenerationOptions casens="LowerCase" generate="true" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="SQLite"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="IBM Netezza"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="Oracle MySQL"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="Microsoft SQL Server (&lt;2008)"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="IBM DB2 (&lt;9.1)"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="Microsoft SQL Server 2008+"/>
+    <GenerationOptions casens="LowerCase" generate="false" genidx="true" genpk="1" genuq="1" national="false" nobackup="false" populate="false" version="IBM DB2 9.1+"/>
+  </GenerationSettings>
+  <Table active="true" name="local_accounts" status="U" uuid="db/table2">
+    <Column fglLength="4" fglType="2" name="l_u_index" notNull="true" order="1" status="U" uuid="db/column2"/>
+    <Column fglLength="255" fglType="201" name="username" notNull="true" order="2" status="U" uuid="db/column4"/>
+    <Column fglLength="255" fglType="201" name="password" notNull="true" order="3" status="U" uuid="db/column10"/>
+    <Column fglLength="255" fglType="201" name="email" notNull="false" order="4" status="U" uuid="db/column11"/>
+    <Column fglLength="4" fglType="2" name="phone" notNull="false" order="5" status="U" uuid="db/column12"/>
+    <Column fglLength="3594" fglType="10" name="last_login" notNull="false" order="6" status="U" uuid="db/column13"/>
+    <Column fglLength="5" fglType="201" name="user_type" notNull="false" order="7" status="U" uuid="db/column19"/>
+    <Index indexColumns="l_u_index" indexConstraint="primaryKey" name="primary_key_local_accounts" status="U" uuid="db/index2"/>
+    <Index indexColumns="username" indexConstraint="unique" name="sqlite_autoindex_local_accounts_1" status="U" uuid="db/index3"/>
+  </Table>
+  <Table active="true" name="local_remember" status="U" uuid="db/table3">
+    <Column fglLength="4" fglType="2" name="l_r_index" notNull="true" order="1" status="U" uuid="db/column15"/>
+    <Column fglLength="255" fglType="201" name="username" notNull="false" order="2" status="U" uuid="db/column16"/>
+    <Column fglLength="2" fglType="1" name="remember" notNull="true" order="3" status="U" uuid="db/column17"/>
+    <Column fglLength="3594" fglType="10" name="last_modified" notNull="false" order="4" status="U" uuid="db/column18"/>
+    <Index indexColumns="l_r_index" indexConstraint="primaryKey" name="primary_key_local_remember" status="U" uuid="db/index4"/>
+  </Table>
+  <Table active="true" name="local_stat" status="U" uuid="db/table1">
+    <Column fglLength="4" fglType="2" name="l_s_index" notNull="true" order="1" status="U" uuid="db/column1"/>
+    <Column fglLength="255" fglType="201" name="deployment_type" notNull="true" order="2" status="U" uuid="db/column3"/>
+    <Column fglLength="255" fglType="201" name="os_type" notNull="true" order="3" status="U" uuid="db/column5"/>
+    <Column fglLength="255" fglType="201" name="ip" notNull="false" order="4" status="U" uuid="db/column6"/>
+    <Column fglLength="255" fglType="201" name="device_name" notNull="false" order="5" status="U" uuid="db/column7"/>
+    <Column fglLength="255" fglType="201" name="resolution" notNull="false" order="6" status="U" uuid="db/column8"/>
+    <Column fglLength="255" fglType="201" name="geo_location" notNull="false" order="7" status="U" uuid="db/column9"/>
+    <Column fglLength="3594" fglType="10" name="last_load" notNull="true" order="8" status="U" uuid="db/column14"/>
+    <Index indexColumns="l_s_index" indexConstraint="primaryKey" name="sqlite_autoindex_local_stat_1" status="U" uuid="db/index1"/>
+  </Table>
+  <Table active="true" name="payload_queue" status="U" uuid="db/table4">
+    <Column fglLength="4" fglType="2" name="p_q_index" notNull="true" order="1" status="U" uuid="db/column20"/>
+    <Column fglLength="255" fglType="201" name="requested_by" notNull="true" order="2" status="U" uuid="db/column21"/>
+    <Column fglLength="3594" fglType="10" name="requested_date" notNull="true" order="3" status="U" uuid="db/column22"/>
+    <Column fglLength="3594" fglType="10" name="last_attempted" notNull="false" order="4" status="U" uuid="db/column23"/>
+    <Column fglLength="255" fglType="201" name="destination" notNull="true" order="5" status="U" uuid="db/column24"/>
+    <Column fglLength="64" fglType="201" name="payload_type" notNull="true" order="6" status="U" uuid="db/column25"/>
+    <Column fglLength="56" fglType="11" name="payload" notNull="true" order="7" status="U" uuid="db/column26"/>
+    <Index indexColumns="p_q_index" indexConstraint="primaryKey" name="primary_key_payload_queue" status="U" uuid="db/index5"/>
+  </Table>
+  <Views ActiveView="View-1" showLabels="true">
+    <View Name="View-1">
+      <Layout>
+        <![CDATA[AAAAAgAAABIAZABiAC8AdABhAGIAbABlADFAMgAAAAAAAEBmIAAAAAAAP5mZmZmZmZ4BAAAAEgBkAGIALwB0AGEAYgBsAGUAMkB2kAAAAAAAQGogAAAAAAA/l41P3ztkXgEAAAASAGQAYgAvAHQAYQBiAGwAZQAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAABIAZABiAC8AdABhAGIAbABlADRAiZAAAAAAAEBbwAAAAAAAP5ysCDEm6X4B]]>
+      </Layout>
+    </View>
+  </Views>
+</Schema>
