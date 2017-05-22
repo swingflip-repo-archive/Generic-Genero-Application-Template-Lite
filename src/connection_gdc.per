@@ -1,0 +1,36 @@
+LAYOUT (TEXT="")   
+VBOX 
+GROUP (TEXT=%"Welcome to the GGAT!")
+GRID
+{
+[splash                         ]
+[connected                      ]
+[status                         ]
+[                               ]
+[                               ]
+[                               ]
+[                               ]
+[                               ]
+[                               ]
+[bt_photo                       ]
+[bt_sync                        ]
+[bt_admint                      ]
+[bt_logout                      ]
+}
+END
+END #GROUP
+END #VBOX
+END  #LAYOUT
+
+ATTRIBUTES
+#use textedit
+IMAGE splash:splash, STYLE="centerImages", IMAGE="disconnected",
+			WIDTH=100 PIXELS, HEIGHT=100 PIXELS;
+LABEL connected=FORMONLY.connected, JUSTIFY=CENTER;
+TEXTEDIT status=FORMONLY.status, NOENTRY, SCROLLBARS=VERTICAL, SIZEPOLICY=FIXED, STRETCH=BOTH;
+BUTTON bt_photo : bt_photo, TEXT=%"Image Upload Demo", HIDDEN;
+BUTTON bt_sync : bt_sync, TEXT=%"Sync with Network!";
+BUTTON bt_admint : bt_admint, TEXT=%"Admin Tools", HIDDEN;
+BUTTON bt_logout : bt_logout, TEXT=%"Logout";
+
+END
