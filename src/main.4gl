@@ -93,6 +93,7 @@ MAIN
 #******************************************************************************#
 # HERE IS WHERE YOU CONFIGURE GOBAL SWITCHES FOR THE APPLICATION
 # ADJUST THESE AS YOU SEEM FIT. BELOW IS A LIST OF OPTIONS IN ORDER:
+#				g_application_database_ver INTEGER,		#Application Database Version (This is useful to force database additions to pre-existing db instances)
 #				g_enable_login SMALLINT								#Boot in to login menu or straight into application (open_application())
 #				g_splash_width STRING, 								#Login menu splash width when not in mobile
 #				g_splash_height STRING, 							#Login menu splash height when not in mobile
@@ -108,7 +109,8 @@ MAIN
 # Here are globals not included in initialize_globals function due to sheer size of the arguement data...
 #				g_client_key STRING,									#Unique Client key for webservice purposes
 
-		CALL initialize_globals(TRUE,											#g_enable_login SMALLINT
+		CALL initialize_globals(1,												#g_application_database_ver INTEGER
+														TRUE,											#g_enable_login SMALLINT
 														"500px",									#g_splash_width STRING
 														"281px",									#g_splash_height STRING
 														TRUE,											#g_enable_geolocation SMALLINT

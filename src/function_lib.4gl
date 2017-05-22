@@ -28,7 +28,7 @@ END FUNCTION
 #
 #
 #
-FUNCTION initialize_globals(f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_limit,f_online_ping_URL,
+FUNCTION initialize_globals(f_application_database_ver, f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_limit,f_online_ping_URL,
 														f_enable_timed_connect,f_timed_connect_time,f_date_format,f_image_dest,
 														f_enable_timed_image_upload) #Set up global variables
 		DEFINE
@@ -44,7 +44,8 @@ FUNCTION initialize_globals(f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_
 				f_timed_connect_time INTEGER,
 				f_date_format STRING,
 				f_image_dest STRING,
-				f_enable_timed_image_upload SMALLINT
+				f_enable_timed_image_upload SMALLINT,
+				f_application_database_ver INTEGER
 
 		LET f_ok = FALSE
 
@@ -60,6 +61,7 @@ FUNCTION initialize_globals(f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_
 		LET g_date_format = f_date_format
 		LET g_image_dest = f_image_dest
 		LET g_enable_timed_image_upload = f_enable_timed_image_upload
+		LET g_application_database_ver = f_application_database_ver
 		
 		LET f_ok = TRUE
 				
@@ -534,6 +536,7 @@ FUNCTION openDB(f_dbname,f_debug)
 		TRY
 				DATABASE f_dbpath
 				LET f_msg = f_msg.append("Connected OK")
+				CALL check_database_version(TRUE)
 		CATCH
 				DISPLAY STATUS, f_msg||SQLERRMESSAGE
 		END TRY
@@ -542,6 +545,66 @@ FUNCTION openDB(f_dbname,f_debug)
 		THEN
 				DISPLAY f_msg
 		END IF
+		
+END FUNCTION
+#
+#
+#
+#
+FUNCTION check_database_version (f_debug)
+		DEFINE
+				f_count INTEGER,
+				f_version INTEGER,
+				f_msg STRING,
+				f_debug SMALLINT
+
+		SELECT COUNT(*) INTO f_count FROM database_version WHERE 1 = 1
+
+		IF f_count = 0
+		THEN
+				LET f_msg = "No database version within working db, "
+				WHENEVER ERROR CONTINUE
+						INSERT INTO database_version VALUES(NULL, g_application_database_ver, CURRENT YEAR TO SECOND)
+				WHENEVER ERROR STOP
+
+				IF sqlca.sqlcode <> 0
+				THEN
+						LET f_msg = f_msg.append("Database version insert failed!")
+						DISPLAY "FATAL ERROR: You must have an invalid db version number set in the global config, please fix and try again!"
+						EXIT PROGRAM 9999
+				ELSE
+						LET f_msg = f_msg.append("Database version insert OK!\n")
+				END IF
+		ELSE
+				LET f_msg="Database Version OK,\n"
+		END IF
+
+		SELECT db_version INTO f_version FROM database_version WHERE 1 = 1
+
+		IF f_version != g_application_database_ver
+		THEN
+				LET f_msg = f_msg.append("Database version mismatch! Running db_create_tables()...\n")
+				CALL db_create_tables() #Before this runs, you need to be confident that this function will work the way you want it... You have been warned!
+				WHENEVER ERROR CONTINUE
+						UPDATE database_version SET db_version = g_application_database_ver, last_updated = CURRENT YEAR TO SECOND WHERE 1 = 1
+				WHENEVER ERROR STOP
+
+				IF sqlca.sqlcode <> 0
+				THEN
+						LET f_msg = f_msg.append("Database version update failed!")
+						DISPLAY "FATAL ERROR: DB version update failed, you must have an issue with your database_version table!"
+						EXIT PROGRAM 9999
+				ELSE
+						LET f_msg = f_msg.append("Database version updated OK!\n")
+				END IF
+		ELSE
+				LET f_msg = f_msg.append("Database is up to date!")
+		END IF
+	
+		IF f_debug = TRUE
+		THEN
+				DISPLAY f_msg
+		END IF			
 		
 END FUNCTION
 #

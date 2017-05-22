@@ -1,3 +1,5 @@
+IMPORT OS
+
 {
   db_create_tables
 
@@ -45,6 +47,12 @@ FUNCTION db_create_tables()
 				payload BLOB NOT NULL
 				);"
 
+		EXECUTE IMMEDIATE "CREATE TABLE database_version (
+				d_v_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+				db_version INTEGER,
+				last_updated DATETIME
+				);"
+
     WHENEVER ERROR STOP
 END FUNCTION
 
@@ -76,4 +84,28 @@ FUNCTION db_drop_tables()
 		EXECUTE IMMEDIATE "DROP TABLE payload_queue"
 		
     WHENEVER ERROR STOP
+END FUNCTION
+
+{
+  db_resync
+
+  Delete working database and copy over fresh database. (Obviously use with caution!)
+}
+FUNCTION db_resync(f_dbname)
+		DEFINE
+				f_dbname STRING,
+				f_dbpath STRING,
+				f_status INTEGER
+				
+				LET f_dbpath = os.path.join(os.path.pwd(), f_dbname)
+
+				IF os.path.delete(f_dbpath)
+				THEN
+						DISPLAY "Working directory database deleted! Initiating openDB()"
+						CALL openDB(f_dbname,TRUE)
+				ELSE
+						DISPLAY "ERROR: COULDN'T REMOVE WORKING DIRECTORY DATABASE"
+						EXIT PROGRAM 9999
+				END IF
+				
 END FUNCTION

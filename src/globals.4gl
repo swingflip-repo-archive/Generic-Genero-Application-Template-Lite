@@ -15,6 +15,7 @@ GLOBALS
 				g_application_title STRING,						#Application Title
 				g_application_version STRING,					#Application Version
 				g_application_about STRING,						#Application About Blurb
+				g_application_database_ver INTEGER,		#Application Database Version (This is useful to force database additions to pre-existing db instances) 
 
 		#Webservice variables
 				g_client_key STRING,									#Unique Client key for webservice purposes
