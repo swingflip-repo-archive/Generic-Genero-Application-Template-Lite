@@ -40,8 +40,8 @@ MAIN
 #******************************************************************************#
 #Set global application details here...
 
-		LET g_application_title =%"main.string.App_Title"
-		LET g_application_version =%"main.string.App_Version"
+		LET g_application_title = "Genero Generic Application Template"
+		LET g_application_version = "v0.5 Alpha"
 		LET m_title =  g_application_title || " " || g_application_version
 		
 #******************************************************************************#
@@ -124,7 +124,7 @@ MAIN
 
 		IF m_ok = FALSE
 		THEN
-				 CALL fgl_winmessage(m_title, %"main.string.ERROR_1001", "stop")
+				 CALL fgl_winmessage(m_title, "ERROR 1001:\nFailed to Initialise Global Variables.", "stop")
 				 EXIT PROGRAM 1001
 		END IF
 
@@ -247,7 +247,7 @@ FUNCTION login_screen() #Local login handler
 							LET m_instruction = "connection"
 							EXIT INPUT
 					ELSE
-							CALL fgl_winmessage(" ",%"main.string.Incorrect_Username", "information")
+							CALL fgl_winmessage(" ","Incorrect Username or Password", "information")
 							NEXT FIELD password
 					END IF
 						
@@ -399,11 +399,13 @@ FUNCTION admin_tools() #Development tools to showcase an admin login
 								
 						BEFORE MENU
 								CALL connection_test()
-								LET f_words = %"main.string.Admin_Explanation"
+								LET f_words = "These are a selection of \"VERY\" basic development tools which should be run in the gdc." || "\n\n" ||
+															"These functions have no input validating so should only be used for testing purposes only! It WILL crash the app if you don't use them properly..." || "\n\n" ||
+															"This section's main purpose is to showcase an 'admin only section' within the application."
 								DISPLAY f_words TO words
 								IF g_user_type != "ADMIN"
 								THEN
-										CALL fgl_winmessage(%"main.string.Error_Title", %"main.string.Bad_Access", "stop")
+										CALL fgl_winmessage("Error!", "You have tried to access an area you shouldn't...Logging out!", "stop")
 										LET m_instruction = "logout"
 										LET TERMINATE = TRUE
 										EXIT MENU			
@@ -497,7 +499,9 @@ FUNCTION image_program()
 								
 						BEFORE MENU
 								CALL connection_test()
-								LET f_words = %"main.string.Photo_Explanation"
+								LET f_words = "Here you can take some photos, and upload them to the cloud. When you confirm your selection, the photos will be compressed and stored locally in a local database ready for transport." || "\n\n" ||
+															"When you have a solid network connection and access to the webserver, the app will send the payload to the webservice and await confirmation before removing the image from the queue." || "\n\n" ||
+															"You can save as many photos in the queue as you wish and they will only be removed once they have been successfully recieved by the cloud."
 								DISPLAY f_words TO words
 								LET f_queue_count = 0
 								INITIALIZE f_temp_img_queue TO NULL
@@ -517,9 +521,9 @@ FUNCTION image_program()
 										LET f_queue_count = f_queue_count + 1
 										IF f_queue_count = 1
 										THEN
-												DISPLAY f_queue_count || %"main.string.Photo_In_Queue" TO status
+												DISPLAY f_queue_count || " Photo in queue" TO status
 										ELSE
-												DISPLAY f_queue_count || %"main.string.Photos_In_Queue" TO status
+												DISPLAY f_queue_count || " Photo(s) in queue" TO status
 										END IF
 										LET f_index = f_index + 1
 								ELSE
@@ -541,9 +545,9 @@ FUNCTION image_program()
 										LET f_queue_count = f_queue_count + 1
 										IF f_queue_count = 1
 										THEN
-												DISPLAY f_queue_count || %"main.string.Photo_In_Temporary_Queue" TO status
+												DISPLAY f_queue_count || " Photo in temporary queue" TO status
 										ELSE
-												DISPLAY f_queue_count || %"main.string.Photos_In_Temporary_Queue" TO status
+												DISPLAY f_queue_count || " Photo(s) in temporary queue" TO status
 										END IF
 										LET f_index = f_index + 1
 								ELSE
@@ -556,20 +560,20 @@ FUNCTION image_program()
 						ON ACTION bt_cancel
 								IF f_temp_img_queue.getLength() = 0
 								THEN
-										CALL fgl_winmessage(%"main.string.Image_Upload", %"main.string.No_Images_To_Cancel", "information")
+										CALL fgl_winmessage("Image Upload", "There are no images in the temporary queue to cancel!", "information")
 								ELSE
-										IF reply_yn("N"," ",%"main.string.Are_You_Sure_To_Cancel")
+										IF reply_yn("N"," ","Are you sure you want to clear the temporary image queue?")
 										THEN
 												LET f_queue_count = 0
 												INITIALIZE f_temp_img_queue TO NULL
 												DISPLAY " " TO status
-												MESSAGE %"main.string.Cleared_Image_Queue"
+												MESSAGE "Cleared image queue!"
 										END IF
 								END IF
 						ON ACTION bt_confirm
 								IF f_temp_img_queue.getLength() = 0
 								THEN
-										CALL fgl_winmessage(%"main.string.Image_Upload", %"main.string.No_Temp_Images_To_Upload", "information")
+										CALL fgl_winmessage("Image Upload", "There are no images in the temporary image queue to upload!", "information")
 								ELSE
 										FOR f_index = 1 TO f_temp_img_queue.getLength()
 												IF f_temp_img_queue[f_index] IS NOT NULL
@@ -583,19 +587,19 @@ FUNCTION image_program()
 																RETURNING m_ok
 												END IF
 										END FOR
-										IF reply_yn("Y"," ",%"Images loaded successfully! Do you wish to upload them now?")
+										IF reply_yn("Y"," ","Images loaded successfully! Do you wish to upload them now?")
 										THEN
 												CALL connection_test()
 												IF g_online = "NONE"
 												THEN
 														IF g_enable_timed_image_upload = TRUE AND g_timed_checks_time > 0
 														THEN
-																CALL fgl_winmessage(%"main.string.Warning_Title", %"main.string.You_Are_Offline_Auto_Retry", "information")
+																CALL fgl_winmessage("Warning!", "You are currently offline, we will automatically try again when you are next online.", "information")
 																LET f_queue_count = 0
 																INITIALIZE f_temp_img_queue TO NULL
 																DISPLAY " " TO status 
 														ELSE
-																CALL fgl_winmessage(%"main.string.Warning_Title", %"main.string.You_Are_Offline_Try_Again", "information")
+																CALL fgl_winmessage("Warning!", "You are currently offline, please try again when you are online.", "information")
 																LET f_queue_count = 0
 																INITIALIZE f_temp_img_queue TO NULL
 																DISPLAY " " TO status
@@ -607,7 +611,7 @@ FUNCTION image_program()
 														DISPLAY " " TO status
 												END IF
 										ELSE
-												MESSAGE %"main.string.Images_Loaded_In_Queue"
+												MESSAGE "Images loaded into upload queue!"
 												LET f_queue_count = 0
 												INITIALIZE f_temp_img_queue TO NULL
 												DISPLAY " " TO status
@@ -652,9 +656,9 @@ FUNCTION connection_test() #Test online connectivity, call this whenever opening
 				THEN
 						IF g_enable_mobile_title = FALSE
 						THEN
-								CALL m_window.setText(%"main.string.Working_Offline")
+								CALL m_window.setText(" *Working Offline* ")
 						ELSE
-								CALL m_window.setText(%"main.string.Working_Offline" || m_title)
+								CALL m_window.setText(" *Working Offline* " || m_title)
 						END IF
 				ELSE
 						IF g_enable_mobile_title = FALSE
@@ -679,10 +683,10 @@ FUNCTION update_connection_image(f_image) #Used to update connection image withi
 		IF g_online = "NONE"
 		THEN
 				CALL m_form.setElementImage(f_image,"disconnected")
-				DISPLAY %"main.string.Services_Disconnected" TO connected
+				DISPLAY "Services Disconnected" TO connected
 		ELSE
 				CALL m_form.setElementImage(f_image,"connected")
-				DISPLAY %"main.string.Services_Connected" TO connected
+				DISPLAY "Services Connected" TO connected
 		END IF 
 END FUNCTION
 

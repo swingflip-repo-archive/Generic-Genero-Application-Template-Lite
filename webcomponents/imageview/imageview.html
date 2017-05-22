@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test</title>
+<meta Http-Equiv="Cache-Control" Content="no-cache">
+<meta Http-Equiv="Pragma" Content="no-cache">
+<meta Http-Equiv="Expires" Content="0">
+<script LANGUAGE="JavaScript">
+    onICHostReady = function(version) {
+
+        if ( version != 1.0 ) {
+            alert('Invalid API version');
+        }
+
+        set_image = function(ressource) {
+            var ie=document.getElementsByName("myimage")[0];
+            ie.src=ressource;
+        }
+
+    }
+</script>
+</head>
+<body style="background-color:#FF0000;">
+<h2>Testing application images in gICAPI Web Component</h2>
+<img name="myimage" />
+</body>
+</html>
