@@ -11,6 +11,14 @@
      <StyleAttribute name="ringMenuPosition" value="none" />
 		 <StyleAttribute name="sizable" value="yes" />
   </Style>
+  <Style name="Window.vertical_main">
+     <StyleAttribute name="windowType" value="normal" />
+     <StyleAttribute name="startMenuPosition" value="menu" />
+		 <StyleAttribute name="allowedOrientations" value="portrait_all" />
+		 <StyleAttribute name="actionPanelPosition" value="none" />
+     <StyleAttribute name="ringMenuPosition" value="none" />
+		 <StyleAttribute name="sizable" value="yes" />
+  </Style>
   <Style name="Window.main2">
      <StyleAttribute name="windowType" value="normal" />
      <StyleAttribute name="actionPanelPosition" value="none" />

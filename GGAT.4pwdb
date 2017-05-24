@@ -1,72 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <WorkspaceDatabase fileContentsEncoding="fglutf8" version="2.0">
-<File m="main" n="src/main.4gl" ts="20170519103854348">
+<File m="main" n="src/main.4gl" ts="20170523090011901">
 <Ref t="src/globals.4gl"/>
-<Fct c="10" el="687" l="673" n="update_connection_image(f_image STRING)" t="F"/>
-<Fct c="10" el="668" l="647" n="connection_test()" t="F">
-<Call c="10" l="650" n="test_connectivity" p="src/function_lib.4gl" t="F"/>
+<Fct c="10" el="771" l="757" n="update_connection_image(f_image STRING)" t="F"/>
+<Fct c="10" el="752" l="731" n="connection_test()" t="F">
+<Call c="10" l="734" n="test_connectivity" p="src/function_lib.4gl" t="F"/>
 </Fct>
-<Fct c="10" el="639" l="461" n="image_program()" t="F">
-<Call c="14" l="495" n="connection_test" t="F"/>
-<Call c="14" l="496" n="timed_upload_queue_data" p="src/function_lib.4gl" t="F"/>
-<Call c="14" l="499" n="connection_test" t="F"/>
-<Call c="16" l="559" n="fgl_winmessage" t="F"/>
-<Call c="14" l="561" n="reply_yn" p="src/function_lib.4gl" t="F"/>
-<Call c="16" l="572" n="fgl_winmessage" t="F"/>
-<Call c="20" l="582" n="load_payload" p="src/function_lib.4gl" t="F"/>
-<Call c="14" l="586" n="reply_yn" p="src/function_lib.4gl" t="F"/>
-<Call c="18" l="588" n="connection_test" t="F"/>
-<Call c="22" l="593" n="fgl_winmessage" t="F"/>
-<Call c="22" l="598" n="fgl_winmessage" t="F"/>
-<Call c="20" l="604" n="upload_image_payload" p="src/function_lib.4gl" t="F"/>
-<Call c="12" l="627" n="open_application" t="F"/>
-<Call c="12" l="633" n="login_screen" t="F"/>
-<Call c="12" l="636" n="close_app" p="src/function_lib.4gl" t="F"/>
+<Fct c="10" el="723" l="546" n="image_program()" t="F">
+<Call c="14" l="579" n="connection_test" t="F"/>
+<Call c="14" l="580" n="timed_upload_queue_data" p="src/function_lib.4gl" t="F"/>
+<Call c="14" l="583" n="connection_test" t="F"/>
+<Call c="16" l="643" n="fgl_winmessage" t="F"/>
+<Call c="14" l="645" n="reply_yn" p="src/function_lib.4gl" t="F"/>
+<Call c="16" l="656" n="fgl_winmessage" t="F"/>
+<Call c="20" l="666" n="load_payload" p="src/function_lib.4gl" t="F"/>
+<Call c="14" l="670" n="reply_yn" p="src/function_lib.4gl" t="F"/>
+<Call c="18" l="672" n="connection_test" t="F"/>
+<Call c="22" l="677" n="fgl_winmessage" t="F"/>
+<Call c="22" l="682" n="fgl_winmessage" t="F"/>
+<Call c="20" l="688" n="upload_image_payload" p="src/function_lib.4gl" t="F"/>
+<Call c="12" l="711" n="open_application" t="F"/>
+<Call c="12" l="717" n="login_screen" t="F"/>
+<Call c="12" l="720" n="close_app" p="src/function_lib.4gl" t="F"/>
 </Fct>
-<Fct c="10" el="456" l="363" n="admin_tools()" t="F">
-<Call c="14" l="397" n="connection_test" t="F"/>
-<Call c="14" l="398" n="timed_upload_queue_data" p="src/function_lib.4gl" t="F"/>
-<Call c="14" l="401" n="connection_test" t="F"/>
-<Call c="16" l="406" n="fgl_winmessage" t="F"/>
-<Call c="12" l="444" n="open_application" t="F"/>
-<Call c="12" l="450" n="login_screen" t="F"/>
-<Call c="12" l="453" n="close_app" p="src/function_lib.4gl" t="F"/>
+<Fct c="10" el="541" l="446" n="admin_tools()" t="F">
+<Call c="14" l="480" n="connection_test" t="F"/>
+<Call c="14" l="481" n="timed_upload_queue_data" p="src/function_lib.4gl" t="F"/>
+<Call c="14" l="484" n="connection_test" t="F"/>
+<Call c="16" l="489" n="fgl_winmessage" t="F"/>
+<Call c="14" l="499" n="print_debug_global_config" p="src/function_lib.4gl" t="F"/>
+<Call c="12" l="529" n="open_application" t="F"/>
+<Call c="12" l="535" n="login_screen" t="F"/>
+<Call c="12" l="538" n="close_app" p="src/function_lib.4gl" t="F"/>
 </Fct>
-<Fct c="10" el="358" l="269" n="open_application()" t="F">
-<Call c="14" l="300" n="connection_test" t="F"/>
-<Call c="14" l="301" n="timed_upload_queue_data" p="src/function_lib.4gl" t="F"/>
-<Call c="14" l="302" n="update_connection_image" t="F"/>
-<Call c="14" l="305" n="connection_test" t="F"/>
-<Call c="14" l="306" n="update_connection_image" t="F"/>
-<Call c="14" l="307" n="generate_about" p="src/function_lib.4gl" t="F"/>
-<Call c="14" l="327" n="upload_image_payload" p="src/function_lib.4gl" t="F"/>
-<Call c="12" l="343" n="image_program" t="F"/>
-<Call c="12" l="346" n="admin_tools" t="F"/>
-<Call c="12" l="352" n="login_screen" t="F"/>
-<Call c="12" l="355" n="close_app" p="src/function_lib.4gl" t="F"/>
+<Fct c="10" el="441" l="352" n="open_application()" t="F">
+<Call c="14" l="383" n="connection_test" t="F"/>
+<Call c="14" l="384" n="timed_upload_queue_data" p="src/function_lib.4gl" t="F"/>
+<Call c="14" l="385" n="update_connection_image" t="F"/>
+<Call c="14" l="388" n="connection_test" t="F"/>
+<Call c="14" l="389" n="update_connection_image" t="F"/>
+<Call c="14" l="390" n="generate_about" p="src/function_lib.4gl" t="F"/>
+<Call c="14" l="410" n="upload_image_payload" p="src/function_lib.4gl" t="F"/>
+<Call c="12" l="426" n="image_program" t="F"/>
+<Call c="12" l="429" n="admin_tools" t="F"/>
+<Call c="12" l="435" n="login_screen" t="F"/>
+<Call c="12" l="438" n="close_app" p="src/function_lib.4gl" t="F"/>
 </Fct>
-<Fct c="10" el="264" l="168" n="login_screen()" t="F">
-<Call c="12" l="207" n="connection_test" t="F"/>
-<Call c="12" l="208" n="timed_upload_queue_data" p="src/function_lib.4gl" t="F"/>
-<Call c="12" l="211" n="connection_test" t="F"/>
-<Call c="12" l="212" n="capture_local_stats" p="src/function_lib.4gl" t="F"/>
-<Call c="12" l="217" n="get_local_remember" p="src/function_lib.4gl" t="F"/>
-<Call c="12" l="222" n="refresh_local_remember" p="src/function_lib.4gl" t="F"/>
-<Call c="12" l="226" n="refresh_local_remember" p="src/function_lib.4gl" t="F"/>
-<Call c="12" l="230" n="refresh_local_remember" p="src/function_lib.4gl" t="F"/>
-<Call c="11" l="242" n="check_password" p="src/function_lib.4gl" t="F"/>
-<Call c="13" l="250" n="fgl_winmessage" t="F"/>
-<Call c="12" l="259" n="open_application" t="F"/>
-<Call c="12" l="262" n="close_app" p="src/function_lib.4gl" t="F"/>
+<Fct c="10" el="347" l="253" n="login_screen()" t="F">
+<Call c="12" l="292" n="connection_test" t="F"/>
+<Call c="12" l="293" n="timed_upload_queue_data" p="src/function_lib.4gl" t="F"/>
+<Call c="12" l="296" n="connection_test" t="F"/>
+<Call c="12" l="300" n="get_local_remember" p="src/function_lib.4gl" t="F"/>
+<Call c="12" l="305" n="refresh_local_remember" p="src/function_lib.4gl" t="F"/>
+<Call c="12" l="309" n="refresh_local_remember" p="src/function_lib.4gl" t="F"/>
+<Call c="12" l="313" n="refresh_local_remember" p="src/function_lib.4gl" t="F"/>
+<Call c="11" l="325" n="check_password" p="src/function_lib.4gl" t="F"/>
+<Call c="13" l="333" n="fgl_winmessage" t="F"/>
+<Call c="12" l="342" n="open_application" t="F"/>
+<Call c="12" l="345" n="close_app" p="src/function_lib.4gl" t="F"/>
 </Fct>
-<Fct c="1" el="158" l="38" n="main()" t="F">
-<Call c="8" l="117" n="initialize_globals" p="src/function_lib.4gl" t="F"/>
-<Call c="11" l="127" n="fgl_winmessage" t="F"/>
-<Call c="8" l="151" n="test_connectivity" p="src/function_lib.4gl" t="F"/>
-<Call c="8" l="156" n="login_screen" t="F"/>
+<Fct c="10" el="248" l="193" n="run_splash_screen()" t="F">
+<Call c="12" l="233" n="image_program" t="F"/>
+<Call c="12" l="236" n="admin_tools" t="F"/>
+<Call c="12" l="242" n="login_screen" t="F"/>
+<Call c="12" l="245" n="close_app" p="src/function_lib.4gl" t="F"/>
+</Fct>
+<Fct c="1" el="183" l="41" n="main()" t="F">
+<Call c="8" l="121" n="initialize_globals" p="src/function_lib.4gl" t="F"/>
+<Call c="11" l="142" n="fgl_winmessage" t="F"/>
+<Call c="8" l="166" n="test_connectivity" p="src/function_lib.4gl" t="F"/>
+<Call c="8" l="167" n="capture_local_stats" p="src/function_lib.4gl" t="F"/>
+<Call c="8" l="174" n="run_splash_screen" t="F"/>
 </Fct>
 </File>
-<File m="local_db_dbxconstraints" n="database/local_db_dbxconstraints.4gl" ts="20170519125854324">
+<File m="local_db_dbxconstraints" n="database/local_db_dbxconstraints.4gl" ts="20170522174848877">
 <Fct c="17" el="969" l="938" n="local_db_dbxconstraints_local_accounts_sqlite_autoindex_local_accounts_1_checkFKConstraint(p_data RECORD)" t="F">
 <Call c="22" l="961" n="libdbapp_utilBuildErrorNoAndErrorMsg" t="F"/>
 </Fct>
@@ -191,7 +198,7 @@
 <Call c="10" l="56" n="libdbapp_utilBuildErrorNoAndErrorMsg" t="F"/>
 </Fct>
 </File>
-<File m="local_db_dbxdata" n="database/local_db_dbxdata.4gl" ts="20170519125854358">
+<File m="local_db_dbxdata" n="database/local_db_dbxdata.4gl" ts="20170522174848832">
 <Dep t="database/local_db_dbxconstraints.4gl"/>
 <Fct c="17" el="1385" l="1355" n="local_db_dbxdata_local_accounts_sqlite_autoindex_local_accounts_1_getPK(p_key RECORD)" t="F"/>
 <Fct c="17" el="1345" l="1338" n="local_db_dbxdata_local_accounts_setDefaultValuesFromDBSchema()" t="F"/>
@@ -355,55 +362,66 @@
 </Fct>
 <Fct c="17" el="65" l="32" n="local_db_dbxdata_payload_queue_primary_key_payload_queue_selectRowByKey(p_key RECORD,p_lock BOOLEAN)" t="F"/>
 </File>
-<File m="database_funcs" n="src/database_funcs.4gl" ts="20170517150020469">
-<Fct c="10" el="79" l="70" n="db_drop_tables()" t="F"/>
-<Fct c="10" el="63" l="56" n="db_create_defaults()" t="F"/>
-<Fct c="10" el="49" l="6" n="db_create_tables()" t="F"/>
+<File m="database_funcs" n="src/database_funcs.4gl" ts="20170522152231606">
+<Fct c="10" el="111" l="94" n="db_resync(f_dbname STRING)" t="F">
+<Call c="12" l="105" n="openDB" p="src/function_lib.4gl" t="F"/>
+</Fct>
+<Fct c="10" el="87" l="78" n="db_drop_tables()" t="F"/>
+<Fct c="10" el="71" l="64" n="db_create_defaults()" t="F"/>
+<Fct c="10" el="57" l="8" n="db_create_tables()" t="F"/>
 </File>
-<File m="function_lib" n="src/function_lib.4gl" ts="20170519125522561">
+<File m="function_lib" n="src/function_lib.4gl" ts="20170522151626663">
 <Ref t="src/globals.4gl"/>
-<Fct c="10" el="520" l="517" n="close_app()" t="F"/>
-<Fct c="10" el="512" l="458" n="openDB(f_dbname STRING,f_debug SMALLINT)" t="F"/>
-<Fct c="10" el="453" l="434" n="reply_yn(f_default STRING,f_title STRING,f_question STRING)" t="F">
-<Call c="21" l="449" n="FGL_WINQUESTION" t="F"/>
+<Fct c="10" el="617" l="614" n="close_app()" t="F"/>
+<Fct c="10" el="609" l="554" n="check_database_version(f_debug SMALLINT)" t="F">
+<Call c="10" l="587" n="db_create_tables" p="src/database_funcs.4gl" t="F"/>
 </Fct>
-<Fct c="10" el="429" l="349" n="upload_image_payload(f_silent SMALLINT)" t="F">
-<Call c="8" l="371" n="openDB" t="F"/>
-<Call c="12" l="383" n="fgl_winmessage" t="F"/>
-<Call c="10" l="386" n="ws_funcs_check_service" p="src/imageWS_imageWSPort.4gl" t="F"/>
-<Call c="14" l="393" n="fgl_winmessage" t="F"/>
-<Call c="14" l="404" n="ws_funcs_process_image" p="src/imageWS_imageWSPort.4gl" t="F"/>
-<Call c="14" l="425" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="549" l="494" n="openDB(f_dbname STRING,f_debug SMALLINT)" t="F">
+<Call c="10" l="539" n="check_database_version" t="F"/>
 </Fct>
-<Fct c="10" el="344" l="330" n="get_payload_destination(f_type STRING)" t="F"/>
-<Fct c="10" el="325" l="296" n="load_payload(f_user STRING,f_type STRING,f_payload STRING)" t="F">
-<Call c="8" l="305" n="openDB" t="F"/>
-<Call c="8" l="309" n="get_payload_destination" t="F"/>
-<Call c="10" l="318" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="489" l="470" n="reply_yn(f_default STRING,f_title STRING,f_question STRING)" t="F">
+<Call c="21" l="485" n="FGL_WINQUESTION" t="F"/>
 </Fct>
-<Fct c="10" el="291" l="275" n="timed_upload_queue_data()" t="F">
-<Call c="12" l="285" n="upload_image_payload" t="F"/>
+<Fct c="10" el="465" l="385" n="upload_image_payload(f_silent SMALLINT)" t="F">
+<Call c="8" l="407" n="openDB" t="F"/>
+<Call c="12" l="419" n="fgl_winmessage" t="F"/>
+<Call c="10" l="422" n="ws_funcs_check_service" p="src/imageWS_imageWSPort.4gl" t="F"/>
+<Call c="14" l="429" n="fgl_winmessage" t="F"/>
+<Call c="14" l="440" n="ws_funcs_process_image" p="src/imageWS_imageWSPort.4gl" t="F"/>
+<Call c="14" l="461" n="fgl_winmessage" t="F"/>
 </Fct>
-<Fct c="10" el="270" l="233" n="test_connectivity(f_deployment_type STRING)" t="F"/>
-<Fct c="10" el="228" l="204" n="refresh_local_remember(f_username unknown,f_remember SMALLINT)" t="F">
-<Call c="8" l="211" n="openDB" t="F"/>
-<Call c="10" l="220" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="380" l="366" n="get_payload_destination(f_type STRING)" t="F"/>
+<Fct c="10" el="361" l="332" n="load_payload(f_user STRING,f_type STRING,f_payload STRING)" t="F">
+<Call c="8" l="341" n="openDB" t="F"/>
+<Call c="8" l="345" n="get_payload_destination" t="F"/>
+<Call c="10" l="354" n="fgl_winmessage" t="F"/>
 </Fct>
-<Fct c="10" el="199" l="176" n="get_local_remember()" t="F">
-<Call c="8" l="183" n="openDB" t="F"/>
-<Call c="10" l="193" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="327" l="310" n="timed_upload_queue_data()" t="F">
+<Call c="12" l="321" n="upload_image_payload" t="F"/>
 </Fct>
-<Fct c="10" el="171" l="144" n="check_password(f_user STRING,f_pass STRING)" t="F"/>
-<Fct c="10" el="139" l="120" n="hash_password(f_pass STRING)" t="F"/>
-<Fct c="10" el="115" l="63" n="capture_local_stats(f_info RECORD)" t="F">
-<Call c="8" l="81" n="openDB" t="F"/>
-<Call c="10" l="92" n="fgl_winmessage" t="F"/>
-<Call c="12" l="109" n="fgl_winmessage" t="F"/>
+<Fct c="10" el="305" l="268" n="test_connectivity(f_deployment_type STRING)" t="F"/>
+<Fct c="10" el="263" l="239" n="refresh_local_remember(f_username unknown,f_remember SMALLINT)" t="F">
+<Call c="8" l="246" n="openDB" t="F"/>
+<Call c="10" l="255" n="fgl_winmessage" t="F"/>
 </Fct>
-<Fct c="10" el="58" l="24" n="initialize_globals(f_splash_w STRING,f_splash_h STRING,f_geo SMALLINT,f_mobile_title SMALLINT,f_local_limit INTEGER,f_online_ping_URL STRING,f_enable_timed_connect SMALLINT,f_timed_connect_time INTEGER,f_date_format STRING,f_image_dest STRING,f_enable_timed_image_upload SMALLINT)" t="F"/>
-<Fct c="10" el="19" l="11" n="generate_about()" t="F"/>
+<Fct c="10" el="234" l="211" n="get_local_remember()" t="F">
+<Call c="8" l="218" n="openDB" t="F"/>
+<Call c="10" l="228" n="fgl_winmessage" t="F"/>
+</Fct>
+<Fct c="10" el="206" l="179" n="check_password(f_user STRING,f_pass STRING)" t="F"/>
+<Fct c="10" el="174" l="155" n="hash_password(f_pass STRING)" t="F"/>
+<Fct c="10" el="150" l="98" n="capture_local_stats(f_info RECORD)" t="F">
+<Call c="8" l="116" n="openDB" t="F"/>
+<Call c="10" l="127" n="fgl_winmessage" t="F"/>
+<Call c="12" l="144" n="fgl_winmessage" t="F"/>
+</Fct>
+<Fct c="10" el="93" l="74" n="print_debug_global_config()" t="F">
+<Call c="8" l="92" n="fgl_winmessage" t="F"/>
+</Fct>
+<Fct c="10" el="69" l="31" n="initialize_globals(f_application_database_ver INTEGER,f_enable_login SMALLINT,f_splash_w STRING,f_splash_h STRING,f_geo SMALLINT,f_mobile_title SMALLINT,f_local_limit INTEGER,f_online_ping_URL STRING,f_enable_timed_connect SMALLINT,f_timed_connect_time INTEGER,f_date_format STRING,f_image_dest STRING,f_enable_timed_image_upload SMALLINT)" t="F"/>
+<Fct c="10" el="26" l="11" n="generate_about()" t="F"/>
 </File>
-<File m="globals" n="src/globals.4gl" ts="20170516131716538"/>
+<File m="globals" n="src/globals.4gl" ts="20170522143456277"/>
 <File m="imageWS_imageWSPort" n="src/imageWS_imageWSPort.4gl" ts="20170516131716818">
 <Ref t="src/imageWS_imageWSPort.inc"/>
 <Fct c="10" el="1066" l="907" n="ws_funcs_process_imageResponse_g()" t="F">

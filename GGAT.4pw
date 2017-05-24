@@ -78,7 +78,7 @@
       <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
-      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
     <Package binaryName="GGAT_iOS" dependencies="400358049,781919164,715422167,313644474" description="iOS Package" label="GGAT_iOS" platform="iOS">
       <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
@@ -108,7 +108,7 @@
       <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
-      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
     <Package binaryName="GGAT_iOS_Simulator" dependencies="400358049,781919164,159917928,212784684,715422167,362164715,313644474" description="iOS Simulator Package" label="GGAT_iOS_Simulator" platform="iOS Simulator">
       <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
@@ -122,11 +122,11 @@
       <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
-      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin" label="Webcomponents" recursive="false" sourceDirectory="$(ProjectDir)/webcomponents"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
   </Group>
   <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,dirlist:DBPATH=$(ProjectDir)/database;$(DBPATH)" label="Project" language="Genero">
-    <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/images;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH)" id="400358049" label="Application">
+    <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/images;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);.." id="400358049" label="Application">
       <File filePath="src/admin.per"/>
       <File filePath="src/admin_gdc.per"/>
       <File filePath="src/connection.per"/>
@@ -135,6 +135,7 @@
       <File filePath="src/main.per"/>
       <File filePath="src/main_gdc.per"/>
       <File filePath="src/photo.per"/>
+      <File filePath="src/splash_screen.per"/>
     </Application>
     <Library binaryName="Config" id="362164715" label="Config">
       <File filePath="config/fglprofile"/>
@@ -166,6 +167,16 @@
     <Library binaryName="Resources" id="159917928" label="Resources">
       <File filePath="resources/default.4ad"/>
       <File filePath="resources/default.4st"/>
+    </Library>
+    <Library binaryName="Webcomponents" id="327340596" label="Webcomponents">
+      <VirtualFolder label="splash">
+        <File filePath="webcomponents/splash/splash.html"/>
+        <File filePath="webcomponents/splash/splash.js"/>
+      </VirtualFolder>
+      <SourceDirectory label="signature">
+        <File filePath="webcomponents/signature/signature.html"/>
+        <File filePath="webcomponents/signature/signature.js"/>
+      </SourceDirectory>
     </Library>
   </Group>
   <Group label="ToolBox" language="Genero" targetDirectory="$(ProjectDir)/toolbin">

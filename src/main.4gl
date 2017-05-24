@@ -161,12 +161,15 @@ MAIN
 		CLOSE WINDOW SCREEN #Just incase
 		
 #We are now initialised, we now just need to run each individual window functions...
-		IF g_enable_login = TRUE
+
+		CALL run_splash_screen()
+
+		{IF g_enable_login = TRUE
 		THEN
 				CALL login_screen() 
 		ELSE
 				CALL open_application()
-		END IF
+		END IF}
 		
 END MAIN
 
@@ -178,6 +181,64 @@ END MAIN
 #Individual window/form functions...
 ################################################################################
 
+FUNCTION run_splash_screen()
+
+		IF m_info.deployment_type = "Genero Desktop Client"
+		THEN
+				OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="vertical_main")
+		ELSE
+				OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="vertical_main")
+		END IF
+		
+		LET TERMINATE = FALSE
+		INITIALIZE m_instruction TO NULL
+		LET m_window = ui.Window.getCurrent()
+
+		IF m_info.deployment_type <> "GMA" AND m_info.deployment_type <> "GMI"
+		THEN
+				CALL m_window.setText(m_title)
+		ELSE
+				IF g_enable_mobile_title = FALSE
+				THEN
+						CALL m_window.setText("")
+				ELSE
+						CALL m_window.setText(m_title)
+				END IF
+		END IF
+
+		LET TERMINATE = FALSE
+
+		WHILE TERMINATE = FALSE
+				MENU
+
+				ON TIMER 10
+						LET TERMINATE = TRUE
+						EXIT MENU
+
+				BEFORE MENU
+						CALL DIALOG.setActionHidden("close",1)
+
+				ON ACTION CLOSE
+						LET TERMINATE = TRUE
+						EXIT MENU
+							
+				END MENU
+		END WHILE
+
+		IF g_enable_login = TRUE
+		THEN
+				CLOSE WINDOW w
+				CALL login_screen() 
+		ELSE
+				CLOSE WINDOW w
+				CALL open_application()
+		END IF
+
+END FUNCTION
+#
+#
+#
+#
 FUNCTION login_screen() #Local login handler
 
 		IF m_info.deployment_type = "Genero Desktop Client"
