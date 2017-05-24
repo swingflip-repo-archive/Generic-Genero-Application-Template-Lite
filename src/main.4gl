@@ -1,6 +1,9 @@
 ################################################################################
 #START OF APPLICATION
 #Written by Ryan Hamlin - 2017. (Ryan@ryanhamlin.co.uk)
+#
+#All application intialising is done here then individual window functions are
+#Called...
 ################################################################################
 IMPORT os
 IMPORT util
@@ -107,25 +110,27 @@ MAIN
 #				g_timed_checks_time INTEGER						#Time in seconds before checking connectivity (g_enable_timed_connect has to be enabled)
 #				g_date_format STRING									#Datetime format. i.e.  "%d/%m/%Y %H:%M"
 #				g_image_dest STRING										#Webserver destination for image payloads. i.e. "Webservice_1" (Not used as of yet)
+#				g_ws_end_point STRING,								#The webservice end point. 
 #				g_enable_timed_image_upload SMALLINT,	#Enable timed image queue uploads (Could have a performance impact!)
 # Here are globals not included in initialize_globals function due to sheer size of the arguement data...
 #				g_client_key STRING,									#Unique Client key for webservice purposes
 
-		CALL initialize_globals(1,												#g_application_database_ver INTEGER
-														TRUE,											#g_enable_splash SMALLINT
-														10,												#g_splash_duration INTEGER
-														TRUE,											#g_enable_login SMALLINT
-														"500px",									#g_splash_width STRING
-														"281px",									#g_splash_height STRING
-														FALSE,											#g_enable_geolocation SMALLINT
-														FALSE,										#g_enable_mobile_title SMALLINT
-														100,											#g_local_stat_limit INTEGER
-														"http://www.google.com",	#g_online_ping_URL STRING
-														TRUE,											#g_enable_timed_connect SMALLINT
-														10,												#g_timed_checks_time INTEGER
-														"%d/%m/%Y %H:%M",					#g_date_format STRING
-														"webserver1",							#g_image_dest STRING	
-														TRUE)											#g_enable_timed_image_upload SMALLINT
+		CALL initialize_globals(1,																	#g_application_database_ver INTEGER
+														TRUE,																#g_enable_splash SMALLINT
+														8,																	#g_splash_duration INTEGER
+														TRUE,																#g_enable_login SMALLINT
+														"500px",														#g_splash_width STRING
+														"281px",														#g_splash_height STRING
+														FALSE,															#g_enable_geolocation SMALLINT
+														FALSE,															#g_enable_mobile_title SMALLINT
+														100,																#g_local_stat_limit INTEGER
+														"http://www.google.com",						#g_online_ping_URL STRING
+														TRUE,																#g_enable_timed_connect SMALLINT
+														10,																	#g_timed_checks_time INTEGER
+														"%d/%m/%Y %H:%M",										#g_date_format STRING
+														"webserver1",												#g_image_dest STRING	
+														"http://www.ryanhamlin.co.uk/ws",		#g_ws_end_point STRING
+														TRUE)																#g_enable_timed_image_upload SMALLINT
 				RETURNING m_ok
 				
 		LET g_client_key = "znbi58mCGZXSBNkJ5GouFuKPLqByReHvtrGj7aXXuJmHGFr89Xp7uCqDcVCv"			#g_client_key STRING
@@ -182,13 +187,11 @@ END MAIN
 
 ################################################################################
 
-
-
 ################################################################################
 #Individual window/form functions...
 ################################################################################
 
-FUNCTION run_splash_screen()
+FUNCTION run_splash_screen() #Application Splashscreen window function
 
 		IF m_info.deployment_type = "Genero Desktop Client"
 		THEN
@@ -246,7 +249,7 @@ END FUNCTION
 #
 #
 #
-FUNCTION login_screen() #Local login handler
+FUNCTION login_screen() #Local Login window function
 
 		IF m_info.deployment_type = "Genero Desktop Client"
 		THEN
@@ -345,7 +348,7 @@ END FUNCTION
 #
 #
 #
-FUNCTION open_application() #First Screen (Demo purposes is an about page)
+FUNCTION open_application() #First Application window function (Demo purposes loads 'connection' form)
 
 		IF m_info.deployment_type = "Genero Desktop Client"
 		THEN
@@ -398,6 +401,10 @@ FUNCTION open_application() #First Screen (Demo purposes is an about page)
 						ON ACTION CLOSE
 								LET TERMINATE = TRUE
 								EXIT MENU
+						ON ACTION bt_inter
+								LET m_instruction = "bt_inter"
+								LET TERMINATE = TRUE
+								EXIT MENU
 						ON ACTION bt_photo
 								LET m_instruction = "bt_photo"
 								LET TERMINATE = TRUE
@@ -417,6 +424,9 @@ FUNCTION open_application() #First Screen (Demo purposes is an about page)
 		END WHILE
 
 		CASE m_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+				WHEN "bt_inter"
+						CLOSE WINDOW w
+						CALL interact_demo()
 				WHEN "bt_photo"
 						CLOSE WINDOW w
 						CALL image_program()
@@ -439,7 +449,7 @@ END FUNCTION
 #
 #
 #
-FUNCTION admin_tools() #Development tools to showcase an admin login
+FUNCTION admin_tools() #Rough Development Tools window function (Mainly to showcase an admin only section)
 
 		DEFINE
 				f_words STRING
@@ -539,7 +549,77 @@ END FUNCTION
 #
 #
 #
-FUNCTION image_program()
+FUNCTION interact_demo() #Interactivity Demo window function
+
+		DEFINE
+				f_words STRING
+
+		IF m_info.deployment_type = "Genero Desktop Client"
+		THEN
+				OPEN WINDOW w WITH FORM "interact_gdc" ATTRIBUTE (STYLE="main")
+		ELSE
+				OPEN WINDOW w WITH FORM "interact" ATTRIBUTE (STYLE="main")
+		END IF
+
+		LET TERMINATE = FALSE
+		INITIALIZE m_instruction TO NULL
+		LET m_window = ui.Window.getCurrent()
+
+		IF m_info.deployment_type <> "GMA" AND m_info.deployment_type <> "GMI"
+		THEN
+				CALL m_window.setText(m_title)
+		ELSE
+				IF g_enable_mobile_title = FALSE
+				THEN
+						CALL m_window.setText("")
+				ELSE
+						CALL m_window.setText(m_title)
+				END IF
+		END IF
+
+		LET TERMINATE = FALSE
+
+		WHILE TERMINATE = FALSE
+				MENU
+				
+						ON TIMER g_timed_checks_time
+								CALL connection_test()
+								CALL timed_upload_queue_data()
+								
+						BEFORE MENU
+								CALL connection_test()
+								LET f_words = %"main.string.Interact_Explanation"
+								DISPLAY f_words TO words
+								
+						ON ACTION bt_go_back
+								LET m_instruction = "go_back"
+								LET TERMINATE = TRUE
+								EXIT MENU								
+							
+				END MENU
+		END WHILE
+
+		CASE m_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+				WHEN "go_back"
+						CLOSE WINDOW w
+						CALL open_application()
+				WHEN "logout"
+						INITIALIZE g_user TO NULL
+						INITIALIZE g_logged_in TO NULL
+						DISPLAY "Logged out successfully!"
+						CLOSE WINDOW w
+						CALL login_screen()
+				OTHERWISE
+						CALL ui.Interface.refresh()
+						CALL close_app()
+		END CASE
+
+END FUNCTION
+#
+#
+#
+#
+FUNCTION image_program() #Image Web Service Demo window function
 
 		DEFINE
 				f_words STRING,
@@ -693,6 +773,8 @@ FUNCTION image_program()
 												DISPLAY " " TO status
 										END IF
 								END IF
+						ON ACTION bt_viewpho
+								CALL ui.Interface.frontCall("standard", "launchURL", [g_ws_end_point], [])
 						ON ACTION bt_go_back
 								LET m_instruction = "go_back"
 								LET TERMINATE = TRUE

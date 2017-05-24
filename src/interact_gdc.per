@@ -1,0 +1,33 @@
+LAYOUT (TEXT="")   
+VBOX 
+GROUP (TEXT="")
+GRID
+{
+[words                          ]
+[                               ]
+[                               ]
+[                               ]
+[                               ]
+[                               ]
+[                               ]
+[bt_sign                        ]
+[bt_maps                        ]
+[bt_video                       ]
+[bt_go_back                     ]
+}
+END
+END #GROUP
+END #VBOX
+END  #LAYOUT
+
+ATTRIBUTES
+#use textedit
+TEXTEDIT words=FORMONLY.words, NOENTRY, SCROLLBARS=VERTICAL, SIZEPOLICY=FIXED, STRETCH=BOTH;
+BUTTON bt_sign : bt_sign, TEXT=%"interact.per.Signature_Demo";
+BUTTON bt_maps : bt_maps, TEXT=%"interact.per.Maps_Demo";
+BUTTON bt_video : bt_video, TEXT=%"interact.per.Video_Demo";
+BUTTON bt_go_back : bt_go_back, TEXT=%"interact.per.Go_Back";
+
+END
+
+

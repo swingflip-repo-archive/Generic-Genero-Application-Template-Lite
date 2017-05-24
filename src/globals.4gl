@@ -20,7 +20,8 @@ GLOBALS
 		#Webservice variables
 				g_client_key STRING,									#Unique Client key for webservice purposes
 				g_image_dest STRING,									#Webserver destination for image payloads. i.e. "Webservice_1" (Not used as of yet, because you should be able to fglWSDL this is pretty redundant)
-
+				g_ws_end_point STRING,								#The webservice end point. 
+				
 		#Application Image variables
 				g_splash_width STRING, 								#Login menu splash width when not in mobile
 				g_splash_height STRING, 							#Login menu splash height when not in mobile

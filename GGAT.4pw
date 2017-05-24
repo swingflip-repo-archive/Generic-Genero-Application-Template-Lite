@@ -131,6 +131,8 @@
       <File filePath="src/admin_gdc.per"/>
       <File filePath="src/connection.per"/>
       <File filePath="src/connection_gdc.per"/>
+      <File filePath="src/interact.per"/>
+      <File filePath="src/interact_gdc.per"/>
       <File filePath="src/main.4gl"/>
       <File filePath="src/main.per"/>
       <File filePath="src/main_gdc.per"/>
@@ -159,6 +161,7 @@
         <File filePath="src/admin_per.str"/>
         <File filePath="src/connection_per.str"/>
         <File filePath="src/function_lib_strings.str"/>
+        <File filePath="config/interact_per.str"/>
         <File filePath="src/main_per.str"/>
         <File filePath="src/main_strings.str"/>
         <File filePath="src/photo_per.str"/>
@@ -191,6 +194,9 @@
     </Application>
     <Application binaryName="CreateUser" dependencies="212784684,455109296,250541541" id="441158400" label="CreateUser">
       <File filePath="toolsrc/user_generator.4gl"/>
+    </Application>
+    <Application binaryName="DB_ReSync" dependencies="212784684,250541541,455109296" id="147366400" label="DB_ReSync">
+      <File filePath="toolsrc/database_resync.4gl"/>
     </Application>
     <Application binaryName="HashGenerator" dependencies="212784684,455109296,250541541" id="12983004" label="HashGenerator">
       <File filePath="toolsrc/hash_generator.4gl"/>

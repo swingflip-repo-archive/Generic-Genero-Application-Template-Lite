@@ -29,7 +29,7 @@ END FUNCTION
 #
 #
 FUNCTION initialize_globals(f_application_database_ver, f_enable_splash, f_splash_duration, f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_limit,f_online_ping_URL,
-														f_enable_timed_connect,f_timed_connect_time,f_date_format,f_image_dest,
+														f_enable_timed_connect,f_timed_connect_time,f_date_format,f_image_dest, f_ws_end_point,
 														f_enable_timed_image_upload) #Set up global variables
 		DEFINE
 				f_ok SMALLINT,
@@ -47,7 +47,8 @@ FUNCTION initialize_globals(f_application_database_ver, f_enable_splash, f_splas
 				f_enable_timed_image_upload SMALLINT,
 				f_application_database_ver INTEGER,
 				f_enable_splash SMALLINT,
-				f_splash_duration INTEGER
+				f_splash_duration INTEGER,
+				f_ws_end_point STRING
 
 		LET f_ok = FALSE
 
@@ -66,6 +67,7 @@ FUNCTION initialize_globals(f_application_database_ver, f_enable_splash, f_splas
 		LET g_image_dest = f_image_dest
 		LET g_enable_timed_image_upload = f_enable_timed_image_upload
 		LET g_application_database_ver = f_application_database_ver
+		LET g_ws_end_point = f_ws_end_point
 		
 		LET f_ok = TRUE
 				

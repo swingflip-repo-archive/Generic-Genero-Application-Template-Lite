@@ -65,6 +65,12 @@ MAIN
 		
 		RUN cmd RETURNING status
 
+		DISPLAY "Interaction Demo Form Extraction String Status: " || status
+
+		LET cmd = "fglform -m ../src/interact.per > ../src/interact_per.str"
+		
+		RUN cmd RETURNING status
+
 		DISPLAY "Connection Form Extraction String Status: " || status
 
 		LET cmd = "fglform -m ../src/main.per > ../src/main_per.str"

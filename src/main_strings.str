@@ -23,3 +23,4 @@
 "main.string.Working_Offline"=" *Working Offline* "
 "main.string.Services_Disconnected"="Services Disconnected"
 "main.string.Services_Connected"="Services Connected"
+"main.string.Interact_Explanation"="Here are some local webcomponents to showcase interactivity within GGAT. The webcomponents are built using a combination of HTML5, Java and CSS"
