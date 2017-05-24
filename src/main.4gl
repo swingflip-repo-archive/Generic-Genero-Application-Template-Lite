@@ -94,6 +94,8 @@ MAIN
 # HERE IS WHERE YOU CONFIGURE GOBAL SWITCHES FOR THE APPLICATION
 # ADJUST THESE AS YOU SEEM FIT. BELOW IS A LIST OF OPTIONS IN ORDER:
 #				g_application_database_ver INTEGER,		#Application Database Version (This is useful to force database additions to pre-existing db instances)
+#				g_enable_splash SMALLINT,							#Open splashscreen when opening the application.
+#				g_splash_duration INTEGER,						#Splashscreen duration (seconds) g_enable_splash needs to be enabled!
 #				g_enable_login SMALLINT								#Boot in to login menu or straight into application (open_application())
 #				g_splash_width STRING, 								#Login menu splash width when not in mobile
 #				g_splash_height STRING, 							#Login menu splash height when not in mobile
@@ -110,10 +112,12 @@ MAIN
 #				g_client_key STRING,									#Unique Client key for webservice purposes
 
 		CALL initialize_globals(1,												#g_application_database_ver INTEGER
+														TRUE,											#g_enable_splash SMALLINT
+														10,												#g_splash_duration INTEGER
 														TRUE,											#g_enable_login SMALLINT
 														"500px",									#g_splash_width STRING
 														"281px",									#g_splash_height STRING
-														TRUE,											#g_enable_geolocation SMALLINT
+														FALSE,											#g_enable_geolocation SMALLINT
 														FALSE,										#g_enable_mobile_title SMALLINT
 														100,											#g_local_stat_limit INTEGER
 														"http://www.google.com",	#g_online_ping_URL STRING
@@ -162,14 +166,17 @@ MAIN
 		
 #We are now initialised, we now just need to run each individual window functions...
 
-		CALL run_splash_screen()
-
-		{IF g_enable_login = TRUE
+		IF g_enable_splash = TRUE AND g_splash_duration > 0
 		THEN
-				CALL login_screen() 
+				CALL run_splash_screen()
 		ELSE
-				CALL open_application()
-		END IF}
+				IF g_enable_login = TRUE
+				THEN
+						CALL login_screen() 
+				ELSE
+						CALL open_application()
+				END IF
+		END IF
 		
 END MAIN
 

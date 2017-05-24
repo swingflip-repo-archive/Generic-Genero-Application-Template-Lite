@@ -28,7 +28,7 @@ END FUNCTION
 #
 #
 #
-FUNCTION initialize_globals(f_application_database_ver, f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_limit,f_online_ping_URL,
+FUNCTION initialize_globals(f_application_database_ver, f_enable_splash, f_splash_duration, f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_limit,f_online_ping_URL,
 														f_enable_timed_connect,f_timed_connect_time,f_date_format,f_image_dest,
 														f_enable_timed_image_upload) #Set up global variables
 		DEFINE
@@ -45,10 +45,14 @@ FUNCTION initialize_globals(f_application_database_ver, f_enable_login,f_splash_
 				f_date_format STRING,
 				f_image_dest STRING,
 				f_enable_timed_image_upload SMALLINT,
-				f_application_database_ver INTEGER
+				f_application_database_ver INTEGER,
+				f_enable_splash SMALLINT,
+				f_splash_duration INTEGER
 
 		LET f_ok = FALSE
 
+		LET g_enable_splash = f_enable_splash
+		LET g_splash_duration = f_splash_duration
 		LET g_enable_login = f_enable_login
 		LET g_splash_width = f_splash_w
 		LET g_splash_height = f_splash_h
@@ -76,6 +80,9 @@ FUNCTION print_debug_global_config()
 				f_msg STRING
 
 		LET f_msg = %"function.lib.string.Config_Dump_Text" ||
+								"g_application_database_ver = " || g_application_database_ver || "\n" ||
+								"g_enable_splash = " || g_enable_splash || "\n" ||
+								"g_splash_duration = " || g_splash_duration || "\n" ||
 								"g_enable_login = " || g_enable_login || "\n" ||
 								"g_splash_width = " || g_splash_width || "\n" ||
 								"g_splash_height = " || g_splash_height || "\n" ||

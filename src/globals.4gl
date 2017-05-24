@@ -35,6 +35,8 @@ GLOBALS
 				g_enable_timed_image_upload SMALLINT,	#Enable timed image queue uploads (Could have a performance impact!)
 
 		#General application variables
+				g_enable_splash SMALLINT,							#Open splashscreen when opening the application.
+				g_splash_duration SMALLINT,						#Splashscreen duration (seconds) g_enable_splash needs to be enabled!
 				g_enable_login SMALLINT,							#Boot in to login menu or straight into application (open_application())
 				g_local_stat_limit INTEGER,						#Number of max local stat records before pruning
 				g_online_ping_URL STRING,							#URL of public site to test internet connectivity (i.e. http://www.google.com) 
