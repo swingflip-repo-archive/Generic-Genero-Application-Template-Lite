@@ -10,7 +10,7 @@ MAIN
 
     CALL db_drop_tables() #THIS WIPES ALL EXISTING DATA! COMMENT OUT IF YOU WANT THE DATA
     CALL db_create_tables()
-		CALL db_create_defaults()
+    CALL db_create_defaults()
 END MAIN
 
 

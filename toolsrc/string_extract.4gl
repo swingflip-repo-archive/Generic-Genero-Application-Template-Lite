@@ -12,7 +12,7 @@
 # Here is a useful note from the manual... 
 
 {
-		Follow these steps to internationalize your application.
+    Follow these steps to internationalize your application.
 
     Identify the current character set used in your sources and make sure the application locale (LANG/LC_ALL) is set correctly.
     In .4gl sources, add a % prefix to the strings that must be localized (i.e. translated). For parameterized messages, replace concatenated strings by a SFMT() usage with %n placholders for variable message parts.
@@ -35,56 +35,56 @@
 # Final note, please note if you are using localized strings with parameters, please use SFMT() instead of the prefix behind each string method (like I did!)
 
 MAIN
-		DEFINE
-				cmd STRING,
-				status INTEGER
+    DEFINE
+        cmd STRING,
+        status INTEGER
 
-		DISPLAY "--------------------------------------------------------------"
-		
-		--MAINS AND LIBRARIES (fglcomp)
-		LET cmd = "fglcomp -m ../src/main.4gl > ../src/main_strings.str"
-		
-		RUN cmd RETURNING status
+    DISPLAY "--------------------------------------------------------------"
+    
+    --MAINS AND LIBRARIES (fglcomp)
+    LET cmd = "fglcomp -m ../src/main.4gl > ../src/main_strings.str"
+    
+    RUN cmd RETURNING status
 
-		DISPLAY "Main String Extraction Status: " || status
+    DISPLAY "Main String Extraction Status: " || status
 
-		LET cmd = "fglcomp -m ../src/function_lib.4gl > ../src/function_lib_strings.str"
-		
-		RUN cmd RETURNING status
+    LET cmd = "fglcomp -m ../src/function_lib.4gl > ../src/function_lib_strings.str"
+    
+    RUN cmd RETURNING status
 
-		DISPLAY "Function Library String Extraction Status: " || status
+    DISPLAY "Function Library String Extraction Status: " || status
 
-		--FORMS (fglform)
-		LET cmd = "fglform -m ../src/admin.per > ../src/admin_per.str"
-		
-		RUN cmd RETURNING status
+    --FORMS (fglform)
+    LET cmd = "fglform -m ../src/admin.per > ../src/admin_per.str"
+    
+    RUN cmd RETURNING status
 
-		DISPLAY "Admin Form Extraction String Status: " || status
+    DISPLAY "Admin Form Extraction String Status: " || status
 
-		LET cmd = "fglform -m ../src/connection.per > ../src/connection_per.str"
-		
-		RUN cmd RETURNING status
+    LET cmd = "fglform -m ../src/connection.per > ../src/connection_per.str"
+    
+    RUN cmd RETURNING status
 
-		DISPLAY "Interaction Demo Form Extraction String Status: " || status
+    DISPLAY "Interaction Demo Form Extraction String Status: " || status
 
-		LET cmd = "fglform -m ../src/interact.per > ../src/interact_per.str"
-		
-		RUN cmd RETURNING status
+    LET cmd = "fglform -m ../src/interact.per > ../src/interact_per.str"
+    
+    RUN cmd RETURNING status
 
-		DISPLAY "Connection Form Extraction String Status: " || status
+    DISPLAY "Connection Form Extraction String Status: " || status
 
-		LET cmd = "fglform -m ../src/main.per > ../src/main_per.str"
-		
-		RUN cmd RETURNING status
+    LET cmd = "fglform -m ../src/main.per > ../src/main_per.str"
+    
+    RUN cmd RETURNING status
 
-		DISPLAY "Main Form Extraction String Status: " || status
+    DISPLAY "Main Form Extraction String Status: " || status
 
-		LET cmd = "fglform -m ../src/photo.per > ../src/photo_per.str"
-		
-		RUN cmd RETURNING status
+    LET cmd = "fglform -m ../src/photo.per > ../src/photo_per.str"
+    
+    RUN cmd RETURNING status
 
-		DISPLAY "Photo Form Extraction String Status: " || status
+    DISPLAY "Photo Form Extraction String Status: " || status
 
-		DISPLAY "--------------------------------------------------------------"		
-		
+    DISPLAY "--------------------------------------------------------------"    
+    
 END MAIN

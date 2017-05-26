@@ -6,18 +6,18 @@
   <Style name="Window.main">
      <StyleAttribute name="windowType" value="normal" />
      <StyleAttribute name="startMenuPosition" value="menu" />
-		 <!--<StyleAttribute name="allowedOrientations" value="portrait_all" />-->
-		 <StyleAttribute name="actionPanelPosition" value="none" />
+     <!--<StyleAttribute name="allowedOrientations" value="portrait_all" />-->
+     <StyleAttribute name="actionPanelPosition" value="none" />
      <StyleAttribute name="ringMenuPosition" value="none" />
-		 <StyleAttribute name="sizable" value="yes" />
+     <StyleAttribute name="sizable" value="yes" />
   </Style>
   <Style name="Window.vertical_main">
      <StyleAttribute name="windowType" value="normal" />
      <StyleAttribute name="startMenuPosition" value="menu" />
-		 <StyleAttribute name="allowedOrientations" value="portrait_all" />
-		 <StyleAttribute name="actionPanelPosition" value="none" />
+     <StyleAttribute name="allowedOrientations" value="portrait_all" />
+     <StyleAttribute name="actionPanelPosition" value="none" />
      <StyleAttribute name="ringMenuPosition" value="none" />
-		 <StyleAttribute name="sizable" value="yes" />
+     <StyleAttribute name="sizable" value="yes" />
   </Style>
   <Style name="Window.main2">
      <StyleAttribute name="windowType" value="normal" />
@@ -80,19 +80,19 @@
      <StyleAttribute name="toolBarPosition" value="none" />
      <StyleAttribute name="statusBarType" value="none" />
   </Style>
-	<Style name=".noBorder">
-		 <StyleAttribute value="none" name="border" />
-	</Style>
-	<Style name=".centerImages">
-		 <StyleAttribute value="center" name="alignment" />
-	</Style>
-	<Style name=".invisible">
-		 <StyleAttribute value="none" name="border" />
-	</Style>
-	<Style name=".redButton">
-		 <StyleAttribute value="#E74C3C" name="textColor" />
-	</Style>
-	<Style name=".greenButton">
-		 <StyleAttribute value="#27AE60" name="textColor" />
-	</Style>
+  <Style name=".noBorder">
+     <StyleAttribute value="none" name="border" />
+  </Style>
+  <Style name=".centerImages">
+     <StyleAttribute value="center" name="alignment" />
+  </Style>
+  <Style name=".invisible">
+     <StyleAttribute value="none" name="border" />
+  </Style>
+  <Style name=".redButton">
+     <StyleAttribute value="#E74C3C" name="textColor" />
+  </Style>
+  <Style name=".greenButton">
+     <StyleAttribute value="#27AE60" name="textColor" />
+  </Style>
 </StyleList>

@@ -37,8 +37,8 @@ PRIVATE DEFINE ws_funcs_process_imageHTTPResp    com.HTTPResponse
 # FUNCTION: ws_funcs_check_service
 #
 FUNCTION ws_funcs_check_service(p_client_key)
-  DEFINE	p_client_key		STRING
-  DEFINE	soapStatus		INTEGER
+  DEFINE  p_client_key    STRING
+  DEFINE  soapStatus    INTEGER
 
 
   LET ws_funcs_check_serviceRequest.client_key = p_client_key
@@ -553,11 +553,11 @@ END FUNCTION
 # FUNCTION: ws_funcs_process_image
 #
 FUNCTION ws_funcs_process_image(p_client_key, p_requestee, p_requesteddate, p_payload)
-  DEFINE	p_client_key		STRING
-  DEFINE	p_requestee		STRING
-  DEFINE	p_requesteddate		STRING
-  DEFINE	p_payload		STRING
-  DEFINE	soapStatus		INTEGER
+  DEFINE  p_client_key    STRING
+  DEFINE  p_requestee    STRING
+  DEFINE  p_requesteddate    STRING
+  DEFINE  p_payload    STRING
+  DEFINE  soapStatus    INTEGER
 
 
   LET ws_funcs_process_imageRequest.client_key = p_client_key

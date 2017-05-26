@@ -15,10 +15,10 @@ GLOBALS
 #
 
 DEFINE wsError RECORD
-	code		STRING,
-	codeNS		STRING,
-	description	STRING,
-	action		STRING
+  code    STRING,
+  codeNS    STRING,
+  description  STRING,
+  action    STRING
 END RECORD
 
 
@@ -27,29 +27,29 @@ END RECORD
 #
 # Global Endpoint user-defined type definition
 #
-TYPE tGlobalEndpointType RECORD	 # End point
-	Address	RECORD	# Address
-		Uri	STRING	# URI 
-	END RECORD,
-	Binding	RECORD	# Binding
-		Version	STRING,	# HTTP Version (1.0 or 1.1)
-		Cookie	STRING,	# Cookie to be set
-		Request RECORD	 # HTTP request
-			Headers DYNAMIC ARRAY OF RECORD	# HTTP Headers
-				Name	STRING,
-				Value	STRING
-			END RECORD
-		END RECORD,
-		Response RECORD	 # HTTP response
-			Headers DYNAMIC ARRAY OF RECORD	# HTTP Headers
-				Name	STRING,
-				Value	STRING
-			END RECORD
-		END RECORD,
-		ConnectionTimeout	INTEGER,# Connection timeout
-		ReadWriteTimeout	INTEGER,# Read write timeout
-		CompressRequest		STRING	# HTTP request compression mode (gzip or deflate)
-	END RECORD
+TYPE tGlobalEndpointType RECORD   # End point
+  Address  RECORD  # Address
+    Uri  STRING  # URI 
+  END RECORD,
+  Binding  RECORD  # Binding
+    Version  STRING,  # HTTP Version (1.0 or 1.1)
+    Cookie  STRING,  # Cookie to be set
+    Request RECORD   # HTTP request
+      Headers DYNAMIC ARRAY OF RECORD  # HTTP Headers
+        Name  STRING,
+        Value  STRING
+      END RECORD
+    END RECORD,
+    Response RECORD   # HTTP response
+      Headers DYNAMIC ARRAY OF RECORD  # HTTP Headers
+        Name  STRING,
+        Value  STRING
+      END RECORD
+    END RECORD,
+    ConnectionTimeout  INTEGER,# Connection timeout
+    ReadWriteTimeout  INTEGER,# Read write timeout
+    CompressRequest    STRING  # HTTP request compression mode (gzip or deflate)
+  END RECORD
 END RECORD
 
 
