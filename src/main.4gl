@@ -590,7 +590,87 @@ FUNCTION interact_demo() #Interactivity Demo window function
 								CALL connection_test()
 								LET f_words = %"main.string.Interact_Explanation"
 								DISPLAY f_words TO words
+
+						ON ACTION bt_sign
+								LET m_instruction = "bt_sign"
+								LET TERMINATE = TRUE
+								EXIT MENU	
+                        ON ACTION bt_video
+                                LET m_instruction = "bt_video"
+                                LET TERMINATE = TRUE
+                                EXIT MENU
+						ON ACTION bt_go_back
+								LET m_instruction = "go_back"
+								LET TERMINATE = TRUE
+								EXIT MENU								
+							
+				END MENU
+		END WHILE
+
+		CASE m_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+				WHEN "bt_sign"
+						CLOSE WINDOW w
+						CALL wc_signature_demo()
+                WHEN "bt_video"
+                        CLOSE WINDOW w
+                        CALL wc_video_demo()
+				WHEN "go_back"
+						CLOSE WINDOW w
+						CALL open_application()
+				WHEN "logout"
+						INITIALIZE g_user TO NULL
+						INITIALIZE g_logged_in TO NULL
+						DISPLAY "Logged out successfully!"
+						CLOSE WINDOW w
+						CALL login_screen()
+				OTHERWISE
+						CALL ui.Interface.refresh()
+						CALL close_app()
+		END CASE
+
+END FUNCTION
+#
+#
+FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
+
+		DEFINE
+				f_words STRING
+
+		IF m_info.deployment_type = "Genero Desktop Client"
+		THEN
+				OPEN WINDOW w WITH FORM "wc_signature" ATTRIBUTE (STYLE="main")
+		ELSE
+				OPEN WINDOW w WITH FORM "wc_signature" ATTRIBUTE (STYLE="main")
+		END IF
+
+		LET TERMINATE = FALSE
+		INITIALIZE m_instruction TO NULL
+		LET m_window = ui.Window.getCurrent()
+
+		IF m_info.deployment_type <> "GMA" AND m_info.deployment_type <> "GMI"
+		THEN
+				CALL m_window.setText(m_title)
+		ELSE
+				IF g_enable_mobile_title = FALSE
+				THEN
+						CALL m_window.setText("")
+				ELSE
+						CALL m_window.setText(m_title)
+				END IF
+		END IF
+
+		LET TERMINATE = FALSE
+
+		WHILE TERMINATE = FALSE
+				MENU
+				
+						ON TIMER g_timed_checks_time
+								CALL connection_test()
+								CALL timed_upload_queue_data()
 								
+						BEFORE MENU
+								CALL connection_test()
+							
 						ON ACTION bt_go_back
 								LET m_instruction = "go_back"
 								LET TERMINATE = TRUE
@@ -602,7 +682,73 @@ FUNCTION interact_demo() #Interactivity Demo window function
 		CASE m_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
 				WHEN "go_back"
 						CLOSE WINDOW w
-						CALL open_application()
+						CALL interact_demo()
+				WHEN "logout"
+						INITIALIZE g_user TO NULL
+						INITIALIZE g_logged_in TO NULL
+						DISPLAY "Logged out successfully!"
+						CLOSE WINDOW w
+						CALL login_screen()
+				OTHERWISE
+						CALL ui.Interface.refresh()
+						CALL close_app()
+		END CASE
+
+END FUNCTION
+#
+#
+FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
+
+		DEFINE
+                f_words STRING
+
+		IF m_info.deployment_type = "Genero Desktop Client"
+		THEN
+				OPEN WINDOW w WITH FORM "wc_video" ATTRIBUTE (STYLE="main")
+		ELSE
+				OPEN WINDOW w WITH FORM "wc_video" ATTRIBUTE (STYLE="main")
+		END IF
+
+		LET TERMINATE = FALSE
+		INITIALIZE m_instruction TO NULL
+		LET m_window = ui.Window.getCurrent()
+
+		IF m_info.deployment_type <> "GMA" AND m_info.deployment_type <> "GMI"
+		THEN
+				CALL m_window.setText(m_title)
+		ELSE
+				IF g_enable_mobile_title = FALSE
+				THEN
+						CALL m_window.setText("")
+				ELSE
+						CALL m_window.setText(m_title)
+				END IF
+		END IF
+
+		LET TERMINATE = FALSE
+
+		WHILE TERMINATE = FALSE
+				MENU
+				
+						ON TIMER g_timed_checks_time
+								CALL connection_test()
+								CALL timed_upload_queue_data()
+								
+						BEFORE MENU
+								CALL connection_test()
+							
+						ON ACTION bt_go_back
+								LET m_instruction = "go_back"
+								LET TERMINATE = TRUE
+								EXIT MENU								
+							
+				END MENU
+		END WHILE
+
+		CASE m_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+				WHEN "go_back"
+						CLOSE WINDOW w
+						CALL interact_demo()
 				WHEN "logout"
 						INITIALIZE g_user TO NULL
 						INITIALIZE g_logged_in TO NULL
