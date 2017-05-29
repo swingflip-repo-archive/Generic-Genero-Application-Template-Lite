@@ -69,6 +69,15 @@
      <StyleAttribute name="toolBarPosition" value="none" />
      <StyleAttribute name="statusBarType" value="none" />
   </Style>
+  <Style name="Window.vertical_naked">
+     <StyleAttribute name="windowType" value="modal" />
+     <StyleAttribute name="border" value="tool" />
+     <StyleAttribute name="actionPanelPosition" value="none" />
+     <StyleAttribute name="ringMenuPosition" value="none" />
+     <StyleAttribute name="toolBarPosition" value="none" />
+     <StyleAttribute name="statusBarType" value="none" />
+     <StyleAttribute name="allowedOrientations" value="portrait_all" />
+  </Style>
   <Style name="Window.viewer">
      <StyleAttribute name="windowType" value="modal" />
      <StyleAttribute name="windowSystemMenu" value="yes" />

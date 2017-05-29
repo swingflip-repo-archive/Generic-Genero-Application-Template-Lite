@@ -117,7 +117,7 @@ MAIN
 
     CALL initialize_globals(1,                                  #g_application_database_ver INTEGER
                             TRUE,                               #g_enable_splash SMALLINT
-                            8,                                  #g_splash_duration INTEGER
+                            5,                                  #g_splash_duration INTEGER
                             TRUE,                               #g_enable_login SMALLINT
                             "500px",                            #g_splash_width STRING
                             "281px",                            #g_splash_height STRING
@@ -195,9 +195,9 @@ FUNCTION run_splash_screen() #Application Splashscreen window function
 
     IF m_info.deployment_type = "Genero Desktop Client"
     THEN
-        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="vertical_main")
+        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="vertical_naked")
     ELSE
-        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="vertical_main")
+        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="vertical_naked")
     END IF
     
     LET TERMINATE = FALSE
@@ -595,10 +595,14 @@ FUNCTION interact_demo() #Interactivity Demo window function
                 LET m_instruction = "bt_sign"
                 LET TERMINATE = TRUE
                 EXIT MENU  
-                        ON ACTION bt_video
-                                LET m_instruction = "bt_video"
-                                LET TERMINATE = TRUE
-                                EXIT MENU
+            ON ACTION bt_video
+                LET m_instruction = "bt_video"
+                LET TERMINATE = TRUE
+                EXIT MENU
+            ON ACTION bt_maps
+                LET m_instruction = "bt_maps"
+                LET TERMINATE = TRUE
+                EXIT MENU
             ON ACTION bt_go_back
                 LET m_instruction = "go_back"
                 LET TERMINATE = TRUE
@@ -611,9 +615,12 @@ FUNCTION interact_demo() #Interactivity Demo window function
         WHEN "bt_sign"
             CLOSE WINDOW w
             CALL wc_signature_demo()
-                WHEN "bt_video"
-                        CLOSE WINDOW w
-                        CALL wc_video_demo()
+        WHEN "bt_maps"
+            CLOSE WINDOW w
+            CALL wc_maps_demo()
+        WHEN "bt_video"
+            CLOSE WINDOW w
+            CALL wc_video_demo()
         WHEN "go_back"
             CLOSE WINDOW w
             CALL open_application()
@@ -632,9 +639,6 @@ END FUNCTION
 #
 #
 FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
-
-    DEFINE
-        f_words STRING
 
     IF m_info.deployment_type = "Genero Desktop Client"
     THEN
@@ -697,10 +701,81 @@ FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Par
 END FUNCTION
 #
 #
-FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
+FUNCTION wc_maps_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
 
     DEFINE
-                f_words STRING
+        f_lat STRING,
+        f_lat2 STRING,
+        f_lng STRING,
+        f_lng2 STRING,
+        f_wc_data STRING,
+        f_result STRING
+        
+    IF m_info.deployment_type = "Genero Desktop Client"
+    THEN
+        OPEN WINDOW w WITH FORM "wc_google_maps" ATTRIBUTE (STYLE="main")
+    ELSE
+        OPEN WINDOW w WITH FORM "wc_google_maps" ATTRIBUTE (STYLE="main")
+    END IF
+
+    INITIALIZE m_instruction TO NULL
+    LET m_window = ui.Window.getCurrent()
+
+    IF m_info.deployment_type <> "GMA" AND m_info.deployment_type <> "GMI"
+    THEN
+        CALL m_window.setText(m_title)
+    ELSE
+        IF g_enable_mobile_title = FALSE
+        THEN
+            CALL m_window.setText("")
+        ELSE
+            CALL m_window.setText(m_title)
+        END IF
+    END IF
+  
+    INPUT f_wc_data, f_lat2, f_lng2 FROM wc_gm, lat, lng
+
+        ON TIMER g_timed_checks_time
+            CALL connection_test()
+            CALL timed_upload_queue_data()
+                
+        ON ACTION go
+            CALL wc_gm_setProp("lat",f_lat2)
+            CALL wc_gm_setProp("lng",f_lng2)
+        ON ACTION mapclicked
+            BREAKPOINT
+            TRY 
+              CALL ui.Interface.frontCall("webcomponent","call",["formonly.wc_gm","echostring","run"],[f_result])
+            CATCH
+              ERROR err_get(status)
+              DISPLAY err_get(status)
+            END TRY
+            DISPLAY "RUNNING" || f_result
+        ON ACTION bt_go_back
+            LET m_instruction = "go_back"
+            EXIT INPUT   
+
+    END INPUT  
+
+    CASE m_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+        WHEN "go_back"
+            CLOSE WINDOW w
+            CALL interact_demo()
+        WHEN "logout"
+            INITIALIZE g_user TO NULL
+            INITIALIZE g_logged_in TO NULL
+            DISPLAY "Logged out successfully!"
+            CLOSE WINDOW w
+            CALL login_screen()
+        OTHERWISE
+            CALL ui.Interface.refresh()
+            CALL close_app()
+    END CASE
+
+END FUNCTION
+#
+#
+FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
 
     IF m_info.deployment_type = "Genero Desktop Client"
     THEN

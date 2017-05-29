@@ -476,6 +476,35 @@ END FUNCTION
 #
 #
 #
+FUNCTION wc_gm_deCode( data )
+	DEFINE data STRING
+	DEFINE t, g DECIMAL(14,10)
+	DEFINE x SMALLINT
+	LET x = data.getIndexOf(",",2)
+	LET t = data.subString(2,x-1)
+	LET g = data.subString(x+1,data.getLength()-1)
+	RETURN t,g
+END FUNCTION
+#
+#
+#
+#
+FUNCTION wc_gm_setProp(prop_name, value)
+	DEFINE prop_name, VALUE STRING
+	DEFINE w ui.Window
+	DEFINE n om.domNode
+	LET w = ui.Window.getCurrent()
+	LET n = w.findNode("Property",prop_name)
+	IF n IS NULL THEN
+		DISPLAY "can't find property:",prop_name
+		RETURN
+	END IF
+	CALL n.setAttribute("value",value)
+END FUNCTION
+#
+#
+#
+#
 FUNCTION reply_yn(f_default,f_title,f_question)
 
     DEFINE
@@ -545,7 +574,7 @@ FUNCTION openDB(f_dbname,f_debug)
     TRY
         DATABASE f_dbpath
         LET f_msg = f_msg.append("Connected OK")
-        CALL check_database_version(TRUE)
+        CALL check_database_version(FALSE)
     CATCH
         DISPLAY STATUS, f_msg||SQLERRMESSAGE
     END TRY

@@ -126,7 +126,7 @@
     </Package>
   </Group>
   <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,dirlist:DBPATH=$(ProjectDir)/database;$(DBPATH)" label="Project" language="Genero">
-    <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/images;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);.." id="400358049" label="Application">
+    <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" environment="value:FGLGUIDEBUG=0,dirlist:FGLIMAGEPATH=$(ProjectDir)/images;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);.." id="400358049" label="Application">
       <VirtualFolder label="Forms">
         <File filePath="src/admin.per"/>
         <File filePath="src/admin_gdc.per"/>
@@ -138,6 +138,7 @@
         <File filePath="src/main_gdc.per"/>
         <File filePath="src/photo.per"/>
         <File filePath="src/splash_screen.per"/>
+        <File filePath="src/wc_google_maps.per"/>
         <File filePath="src/wc_signature.per"/>
         <File filePath="src/wc_video.per"/>
       </VirtualFolder>
@@ -176,6 +177,10 @@
       <File filePath="resources/default.4st"/>
     </Library>
     <Library binaryName="Webcomponents" id="327340596" label="Webcomponents">
+      <VirtualFolder label="gm">
+        <File filePath="webcomponents/gm/gm.html"/>
+        <File filePath="webcomponents/gm/gm.js"/>
+      </VirtualFolder>
       <VirtualFolder label="splash">
         <File filePath="webcomponents/splash/splash.html"/>
         <File filePath="webcomponents/splash/splash.js"/>
