@@ -704,12 +704,13 @@ END FUNCTION
 FUNCTION wc_maps_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
 
     DEFINE
-        f_lat STRING,
-        f_lat2 STRING,
-        f_lng STRING,
-        f_lng2 STRING,
-        f_wc_data STRING,
-        f_result STRING
+        f_latlng_record RECORD
+            lat FLOAT,
+            lng FLOAT
+        END RECORD,
+        f_result STRING,
+        f_obj util.JSONObject,
+        f_dummy STRING
         
     IF m_info.deployment_type = "Genero Desktop Client"
     THEN
@@ -733,24 +734,39 @@ FUNCTION wc_maps_demo() #Webcomponent Demo (Signature) window function (Part of 
         END IF
     END IF
   
-    INPUT f_wc_data, f_lat2, f_lng2 FROM wc_gm, lat, lng
+    INPUT f_dummy, f_latlng_record.lat, f_latlng_record.lng FROM wc_gm, lat, lng ATTRIBUTES(UNBUFFERED)
 
         ON TIMER g_timed_checks_time
             CALL connection_test()
             CALL timed_upload_queue_data()
+
+        BEFORE INPUT
+            CALL DIALOG.setActionHidden("accept",1)
+            CALL DIALOG.setActionHidden("cancel",1)
+            CALL DIALOG.setActionHidden("mapclicked",1)
                 
-        ON ACTION go
-            CALL wc_gm_setProp("lat",f_lat2)
-            CALL wc_gm_setProp("lng",f_lng2)
-        ON ACTION mapclicked
-            BREAKPOINT
+        ON ACTION bt_go
+            INITIALIZE f_result TO NULL
             TRY 
-              CALL ui.Interface.frontCall("webcomponent","call",["formonly.wc_gm","echostring","run"],[f_result])
+              CALL ui.Interface.frontCall("webcomponent","call",["formonly.wc_gm","goToLocation",util.JSON.stringify(f_latlng_record)],[f_result])
             CATCH
               ERROR err_get(status)
               DISPLAY err_get(status)
             END TRY
-            DISPLAY "RUNNING" || f_result
+        ON ACTION mapclicked
+            INITIALIZE f_result TO NULL
+            TRY 
+              CALL ui.Interface.frontCall("webcomponent","call",["formonly.wc_gm","returnlatlng","run"],[f_result])
+            CATCH
+              ERROR err_get(status)
+              DISPLAY err_get(status)
+            END TRY
+            IF f_result IS NOT NULL
+            THEN
+                LET f_obj = util.JSONObject.parse(f_result)
+                CALL f_obj.toFGL(f_latlng_record)
+                CALL ui.Interface.refresh() #Just incase...
+            END IF
         ON ACTION bt_go_back
             LET m_instruction = "go_back"
             EXIT INPUT   

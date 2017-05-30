@@ -26,16 +26,19 @@ function initMap() {
   UK4js = {lat: 51.4557992, lng: 0.2491976}; 
   latlang = new google.maps.LatLng( UK4js );
 
+  relocateMap(latlang);
+}
+
+function relocateMap(location) {
   var map = new google.maps.Map(
     document.getElementById('map_canvas'), {
       zoom: 12,
-      center: UK4js 
+      center: location 
   });
   var marker = new google.maps.Marker({
-    position: UK4js,
+    position: location,
     map: map
   }); 
-
   google.maps.event.addListener(map, 'click', function(event) {
     mapClicked( event.latLng );
   });
@@ -45,18 +48,18 @@ function mapClicked(where) {
 	debug_js = debug_js + "mapClicked:"+where+"<br />";
   latlng = where
 	//document.getElementById("debug").innerHTML = debug_js;
-  
-  document.getElementById("test").innerHTML = returnlatlng();
+  //document.getElementById("test").innerHTML = returnlatlng();
   gICAPI.Action('mapclicked');
   
 }
 
 function returnlatlng(run) {
   latlngString = JSON.stringify(latlng);
-  console.log(latlngString);
-  return latlngString
+  return latlngString;
 }
 
-function echostring(str){
-  return str
+function goToLocation(gotolocstr) {
+  var gotoloc = JSON.parse(gotolocstr);
+  relocateMap(gotoloc);
+  return "ok";
 }
