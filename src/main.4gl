@@ -3,7 +3,7 @@
 #Written by Ryan Hamlin - 2017. (Ryan@ryanhamlin.co.uk)
 #
 #All application intialising is done here then individual window functions are
-#Called...
+#called...
 ################################################################################
 IMPORT os
 IMPORT util
@@ -55,8 +55,8 @@ MAIN
 
     #Grab deployment data...
 
-    CALL ui.Interface.frontCall("standard", "feInfo", "feName", m_info.deployment_type)
-    CALL ui.Interface.frontCall("standard", "feInfo", "osType", m_info.os_type)
+    CALL ui.interface.getFrontEndName() RETURNING m_info.deployment_type
+    CALL ui.interface.frontCall("standard", "feInfo", "osType", m_info.os_type)
     CALL ui.Interface.frontCall("standard", "feInfo", "ip", m_info.ip)
     CALL ui.Interface.frontCall("standard", "feInfo", "deviceId", m_info.device_name)    
     CALL ui.Interface.frontCall("standard", "feInfo", "screenResolution", m_info.resolution)
@@ -65,12 +65,12 @@ MAIN
     
     IF m_info.deployment_type <> "GMA" AND m_info.deployment_type <> "GMI"
     THEN
-        {DISPLAY "--Deployment Data--\n" ||
+        DISPLAY "--Deployment Data--\n" ||
                 "Deployment Type: " || m_info.deployment_type || "\n" ||
                 "OS Type: " || m_info.os_type || "\n" ||
                 "Device IP: " || m_info.ip || "\n" ||
                 "Resolution: " || m_info.resolution || "\n" ||
-                "-------------------\n"}
+                "-------------------\n"
     ELSE
         {DISPLAY "--Deployment Data--\n" ||
                 "Deployment Type: " || m_info.deployment_type || "\n" ||
@@ -193,11 +193,11 @@ END MAIN
 
 FUNCTION run_splash_screen() #Application Splashscreen window function
 
-    IF m_info.deployment_type = "Genero Desktop Client"
+    IF m_info.deployment_type = "GDC"
     THEN
-        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="vertical_naked")
+        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="splashscreen")
     ELSE
-        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="vertical_naked")
+        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="splashscreen")
     END IF
     
     LET TERMINATE = FALSE
@@ -251,7 +251,7 @@ END FUNCTION
 #
 FUNCTION login_screen() #Local Login window function
 
-    IF m_info.deployment_type = "Genero Desktop Client"
+    IF m_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "main_gdc" ATTRIBUTE (STYLE="main")
     ELSE
@@ -350,7 +350,7 @@ END FUNCTION
 #
 FUNCTION open_application() #First Application window function (Demo purposes loads 'connection' form)
 
-    IF m_info.deployment_type = "Genero Desktop Client"
+    IF m_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "connection_gdc" ATTRIBUTE (STYLE="main")
     ELSE
@@ -454,7 +454,7 @@ FUNCTION admin_tools() #Rough Development Tools window function (Mainly to showc
     DEFINE
         f_words STRING
 
-    IF m_info.deployment_type = "Genero Desktop Client"
+    IF m_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "admin_gdc" ATTRIBUTE (STYLE="main")
     ELSE
@@ -554,7 +554,7 @@ FUNCTION interact_demo() #Interactivity Demo window function
     DEFINE
         f_words STRING
 
-    IF m_info.deployment_type = "Genero Desktop Client"
+    IF m_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "interact_gdc" ATTRIBUTE (STYLE="main")
     ELSE
@@ -640,7 +640,7 @@ END FUNCTION
 #
 FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
 
-    IF m_info.deployment_type = "Genero Desktop Client"
+    IF m_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "wc_signature" ATTRIBUTE (STYLE="main")
     ELSE
@@ -712,7 +712,7 @@ FUNCTION wc_maps_demo() #Webcomponent Demo (Signature) window function (Part of 
         f_obj util.JSONObject,
         f_dummy STRING
         
-    IF m_info.deployment_type = "Genero Desktop Client"
+    IF m_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "wc_google_maps" ATTRIBUTE (STYLE="main")
     ELSE
@@ -793,7 +793,7 @@ END FUNCTION
 #
 FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
 
-    IF m_info.deployment_type = "Genero Desktop Client"
+    IF m_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "wc_video" ATTRIBUTE (STYLE="main")
     ELSE

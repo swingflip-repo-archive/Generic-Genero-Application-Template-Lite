@@ -1,31 +1,8 @@
-LAYOUT
+LAYOUT ( MINWIDTH=50, MINHEIGHT=40 )
 GRID
 {
 [lat                  ][lng                    ][bt_go          ]
 [wc_gm                                                          ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
-[                                                               ]
 [bt_go_back                                                     ]
 }
 END -- GRID
@@ -34,7 +11,7 @@ END -- LAYOUT
 ATTRIBUTES
 WEBCOMPONENT wc_gm = FORMONLY.wc_gm, COMPONENTTYPE="gm", SIZEPOLICY = FIXED, STRETCH=BOTH, PROPERTIES=(lat="0",lng="0"),
     SCROLLBARS=NONE; 
-EDIT lat = FORMONLY.lat, COMMENT=%"interact.per.Latitude";
-EDIT lng = FORMONLY.lng, COMMENT=%"interact.per.Longitude";
+TEXTEDIT lat = FORMONLY.lat, STRETCH=X, SCROLLBARS=NONE, COMMENT=%"interact.per.Latitude";
+TEXTEDIT lng = FORMONLY.lng, STRETCH=X, SCROLLBARS=NONE, COMMENT=%"interact.per.Longitude";
 BUTTON bt_go_back : bt_go_back, TEXT=%"interact.per.Go_Back";
 BUTTON bt_go : bt_go, TEXT=%"interact.per.Go";

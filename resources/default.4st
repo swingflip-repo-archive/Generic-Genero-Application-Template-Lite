@@ -78,6 +78,17 @@
      <StyleAttribute name="statusBarType" value="none" />
      <StyleAttribute name="allowedOrientations" value="portrait_all" />
   </Style>
+  <Style name="Window.splashscreen">
+     <StyleAttribute name="windowType" value="modal" />
+     <StyleAttribute name="border" value="none" />
+     <StyleAttribute name="actionPanelPosition" value="none" />
+     <StyleAttribute name="ringMenuPosition" value="none" />
+     <StyleAttribute name="toolBarPosition" value="none" />
+     <StyleAttribute name="statusBarType" value="none" />
+     <StyleAttribute name="allowedOrientations" value="portrait_all" />
+     <StyleAttribute name="position" value="center" />
+     <StyleAttribute name="backgroundColor" value="#FFFFFF" />
+  </Style>
   <Style name="Window.viewer">
      <StyleAttribute name="windowType" value="modal" />
      <StyleAttribute name="windowSystemMenu" value="yes" />
