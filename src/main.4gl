@@ -299,6 +299,10 @@ FUNCTION login_screen() #Local Login window function
             CALL get_local_remember()
                 RETURNING m_ok, m_remember, m_username
 
+        ON ACTION ACCEPT
+            #Do Nothing
+        ON ACTION CANCEL
+            #Do Nothing
         ON CHANGE username
             LET m_username = downshift(m_username)
             CALL refresh_local_remember(m_username, m_remember)
@@ -733,18 +737,25 @@ FUNCTION wc_maps_demo() #Webcomponent Demo (Signature) window function (Part of 
             CALL m_window.setText(m_title)
         END IF
     END IF
-  
+    
+LABEL go_back_wc_maps_demo: 
+
     INPUT f_dummy, f_latlng_record.lat, f_latlng_record.lng FROM wc_gm, lat, lng ATTRIBUTES(UNBUFFERED)
 
-        ON TIMER g_timed_checks_time
-            CALL connection_test()
-            CALL timed_upload_queue_data()
+        #ON TIMER can cause some grief when running in an INPUT in terms of field validation. Disabled for now.
+        #ON TIMER g_timed_checks_time
+           #CALL connection_test()
+            #CALL timed_upload_queue_data()
 
         BEFORE INPUT
             CALL DIALOG.setActionHidden("accept",1)
             CALL DIALOG.setActionHidden("cancel",1)
             CALL DIALOG.setActionHidden("mapclicked",1)
-                
+
+        ON ACTION ACCEPT
+            #Do Nothing
+        ON ACTION CANCEL
+            #Do Nothing
         ON ACTION bt_go
             INITIALIZE f_result TO NULL
             TRY 
@@ -784,8 +795,7 @@ FUNCTION wc_maps_demo() #Webcomponent Demo (Signature) window function (Part of 
             CLOSE WINDOW w
             CALL login_screen()
         OTHERWISE
-            CALL ui.Interface.refresh()
-            CALL close_app()
+            GOTO go_back_wc_maps_demo
     END CASE
 
 END FUNCTION
