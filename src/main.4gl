@@ -277,12 +277,20 @@ FUNCTION login_screen() #Local Login window function
         END IF
     END IF
 
-    #Set the login splash size if we are not in mobile
-    IF m_info.deployment_type <> "GMA" AND m_info.deployment_type <> "GMI"
+    #We need to adjust the image so it appears correctly in GDC,GBC,GMA and GMI
+
+    #Set the login splash size if we are running in GDC
+    IF m_info.deployment_type = "GDC"
     THEN
         CALL m_dom_node1.setAttribute("sizePolicy","dynamic")
         CALL m_dom_node1.setAttribute("width",g_splash_width)
         CALL m_dom_node1.setAttribute("height",g_splash_height)
+    END IF
+
+    #Set the login screen image to stretch both in GBC
+    IF m_info.deployment_type = "GBC" 
+    THEN
+        CALL m_dom_node1.setAttribute("stretch","both")
     END IF
 
     INPUT m_username, m_password, m_remember FROM username, password, remember ATTRIBUTE(UNBUFFERED)

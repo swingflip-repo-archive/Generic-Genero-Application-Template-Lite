@@ -3,9 +3,11 @@ VBOX
 GROUP (TEXT=%"photo.per.Title")
 GRID
 {
+[splash                                                                                                                                                                                    ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
+[                                                                                                                                                                                          ]
 [words                                                                                                                                                                                     ]
-[                                                                                                                                                                                          ]
-[                                                                                                                                                                                          ]
 [                                                                                                                                                                                          ]
 [                                                                                                                                                                                          ]
 [                                                                                                                                                                                          ]
@@ -14,7 +16,6 @@ GRID
 [bt_takep                                                                                                                                                                                  ]
 [bt_choosep                                                                                                                                                                                ]
 [status                                                                                                                                                                                    ]
-[                                                                                                                                                                                          ]
 [                                                                                                                                                                                          ]
 [bt_cancel                                                                                                                                                                                 ]
 [bt_confirm                                                                                                                                                                                ]
@@ -27,7 +28,7 @@ END #VBOX
 END  #LAYOUT
 
 ATTRIBUTES
-#use textedit
+IMAGE splash:splash, STYLE="centerImages noBorder", IMAGE="camera-icon";
 TEXTEDIT words=FORMONLY.words, NOENTRY, SCROLLBARS=VERTICAL, SIZEPOLICY=FIXED, STRETCH=X;
 BUTTON bt_takep : bt_takep, TEXT=%"photo.per.Take_Photo", IMAGE="flaticon-photo-camera";
 BUTTON bt_choosep : bt_choosep, TEXT=%"photo.per.Choose_Photo", IMAGE="flaticon-picture";

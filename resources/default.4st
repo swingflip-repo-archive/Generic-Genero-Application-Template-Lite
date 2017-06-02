@@ -82,7 +82,7 @@
      <StyleAttribute name="allowedOrientations" value="portrait_all" />
   </Style>
   <Style name="Window.splashscreen">
-     <StyleAttribute name="windowType" value="normal" />
+     <StyleAttribute name="windowType" value="modal" />
      <StyleAttribute name="border" value="none" />
      <StyleAttribute name="actionPanelPosition" value="none" />
      <StyleAttribute name="ringMenuPosition" value="none" />
