@@ -238,6 +238,11 @@ FUNCTION get_local_remember()
         EXIT PROGRAM 1004
     END IF
 
+    IF f_remember = FALSE
+    THEN
+        LET f_username = ""
+    END IF
+
     RETURN f_ok, f_remember, f_username
     
 END FUNCTION
