@@ -228,7 +228,7 @@ FUNCTION get_local_remember()
 
     LET f_ok = FALSE
 
-    SELECT remember, username INTO f_remember, f_username FROM local_remember WHERE 1 = 1
+    SELECT remember, username INTO f_remember, f_username FROM local_remember WHERE 1  = 1
 
     IF f_remember IS NOT NULL
     THEN

@@ -68,11 +68,11 @@
       <DynamicProperty name="icon-xxhdpi" value="$(ProjectDir)/images/icon/xxhdpi.png"/>
       <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
       <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
-      <DynamicProperty name="packageVersionName" value="0.7"/>
+      <DynamicProperty name="packageVersionName" value="0.8"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
-      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg,*.ttf,my_image2font.txt" label="Images" sourceDirectory="$(ProjectDir)/images"/>
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
       <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
@@ -98,11 +98,11 @@
       <DynamicProperty name="icon87x87" value="$(ProjectDir)/images/icon/Icon-Small@3x.png"/>
       <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
       <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
-      <DynamicProperty name="packageVersionName" value="0.7"/>
+      <DynamicProperty name="packageVersionName" value="0.8"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
-      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg,*.ttf,my_image2font.txt" label="Images" sourceDirectory="$(ProjectDir)/images"/>
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
       <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
@@ -116,7 +116,7 @@
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
-      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.png,*.jpg,*.ttf,my_image2font.txt" label="Images" sourceDirectory="$(ProjectDir)/images"/>
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
       <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
