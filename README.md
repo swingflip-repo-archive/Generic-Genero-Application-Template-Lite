@@ -1,10 +1,10 @@
 ![GGAT](http://i.imgur.com/b4dLZz7.png)
 # Generic Genero Application Template
-A purpose built template application to assist developers develop a cross platform application which will work in GDC, GMA, GMI and GBC. 
+A purpose built application template to assist developers develop a cross platform application which will work in GDC, GMA, GMI and GBC. 
 
 [![Powered By Genero](http://i.imgur.com/m0vHCJl.png)](http://4js.com/products/)&nbsp;&nbsp;&nbsp;&nbsp;[![Built by Ryan Hamlin](http://i.imgur.com/24Bf8Ql.png)](http://www.ryanhamlin.co.uk)
 
-GGAT (Generic Genero Application Template) is an universial application base which has been designed to assist developers in developing cross platform applications by providing the basis and the necessary tools for a Genero based apps. It also comes bundled with tech demos and many other features which are useful to test out new environments and give developers example on cool features within Genero.  
+GGAT (Generic Genero Application Template) is an universial application base which has been designed to assist developers in developing cross platform applications by providing the basis and the necessary tools for a Genero based app. It also comes bundled with tech demos and many other features which are useful to test out new environments and give developers examples on cool features within Genero.  
 
 GGAT was built using Genero Studio 3.10.xx and has been coded and thoroughly tested to work on most available platforms:
   - Mircosoft Windows
@@ -14,7 +14,7 @@ GGAT was built using Genero Studio 3.10.xx and has been coded and thoroughly tes
   - Javascript enabled web browsers
 
 ### GGAT's Main Features
-  - Fully structured GST project with all configs ready to compile and go!
+  - Fully structured GST project with all configs already set up. Just compile and go!
   - Built in app and db maintenance tools with DB modification scripts.
   - Modular design to enable developers to build on top of GGAT without lots of setup.
   - Multitude of different configurable settings to change the way the application functions.
@@ -22,11 +22,11 @@ GGAT was built using Genero Studio 3.10.xx and has been coded and thoroughly tes
   - Over 1000 built in truetype font icons ready to use within your applications Including FontAwesome and FlatIcons
   - Full localisation support. (Comes with English and French Language packs by default)
   - Local SQLite3 database which houses encyrpted logins and device logs.
-  - Bundled with a basic PHP nuSOAP webservice which showcases the use of webservices and Genero mobile whilst online and offline
+  - Bundled with a basic PHP nuSOAP webservice which showcases the use of webservices and Genero whilst online and offline
 
 ### GGAT's Demo Functionaility 
   - Local Login facility (Uses local SQLlite DB within the application and encrypts data using bCrypt)
-  - Local user support (also includes userTypes i.e. Admins and Users)
+  - Local user support (also includes user types i.e. Admins and Users)
   - Automated Connectivity Checks (Automatic connection detection to detect when device is online or offline)
   - Camera Upload Demo (Take or select photos from your device and upload them to a webservice using base64 payloads)
   - Interactivity Demo (Multiple Javascript & jQuery plugin demos)
