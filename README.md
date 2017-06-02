@@ -60,7 +60,7 @@ To Develop using GGAT you must have a valid and active development license for G
 
   1) Use your prefered GIT method and fork to your development machine...
   2) Open the GGAT GST project file `projectdir/GGAT.4pl`
-  3) Hit Compile and Go!
+  3) Hit Compile and Go! (The Default login details are... Username: Ryan Password: a)
 
 ### Configuration 
 
