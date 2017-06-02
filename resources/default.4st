@@ -11,6 +11,7 @@
      <StyleAttribute name="ringMenuPosition" value="none" />
      <StyleAttribute name="sizable" value="yes" />
      <StyleAttribute name="position" value="center" />
+     <StyleAttribute name="forceDefaultSettings" value="yes" />
   </Style>
   <Style name="Window.vertical_main">
      <StyleAttribute name="windowType" value="normal" />
@@ -19,6 +20,7 @@
      <StyleAttribute name="actionPanelPosition" value="none" />
      <StyleAttribute name="ringMenuPosition" value="none" />
      <StyleAttribute name="sizable" value="yes" />
+     <StyleAttribute name="position" value="center" />
   </Style>
   <Style name="Window.main2">
      <StyleAttribute name="windowType" value="normal" />

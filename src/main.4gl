@@ -195,9 +195,9 @@ FUNCTION run_splash_screen() #Application Splashscreen window function
 
     IF m_info.deployment_type = "GDC"
     THEN
-        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="splashscreen")
+        OPEN WINDOW w WITH FORM "splash_screen"
     ELSE
-        OPEN WINDOW w WITH FORM "splash_screen" ATTRIBUTE (STYLE="splashscreen")
+        OPEN WINDOW w WITH FORM "splash_screen"
     END IF
     
     LET TERMINATE = FALSE
@@ -253,9 +253,9 @@ FUNCTION login_screen() #Local Login window function
 
     IF m_info.deployment_type = "GDC"
     THEN
-        OPEN WINDOW w WITH FORM "main_gdc" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "main_gdc"
     ELSE
-        OPEN WINDOW w WITH FORM "main" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "main"
     END IF
     
     #Initialize window specific variables
@@ -356,9 +356,9 @@ FUNCTION open_application() #First Application window function (Demo purposes lo
 
     IF m_info.deployment_type = "GDC"
     THEN
-        OPEN WINDOW w WITH FORM "connection_gdc" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "connection_gdc"
     ELSE
-        OPEN WINDOW w WITH FORM "connection" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "connection"
     END IF
     
     LET TERMINATE = FALSE
@@ -460,9 +460,9 @@ FUNCTION admin_tools() #Rough Development Tools window function (Mainly to showc
 
     IF m_info.deployment_type = "GDC"
     THEN
-        OPEN WINDOW w WITH FORM "admin_gdc" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "admin_gdc"
     ELSE
-        OPEN WINDOW w WITH FORM "admin" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "admin"
     END IF
 
     LET TERMINATE = FALSE
@@ -560,9 +560,9 @@ FUNCTION interact_demo() #Interactivity Demo window function
 
     IF m_info.deployment_type = "GDC"
     THEN
-        OPEN WINDOW w WITH FORM "interact_gdc" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "interact_gdc"
     ELSE
-        OPEN WINDOW w WITH FORM "interact" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "interact"
     END IF
 
     LET TERMINATE = FALSE
@@ -646,9 +646,9 @@ FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Par
 
     IF m_info.deployment_type = "GDC"
     THEN
-        OPEN WINDOW w WITH FORM "wc_signature" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "wc_signature"
     ELSE
-        OPEN WINDOW w WITH FORM "wc_signature" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "wc_signature"
     END IF
 
     LET TERMINATE = FALSE
@@ -718,9 +718,9 @@ FUNCTION wc_maps_demo() #Webcomponent Demo (Signature) window function (Part of 
         
     IF m_info.deployment_type = "GDC"
     THEN
-        OPEN WINDOW w WITH FORM "wc_google_maps" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "wc_google_maps"
     ELSE
-        OPEN WINDOW w WITH FORM "wc_google_maps" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "wc_google_maps"
     END IF
 
     INITIALIZE m_instruction TO NULL
@@ -805,9 +805,9 @@ FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of
 
     IF m_info.deployment_type = "GDC"
     THEN
-        OPEN WINDOW w WITH FORM "wc_video" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "wc_video"
     ELSE
-        OPEN WINDOW w WITH FORM "wc_video" ATTRIBUTE (STYLE="main")
+        OPEN WINDOW w WITH FORM "wc_video"
     END IF
 
     LET TERMINATE = FALSE
@@ -875,7 +875,7 @@ FUNCTION image_program() #Image Web Service Demo window function
         f_queue_count INTEGER,
         f_payload STRING
 
-    OPEN WINDOW w WITH FORM "photo" ATTRIBUTE (STYLE="main")
+    OPEN WINDOW w WITH FORM "photo"
 
     LET TERMINATE = FALSE
     INITIALIZE m_instruction TO NULL

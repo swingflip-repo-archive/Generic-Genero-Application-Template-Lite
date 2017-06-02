@@ -1,4 +1,4 @@
-LAYOUT (TEXT="")   
+LAYOUT ( MINWIDTH=50, MINHEIGHT=40, STYLE="main" )
 VBOX 
 GROUP (TEXT="")
 GRID
@@ -7,6 +7,7 @@ GRID
 [username                                     ]
 [password                                     ]
 [cb                                           ]
+[spacer                                       ]
 [bt_login                                     ]
 [                                             ]
 }
@@ -22,6 +23,7 @@ IMAGE splash:splash, STYLE="splash", IMAGE="splash", #CHANGE IMAGE TO REFLECT IM
 EDIT username=formonly.username, COMMENT=%"Username", JUSTIFY=CENTER;
 EDIT password=formonly.password, INVISIBLE, COMMENT=%"Password", JUSTIFY=CENTER;
 CHECKBOX cb=formonly.remember, NOT NULL, REQUIRED,VALUECHECKED="1", VALUEUNCHECKED="0", TEXT=%"Remember Me";
+TEXTEDIT spacer=FORMONLY.spacer, NOENTRY, SCROLLBARS=NONE, SIZEPOLICY=FIXED,STRETCH=BOTH, STYLE="noBorder";
 BUTTON bt_login : bt_login, TEXT=%"Login";
 
 END
