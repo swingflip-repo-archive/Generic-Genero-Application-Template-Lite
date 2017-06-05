@@ -13,3 +13,6 @@ fglrun.localization.file.6.name = "main_strings.42s"
 fglrun.localization.file.7.name = "function_lib_strings.42s"
 #Only enable warnKeyNotFound for debugging.
 fglrun.localization.warnKeyNotFound = TRUE
+
+#Mobile specific ENV set up (This only effects when deployed from API or APK files)
+mobile.environment.FGLIMAGEPATH = "$FGLAPPDIR/my_image2font.txt"
