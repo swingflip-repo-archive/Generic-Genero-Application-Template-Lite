@@ -41,11 +41,6 @@ GLOBALS "globals.4gl"
         m_remember STRING
     
 FUNCTION initialise_app()
-    #******************************************************************************#
-    #Detect user's locale and set language accordingly depending on available language packs.
-        CALL ui.Interface.frontCall("standard", "feInfo", "userPreferredLang", m_info.locale)
-        CALL load_localisation("fr",FALSE)
-            RETURNING m_require_app_reload
 
     #******************************************************************************#
     #Grab deployment data...
