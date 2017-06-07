@@ -76,6 +76,7 @@
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
       <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/fr" includedFiles="*.42s" label="Localisation_FR" sourceDirectory="$(ProjectDir)/bin/fr"/>
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
@@ -106,6 +107,7 @@
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
       <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/fr" includedFiles="*.42s" label="Localisation_FR" sourceDirectory="$(ProjectDir)/bin/fr"/>
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
@@ -120,6 +122,7 @@
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
       <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
       <Directory destinationDirectory="$(ProjectDir)/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/fr" includedFiles="*.42s" label="Localisation_FR" sourceDirectory="$(ProjectDir)/bin/fr"/>
       <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
@@ -163,13 +166,24 @@
         <File filePath="src/Lang_Readme_EN.txt"/>
       </VirtualFolder>
       <VirtualFolder label="defaults (en)">
-        <File filePath="src/admin_per.str"/>
-        <File filePath="src/connection_per.str"/>
-        <File filePath="src/function_lib_strings.str"/>
-        <File filePath="config/interact_per.str"/>
-        <File filePath="src/main_per.str"/>
-        <File filePath="src/main_strings.str"/>
-        <File filePath="src/photo_per.str"/>
+        <File filePath="src/lang_defaults/admin_per.str"/>
+        <File filePath="src/lang_defaults/connection_per.str"/>
+        <File filePath="src/lang_defaults/function_lib_strings.str"/>
+        <File filePath="src/lang_defaults/interact_per.str"/>
+        <File filePath="src/lang_defaults/main_per.str"/>
+        <File filePath="src/lang_defaults/main_strings.str"/>
+        <File filePath="src/lang_defaults/photo_per.str"/>
+      </VirtualFolder>
+    </Library>
+    <Library binaryName="Localisation Files (fr)" id="332504730" label="Localisation Files (fr)" targetDirectory="$(ProjectDir)/bin/fr">
+      <VirtualFolder label="francais (fr)">
+        <File filePath="src/lang_fr/admin_per.str"/>
+        <File filePath="src/lang_fr/connection_per.str"/>
+        <File filePath="src/lang_fr/function_lib_strings.str"/>
+        <File filePath="src/lang_fr/interact_per.str"/>
+        <File filePath="src/lang_fr/main_per.str"/>
+        <File filePath="src/lang_fr/main_strings.str"/>
+        <File filePath="src/lang_fr/photo_per.str"/>
       </VirtualFolder>
     </Library>
     <Library binaryName="Resources" id="159917928" label="Resources">

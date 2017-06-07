@@ -116,7 +116,8 @@ FUNCTION capture_local_stats(f_info)
             resolution_y STRING,
             geo_status STRING,
             geo_lat STRING,
-            geo_lon STRING
+            geo_lon STRING,
+            locale STRING
         END RECORD,
         f_concat_geo STRING,
         f_ok SMALLINT,
@@ -162,7 +163,8 @@ END FUNCTION
 #
 #
 FUNCTION hash_password(f_pass)
-    DEFINE f_pass STRING,
+    DEFINE
+        f_pass STRING,
         salt STRING,
         hashed_pass STRING,
         f_ok SMALLINT

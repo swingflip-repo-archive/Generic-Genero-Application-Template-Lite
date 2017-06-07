@@ -1,8 +1,7 @@
-Here is where your localisation wording goes. By default GGAT's default language is English. If you are wanting to localise
- your application whilst using GGAT as your application base. Add folders as needed.
+Here is where your localisation wording goes. By default, GGAT's default language is English. If you are wanting to localise
+your application whilst using GGAT as your application base, add folders as needed.
 
-Please bare in mind where you are saving your localisation files mind you as it is critical you store the files in
- the correct places.
+Please bare in mind where you are saving your localisation files as it is critical you store the files in the correct place.
 
 For Example:
 
@@ -27,7 +26,7 @@ appdir/
 |       |-- other-web-comp-resource       |
 |   ...                                 --
 
-I have written a string extracting tool which is located within the toolbox. This application is an example on how you
+I have written a string extraction tool which is located within the toolbox. This application is an example on how you
 can extract strings from your 4gl and per files.
 
 Using the same model, add you localisation according to the manual.

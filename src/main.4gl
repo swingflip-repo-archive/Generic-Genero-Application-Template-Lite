@@ -18,7 +18,8 @@ GLOBALS "globals.4gl"
         m_dom_node1 om.DomNode,
         m_index INTEGER,
         m_ok SMALLINT,
-        m_instruction STRING
+        m_instruction STRING,
+        m_require_app_reload SMALLINT
         
     DEFINE
         m_title STRING,
@@ -32,13 +33,29 @@ GLOBALS "globals.4gl"
             resolution_y STRING,
             geo_status STRING,
             geo_lat STRING,
-            geo_lon STRING
+            geo_lon STRING,
+            locale STRING
         END RECORD,
         m_username STRING,
         m_password STRING,
         m_remember STRING
     
 MAIN
+#******************************************************************************#
+#Grab deployment data...
+
+    CALL ui.interface.getFrontEndName() RETURNING m_info.deployment_type
+    CALL ui.interface.frontCall("standard", "feInfo", "osType", m_info.os_type)
+    CALL ui.Interface.frontCall("standard", "feInfo", "ip", m_info.ip)
+    CALL ui.Interface.frontCall("standard", "feInfo", "deviceId", m_info.device_name)    
+    CALL ui.Interface.frontCall("standard", "feInfo", "screenResolution", m_info.resolution)
+    CALL ui.Interface.frontCall("standard", "feInfo", "userPreferredLang", m_info.locale)
+    
+#******************************************************************************#
+#Detect user's locale and set language accordingly depending on available language packs.
+
+    CALL load_localisation("fr",FALSE)
+        RETURNING m_require_app_reload
 
 #******************************************************************************#
 #Set global application details here...
@@ -53,14 +70,6 @@ MAIN
     #BREAKPOINT #Uncomment to step through application
     DISPLAY "\nStarting up " || g_application_title || " " || g_application_version || "...\n"
 
-    #Grab deployment data...
-
-    CALL ui.interface.getFrontEndName() RETURNING m_info.deployment_type
-    CALL ui.interface.frontCall("standard", "feInfo", "osType", m_info.os_type)
-    CALL ui.Interface.frontCall("standard", "feInfo", "ip", m_info.ip)
-    CALL ui.Interface.frontCall("standard", "feInfo", "deviceId", m_info.device_name)    
-    CALL ui.Interface.frontCall("standard", "feInfo", "screenResolution", m_info.resolution)
-
     #Uncomment the below to display device data when running.
     
     IF m_info.deployment_type <> "GMA" AND m_info.deployment_type <> "GMI"
@@ -68,17 +77,19 @@ MAIN
         DISPLAY "--Deployment Data--\n" ||
                 "Deployment Type: " || m_info.deployment_type || "\n" ||
                 "OS Type: " || m_info.os_type || "\n" ||
+                "User Locale: " || m_info.locale || "\n" ||
                 "Device IP: " || m_info.ip || "\n" ||
                 "Resolution: " || m_info.resolution || "\n" ||
                 "-------------------\n"
     ELSE
-        {DISPLAY "--Deployment Data--\n" ||
+        DISPLAY "--Deployment Data--\n" ||
                 "Deployment Type: " || m_info.deployment_type || "\n" ||
                 "OS Type: " || m_info.os_type || "\n" ||
+                "User Locale: " || m_info.locale || "\n" ||
                 "Device IP: " || m_info.ip || "\n" ||
                 "Device ID: " || m_info.device_name || "\n" ||
                 "Resolution: " || m_info.resolution || "\n" ||
-                "-------------------\n"}
+                "-------------------\n"
     END IF
     
     LET m_string_tokenizer = base.StringTokenizer.create(m_info.resolution,"x")
@@ -134,7 +145,7 @@ MAIN
         RETURNING m_ok
         
     LET g_client_key = "znbi58mCGZXSBNkJ5GouFuKPLqByReHvtrGj7aXXuJmHGFr89Xp7uCqDcVCv"      #g_client_key STRING
-        
+
 #******************************************************************************#
 
     IF m_ok = FALSE
@@ -1061,6 +1072,50 @@ END FUNCTION
 #Module Functions...
 ################################################################################
 
+FUNCTION load_localisation(f_locale, f_pre_window) #This auto loads the user's locale language if available. (Must be local to the main.4gl!)
+    DEFINE
+        f_locale STRING,
+        f_pre_window SMALLINT,
+        f_localisation_path STRING,
+        f_string_buffer base.StringBuffer,
+        f_require_reload SMALLINT
+
+    LET f_require_reload = FALSE
+    BREAKPOINT
+    #Check if we have the locale.42s folder, if not then revert to defaults. 
+    #If load_localisation() is called before window then f_pre_window = false else we need to reload current window
+
+    IF os.Path.exists(os.Path.join(base.Application.getProgramDir(), f_locale)) #i.e. en_GB or en_US
+    THEN
+        LET g_language = f_locale
+        LET f_localisation_path = os.Path.join(base.Application.getProgramDir(), g_language)
+        CALL base.Application.reloadResources(f_localisation_path)
+        LET f_require_reload = TRUE
+    ELSE
+        LET f_string_buffer = base.StringBuffer.create()
+        CALL f_string_buffer.append(f_locale)
+        LET f_locale = f_string_buffer.subString(1,2)
+        IF os.Path.exists(os.Path.join(base.Application.getProgramDir(), f_locale)) #i.e. en or fr or de
+        THEN
+            LET g_language = f_locale
+            LET f_localisation_path = os.Path.join(base.Application.getProgramDir(), g_language)
+            CALL base.Application.reloadResources(f_localisation_path)
+            LET f_require_reload = TRUE
+        END IF
+    END IF
+
+    IF f_pre_window = TRUE
+    THEN
+        LET f_require_reload = FALSE #Even if we have changed the local language, we don't need to reload window because pre window
+    END IF
+
+    RETURN f_require_reload
+    
+END FUNCTION
+#
+#
+#
+#
 FUNCTION connection_test() #Test online connectivity, call this whenever opening new window!
     IF g_enable_timed_connect = TRUE
     THEN
