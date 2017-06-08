@@ -148,7 +148,6 @@
       <File filePath="src/application_main.4gl"/>
       <File filePath="src/main.4gl"/>
     </Application>
-    <Application binaryName="Application_1" id="531116000" label="Application_1"/>
     <Library binaryName="Config" id="362164715" label="Config">
       <File filePath="config/fglprofile"/>
     </Library>
