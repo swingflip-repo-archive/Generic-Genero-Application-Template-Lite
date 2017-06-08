@@ -15,4 +15,4 @@ fglrun.localization.file.7.name = "function_lib_strings.42s"
 fglrun.localization.warnKeyNotFound = TRUE
 
 #Mobile specific ENV set up (This only effects when deployed from API or APK files)
-mobile.environment.FGLIMAGEPATH = "$FGLAPPDIR/my_image2font.txt"
+mobile.environment.FGLIMAGEPATH = "$FGLAPPDIR:$FGLAPPDIR/my_image2font.txt"
