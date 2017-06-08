@@ -17,5 +17,5 @@
 "function.lib.string.No_Images_To_Upload"="Il n'y a pas d'images dans la file d'attente à transférer!"
 "function.lib.string.Warning_Title"="Attention!"
 "function.lib.string.Unable_To_Communicate"="Impossible de communiquer avec le serveur web d'images en ce moment!"
-"function.lib.string.global_dump"="Global Config"
-"function.lib.string.Config_Dump_Text"="Application global config dump: \n\n"
+"function.lib.string.global_dump"="Configuration globale"
+"function.lib.string.Config_Dump_Text"="Fichier de configuration globale de l'application: \n\n"

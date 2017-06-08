@@ -1,5 +1,5 @@
-"admin.per.Title"="Admin Controls"
-"admin.per.Dump_Config"="Print Config Dump"
+"admin.per.Title"="Contr�les de l'administrateur"
+"admin.per.Dump_Config"="Imprimer le fichier de configuration"
 "admin.per.Create_User"="Créer un Utilisateur"
 "admin.per.Check_Password"="Vérifier le Mot de Passe"
 "admin.per.Hash_Generator"="Générateur de Clé"
