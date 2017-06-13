@@ -335,7 +335,8 @@ FUNCTION timed_upload_queue_data()
         THEN
             DISPLAY "Uploading images..."
             CALL upload_image_payload(TRUE)
-            MESSAGE %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed"
+            #MESSAGE %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed"
+            MESSAGE SFMT(%"function.lib.string.Uploaded",g_OK_uploads,g_FAILED_uploads)
         END IF
     END IF
     
@@ -474,7 +475,8 @@ FUNCTION upload_image_payload(f_silent)
             END FOR
             IF f_silent = FALSE
             THEN
-                CALL fgl_winmessage(%"function.lib.string.Image_Upload", %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed", "information")
+                #CALL fgl_winmessage(%"function.lib.string.Image_Upload", %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed", "information")
+                CALL fgl_winmessage(%"function.lib.string.Image_Upload", SFMT(%"function.lib.string.Uploaded",g_OK_uploads,g_FAILED_uploads), "information" )
             END IF
         END IF
     END IF
