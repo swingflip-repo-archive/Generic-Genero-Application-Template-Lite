@@ -81,7 +81,15 @@ FUNCTION print_debug_global_config()
     DEFINE
         f_msg STRING
 
+    #FYI, these aren't ALL of the globals. I have only dumped what I believe could be of use...
     LET f_msg = %"function.lib.string.Config_Dump_Text" ||
+                # Current Session Global Variable Values #
+                "g_online = " || g_online || "\n" ||
+                "g_user = " || g_user || "\n" ||
+                "g_user_type = " || g_user_type || "\n" ||
+                "g_logged_in = " || g_logged_in || "\n" ||
+                "g_language = " || g_language || "\n" ||
+                # Application Global Variable Values #
                 "g_application_database_ver = " || g_application_database_ver || "\n" ||
                 "g_enable_splash = " || g_enable_splash || "\n" ||
                 "g_splash_duration = " || g_splash_duration || "\n" ||
@@ -97,8 +105,49 @@ FUNCTION print_debug_global_config()
                 "g_date_format = " || g_date_format || "\n" ||
                 "g_image_dest = " || g_image_dest || "\n" ||
                 "g_enable_timed_image_upload = " || g_enable_timed_image_upload
-
+    DISPLAY f_msg 
     CALL fgl_winmessage(%"function.lib.string.global_dump",f_msg, "information")
+END FUNCTION
+#
+#
+#
+#
+FUNCTION print_debug_env()
+    DEFINE
+        f_msg STRING,
+        f_fe_typ STRING,
+        f_fe_ver STRING,
+        f_cli_os STRING,
+        f_cli_osver STRING,
+        f_ip STRING,
+        f_device_name STRING,
+        f_cli_res STRING
+
+    LET f_fe_typ = ui.interface.getFrontEndName()
+    LET f_fe_ver = ui.interface.getFrontEndVersion()
+
+    CALL ui.interface.frontCall("standard", "feInfo", "osType", f_cli_os)
+    CALL ui.interface.frontCall("standard", "feInfo", "osVersion", f_cli_osver)
+    CALL ui.Interface.frontCall("standard", "feInfo", "ip", f_ip)
+    CALL ui.Interface.frontCall("standard", "feInfo", "deviceId",f_device_name)    
+    CALL ui.Interface.frontCall("standard", "feInfo", "screenResolution", f_cli_res)
+    IF f_device_name IS NULL THEN LET f_device_name = "N/A" END IF
+
+    LET f_msg = %"function.lib.string.Env_Dump_Text" ||
+                "DVM VER= " || fgl_getVersion() || "\n" ||
+                "FGLPROFILE = " || NVL(fgl_getEnv("FGLPROFILE"),"NULL") || "\n" ||
+                "FGLIMAGEPATH = " || NVL(fgl_getEnv("FGLIMAGEPATH"),"NULL") || "\n" ||
+                "FGLRESOURCEPATH = " || NVL(fgl_getEnv("FGLRESOURCEPATH"),"NULL") || "\n" ||
+                "FRONT END NAME = " || f_fe_typ || "\n" ||
+                "FRONT END VER= " || f_fe_ver || "\n" ||
+                "OSTYPE = " || f_cli_os || "\n" ||
+                "OSVERSION = " || f_cli_osver || "\n" ||
+                "IP = " || f_ip || "\n" ||
+                "DEVICEID = " || f_device_name || "\n" ||
+                "RESOLUTION = " || f_cli_res
+                
+    DISPLAY f_msg 
+    CALL fgl_winmessage(%"function.lib.string.Env_Dump",f_msg, "information")
 END FUNCTION
 #
 #

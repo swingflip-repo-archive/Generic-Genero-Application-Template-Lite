@@ -15,6 +15,7 @@ GRID
 [                                                                                                                                                                                          ]
 [                                                                                                                                                                                          ]
 [                                                                                                                                                                                          ]
+[bt_env_dump                                                                                                                                                                               ]
 [bt_dump                                                                                                                                                                                   ]
 [bt_create                                                                                                                                                                                 ]
 [bt_check                                                                                                                                                                                  ]
@@ -29,6 +30,7 @@ END  #LAYOUT
 ATTRIBUTES
 IMAGE splash:splash, STYLE="centerImages noBorder", IMAGE="option-icon";
 TEXTEDIT words=FORMONLY.words, NOENTRY, SCROLLBARS=VERTICAL, SIZEPOLICY=FIXED, STRETCH=BOTH;
+BUTTON bt_env_dump : bt_env_dump, TEXT=%"admin.per.Dump_Env";
 BUTTON bt_dump : bt_dump, TEXT=%"admin.per.Dump_Config";
 BUTTON bt_create : bt_create, TEXT=%"admin.per.Create_User";
 BUTTON bt_check : bt_check, TEXT=%"admin.per.Check_Password";

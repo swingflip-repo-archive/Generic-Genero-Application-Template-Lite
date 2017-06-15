@@ -517,6 +517,8 @@ FUNCTION admin_tools() #Rough Development Tools window function (Mainly to showc
             ON ACTION CLOSE
                 LET TERMINATE = TRUE
                 EXIT MENU
+            ON ACTION bt_env_dump
+                CALL print_debug_env()
             ON ACTION bt_dump
                 CALL print_debug_global_config()
             ON ACTION bt_create
@@ -936,9 +938,9 @@ FUNCTION image_program() #Image Web Service Demo window function
                     LET f_queue_count = f_queue_count + 1
                     IF f_queue_count = 1
                     THEN
-                        DISPLAY f_queue_count || %"main.string.Photo_In_Queue" TO status
+                        DISPLAY f_queue_count || %"main.string.Photo_In_Temporary_Queue" TO status
                     ELSE
-                        DISPLAY f_queue_count || %"main.string.Photos_In_Queue" TO status
+                        DISPLAY f_queue_count || %"main.string.Photos_In_Temporary_Queue" TO status
                     END IF
                     LET f_index = f_index + 1
                 ELSE

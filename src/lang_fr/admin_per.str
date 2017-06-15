@@ -1,4 +1,5 @@
-"admin.per.Title"="Contr�les de l'administrateur"
+"admin.per.Title"="Contrôles de l'administrateur"
+"admin.per.Dump_Env"="Imprimer le fichier de l'environnement"
 "admin.per.Dump_Config"="Imprimer le fichier de configuration"
 "admin.per.Create_User"="Créer un Utilisateur"
 "admin.per.Check_Password"="Vérifier le Mot de Passe"

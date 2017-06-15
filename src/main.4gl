@@ -23,8 +23,10 @@ MAIN
 #******************************************************************************#
 #Detect user's locale and set language accordingly depending on available language packs.
     CALL ui.Interface.frontCall("standard", "feInfo", "userPreferredLang", m_info.locale)
+
+    LET g_language = m_info.locale
     
-    CALL load_localisation(m_info.locale,FALSE)
+    CALL load_localisation("FR",FALSE)
         RETURNING m_require_app_reload #Not needed yet, but will useful when we can change strings runtime properly.
 
     CALL initialise_app()

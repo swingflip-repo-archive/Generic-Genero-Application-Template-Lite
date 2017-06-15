@@ -17,3 +17,5 @@
 "function.lib.string.Unable_To_Communicate"="Unable to communicate with image webserver at this time!"
 "function.lib.string.global_dump"="Global Config"
 "function.lib.string.Config_Dump_Text"="Application global config dump: \n\n"
+"function.lib.string.Env_Dump"="Application Environment"
+"function.lib.string.Env_Dump_Text"="Application environment dump: \n\n"

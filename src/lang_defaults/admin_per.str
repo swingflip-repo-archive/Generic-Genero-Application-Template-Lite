@@ -1,4 +1,5 @@
 "admin.per.Title"="Admin Controls"
+"admin.per.Dump_Env"="Print Environment Dump"
 "admin.per.Dump_Config"="Print Config Dump"
 "admin.per.Create_User"="Create User"
 "admin.per.Check_Password"="Check Password"
