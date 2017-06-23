@@ -1,3 +1,4 @@
+
 "main.string.App_Title"="Modèle d'Application Genero Générique"
 "main.string.App_Version"="v0.8 Alpha"
 "main.string.ERROR_1001"="ERROR 1001:\nEchec d'Initialisation des Variables Globales."
@@ -23,4 +24,4 @@
 "main.string.Working_Offline"=" *Travail Hors Connexion* "
 "main.string.Services_Disconnected"="Services Déconnectés"
 "main.string.Services_Connected"="Services Connectés"
-"main.string.Interact_Explanation"="Voici quelques composants Web locaux qui montrent l'interactivit� au sein de GGAT. Les composants Web sont construits en utilisant une combinaison de HTML5, Java et CSS"
+"main.string.Interact_Explanation"="Voici quelques composants Web locaux qui montrent l'interactivité au sein de GGAT. Les composants Web sont construits en utilisant une combinaison de HTML5, Java et CSS"
