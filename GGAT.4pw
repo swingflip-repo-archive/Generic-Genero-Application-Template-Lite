@@ -129,7 +129,7 @@
     </Package>
   </Group>
   <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,dirlist:DBPATH=$(ProjectDir)/database;$(DBPATH)" label="Project" language="Genero">
-    <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/images/my_image2font.txt;$(ProjectDir)/images;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);.." id="400358049" label="Application">
+    <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" environment="value:LANG=.fglutf8,dirlist:FGLIMAGEPATH=$(ProjectDir)/images/my_image2font.txt;$(ProjectDir)/images;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);.." id="400358049" label="Application">
       <VirtualFolder label="Forms">
         <File filePath="src/admin.per"/>
         <File filePath="src/admin_gdc.per"/>

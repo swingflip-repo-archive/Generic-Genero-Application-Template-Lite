@@ -20,8 +20,8 @@ GLOBALS "globals.4gl"
         m_require_app_reload SMALLINT
     
 MAIN
-#******************************************************************************#
-#Detect user's locale and set language accordingly depending on available language packs.
+#******************************************************************************# 
+    #Detect user's locale and set language accordingly depending on available language packs.
     CALL ui.Interface.frontCall("standard", "feInfo", "userPreferredLang", m_info.locale)
 
     LET g_language = m_info.locale
