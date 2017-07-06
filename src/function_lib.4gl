@@ -30,7 +30,7 @@ END FUNCTION
 #
 FUNCTION initialize_globals(f_application_database_ver, f_enable_splash, f_splash_duration, f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_limit,f_online_ping_URL,
                             f_enable_timed_connect,f_timed_connect_time,f_date_format,f_image_dest, f_ws_end_point,
-                            f_enable_timed_image_upload) #Set up global variables
+                            f_enable_timed_image_upload, f_default_language, f_local_images_available) #Set up global variables
     DEFINE
         f_ok SMALLINT,
         f_enable_login SMALLINT,
@@ -48,7 +48,9 @@ FUNCTION initialize_globals(f_application_database_ver, f_enable_splash, f_splas
         f_application_database_ver INTEGER,
         f_enable_splash SMALLINT,
         f_splash_duration INTEGER,
-        f_ws_end_point STRING
+        f_ws_end_point STRING,
+        f_default_language CHAR(2),
+        f_local_images_available DYNAMIC ARRAY OF CHAR(2)
 
     LET f_ok = FALSE
 
@@ -68,6 +70,8 @@ FUNCTION initialize_globals(f_application_database_ver, f_enable_splash, f_splas
     LET g_enable_timed_image_upload = f_enable_timed_image_upload
     LET g_application_database_ver = f_application_database_ver
     LET g_ws_end_point = f_ws_end_point
+    LET g_default_language = f_default_language
+    LET g_local_images_available = f_local_images_available
     
     LET f_ok = TRUE
         
@@ -89,6 +93,8 @@ FUNCTION print_debug_global_config()
                 "g_user_type = " || g_user_type || "\n" ||
                 "g_logged_in = " || g_logged_in || "\n" ||
                 "g_language = " || g_language || "\n" ||
+                "g_language_short = " || g_language_short || "\n" ||
+                "g_default_language = " || g_default_language || "\n" ||
                 # Application Global Variable Values #
                 "g_application_database_ver = " || g_application_database_ver || "\n" ||
                 "g_enable_splash = " || g_enable_splash || "\n" ||
@@ -529,6 +535,28 @@ FUNCTION upload_image_payload(f_silent)
             END IF
         END IF
     END IF
+END FUNCTION
+#
+#
+#
+#
+FUNCTION set_localised_image(f_image)
+
+    DEFINE
+        f_image STRING
+
+    IF g_default_language.toUpperCase() = g_language_short.toUpperCase()
+    THEN
+        RETURN f_image #Default language being used. Return default image
+    ELSE
+        IF g_local_images_available.search("",g_language_short.toUpperCase())
+        THEN
+            RETURN f_image || "_" || g_language_short #Localisation found. Return localised image
+        END IF
+    END IF
+    
+    RETURN f_image #We should never reach this point but just incase...
+    
 END FUNCTION
 #
 #

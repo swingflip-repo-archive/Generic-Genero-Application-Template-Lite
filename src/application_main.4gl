@@ -38,7 +38,9 @@ GLOBALS "globals.4gl"
         END RECORD,
         m_username STRING,
         m_password STRING,
-        m_remember STRING
+        m_remember STRING,
+        m_image STRING,
+        m_local_images_available DYNAMIC ARRAY OF CHAR(2)
     
 FUNCTION initialise_app()
 
@@ -100,25 +102,31 @@ FUNCTION initialise_app()
     #******************************************************************************#
     # HERE IS WHERE YOU CONFIGURE GOBAL SWITCHES FOR THE APPLICATION
     # ADJUST THESE AS YOU SEEM FIT. BELOW IS A LIST OF OPTIONS IN ORDER:
-    #        g_application_database_ver INTEGER,    #Application Database Version (This is useful to force database additions to pre-existing db instances)
-    #        g_enable_splash SMALLINT,              #Open splashscreen when opening the application.
-    #        g_splash_duration INTEGER,            #Splashscreen duration (seconds) g_enable_splash needs to be enabled!
-    #        g_enable_login SMALLINT                #Boot in to login menu or straight into application (open_application())
-    #        g_splash_width STRING,                 #Login menu splash width when not in mobile
-    #        g_splash_height STRING,               #Login menu splash height when not in mobile
-    #        g_enable_geolocation SMALLINT,        #Toggle to enable geolocation
-    #        g_enable_mobile_title SMALLINT,       #Toggle application title on mobile
-    #        g_local_stat_limit INTEGER,            #Number of max local stat records before pruning
-    #        g_online_ping_URL STRING,              #URL of public site to test internet connectivity (i.e. http://www.google.com) 
-    #        g_enable_timed_connect SMALLINT,      #Enable timed connectivity checks
-    #        g_timed_checks_time INTEGER            #Time in seconds before checking connectivity (g_enable_timed_connect has to be enabled)
-    #        g_date_format STRING                  #Datetime format. i.e.  "%d/%m/%Y %H:%M"
-    #        g_image_dest STRING                    #Webserver destination for image payloads. i.e. "Webservice_1" (Not used as of yet)
-    #        g_ws_end_point STRING,                #The webservice end point. 
-    #        g_enable_timed_image_upload SMALLINT,  #Enable timed image queue uploads (Could have a performance impact!)
+    #        g_application_database_ver INTEGER,               #Application Database Version (This is useful to force database additions to pre-existing db instances)
+    #        g_enable_splash SMALLINT,                         #Open splashscreen when opening the application.
+    #        g_splash_duration INTEGER,                        #Splashscreen duration (seconds) g_enable_splash needs to be enabled!
+    #        g_enable_login SMALLINT                           #Boot in to login menu or straight into application (open_application())
+    #        g_splash_width STRING,                            #Login menu splash width when not in mobile
+    #        g_splash_height STRING,                           #Login menu splash height when not in mobile
+    #        g_enable_geolocation SMALLINT,                    #Toggle to enable geolocation
+    #        g_enable_mobile_title SMALLINT,                   #Toggle application title on mobile
+    #        g_local_stat_limit INTEGER,                       #Number of max local stat records before pruning
+    #        g_online_ping_URL STRING,                         #URL of public site to test internet connectivity (i.e. http://www.google.com) 
+    #        g_enable_timed_connect SMALLINT,                  #Enable timed connectivity checks
+    #        g_timed_checks_time INTEGER                       #Time in seconds before checking connectivity (g_enable_timed_connect has to be enabled)
+    #        g_date_format STRING                              #Datetime format. i.e.  "%d/%m/%Y %H:%M"
+    #        g_image_dest STRING                               #Webserver destination for image payloads. i.e. "Webservice_1" (Not used as of yet)
+    #        g_ws_end_point STRING,                            #The webservice end point. 
+    #        g_enable_timed_image_upload SMALLINT,             #Enable timed image queue uploads (Could have a performance impact!)
+    #        g_local_images_available DYNAMIC ARRAY OF CHAR(2) #Available localisations for images.
+    #        g_default_language STRING,                        #The default language used within the application (i.e. EN)
     # Here are globals not included in initialize_globals function due to sheer size of the arguement data...
-    #        g_client_key STRING,                  #Unique Client key for webservice purposes
+    #        g_client_key STRING,                              #Unique Client key for webservice purposes
 
+        #List the localisations availble for images and wc here so we can change the images depending on locale...
+        LET m_local_images_available[1] = "EN"
+        LET m_local_images_available[2] = "FR"
+        
         CALL initialize_globals(1,                                  #g_application_database_ver INTEGER
                                 TRUE,                               #g_enable_splash SMALLINT
                                 5,                                  #g_splash_duration INTEGER
@@ -134,7 +142,9 @@ FUNCTION initialise_app()
                                 "%d/%m/%Y %H:%M",                   #g_date_format STRING
                                 "webserver1",                       #g_image_dest STRING  
                                 "http://www.ryanhamlin.co.uk/ws",   #g_ws_end_point STRING
-                                TRUE)                               #g_enable_timed_image_upload SMALLINT
+                                TRUE,                               #g_enable_timed_image_upload SMALLINT
+                                "EN",                               #g_default_language CHAR(2)
+                                m_local_images_available)           #g_local_images_available DYNAMIC ARRAY OF CHAR(2)
             RETURNING m_ok
             
         LET g_client_key = "znbi58mCGZXSBNkJ5GouFuKPLqByReHvtrGj7aXXuJmHGFr89Xp7uCqDcVCv"      #g_client_key STRING
@@ -296,6 +306,11 @@ FUNCTION login_screen() #Local Login window function
     THEN
         CALL m_dom_node1.setAttribute("stretch","both")
     END IF
+
+    #Set the login screen image to the corresponding language loaded
+    CALL set_localised_image("splash")
+        RETURNING m_image
+    CALL m_dom_node1.setAttribute("image",m_image)
 
     INPUT m_username, m_password, m_remember FROM username, password, remember ATTRIBUTE(UNBUFFERED)
 

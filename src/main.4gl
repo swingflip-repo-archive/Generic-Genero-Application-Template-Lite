@@ -45,6 +45,10 @@ FUNCTION load_localisation(f_locale, f_pre_window) #This auto loads the user's l
     #Check if we have the locale.42s folder, if not then revert to defaults. 
     #If load_localisation() is called before window then f_pre_window = false else we need to reload current window
 
+    LET f_string_buffer = base.StringBuffer.create()
+    CALL f_string_buffer.append(f_locale)
+    LET g_language_short = f_string_buffer.subString(1,2)
+
     IF os.Path.exists(os.Path.join(base.Application.getProgramDir(), f_locale)) #i.e. en_GB or en_US
     THEN
         LET g_language = f_locale
@@ -52,8 +56,6 @@ FUNCTION load_localisation(f_locale, f_pre_window) #This auto loads the user's l
         CALL base.Application.reloadResources(f_localisation_path)
         LET f_require_reload = TRUE
     ELSE
-        LET f_string_buffer = base.StringBuffer.create()
-        CALL f_string_buffer.append(f_locale)
         LET f_locale = f_string_buffer.subString(1,2)
         IF os.Path.exists(os.Path.join(base.Application.getProgramDir(), f_locale)) #i.e. en or fr or de
         THEN
