@@ -20,8 +20,6 @@ var banner_image
 var loading_string
 var powered_by_string
 
-setLocale("FR");
-
 function setLocale(lang_short_code) {
   lang = lang_short_code;
   //lang = JSON.stringify(lang_short_code);
@@ -38,27 +36,33 @@ function setLocale(lang_short_code) {
   }
   document.write
   (" \
-    <!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"> \
-    <html style=\"width: 100%; height: 100%; background-color:#FFFFFF;\"> \
-      <head> \
-          <meta content=\"text/html; charset=UTF-8\" http-equiv=\"content-type\"> \
-          <title></title> \
-          <link rel=\"stylesheet\" type=\"text/css\" href=\"splash.css\" /> \
-      </head> \
-      <body> \
-        <div style=\"display:table; height:100%; width:100%;\"> \
-          <div style=\"display:table-cell;vertical-align:middle; width:100%; text-align:center;\"> \
-            <div style=\"margin-left:auto;margin-right:auto;\"> \
-                <img src=\"" + banner_image + "\" width=\"75%\" /><br /> \
-                <h1 style=\"font-size: 200%;\">" + powered_by_string + "</h1> \
-                <img src=\"genero.png\" width=\"40%\" /><br /><br /> \
-                <h1 style=\"font-size: 250%;\">" + loading_string + "</h1><br /> \
-                <img src=\"box.gif\" /><br /> \
-            </div> \
-          </div> \
+    <div style=\"display:table; height:100%; width:100%;\"> \
+      <div style=\"display:table-cell;vertical-align:middle; width:100%; text-align:center;\"> \
+        <div style=\"margin-left:auto;margin-right:auto;\"> \
+            <img src=\"" + banner_image + "\" width=\"75%\" /><br /> \
+            <h1 style=\"font-size: 200%;\">" + powered_by_string + "</h1> \
+            <img src=\"genero.png\" width=\"40%\" /><br /><br /> \
+            <h1 style=\"font-size: 250%;\">" + loading_string + "</h1><br /> \
+            <img src=\"box.gif\" /><br /> \
         </div> \
-      </body> \
-    </html> \
+      </div> \
+    </div> \
   ")
+  /* I have to include the stylesheet into the document.write again to get it to pull the CSS. I only need to do this in QT webkit. 
+  document.write
+  (" <link rel=\"stylesheet\" type=\"text/css\" href=\"splash.css\" /> \
+    <div style=\"display:table; height:100%; width:100%;\"> \
+      <div style=\"display:table-cell;vertical-align:middle; width:100%; text-align:center;\"> \
+        <div style=\"margin-left:auto;margin-right:auto;\"> \
+            <img src=\"" + banner_image + "\" width=\"75%\" /><br /> \
+            <h1 style=\"font-size: 200%;\">" + powered_by_string + "</h1> \
+            <img src=\"genero.png\" width=\"40%\" /><br /><br /> \
+            <h1 style=\"font-size: 250%;\">" + loading_string + "</h1><br /> \
+            <img src=\"box.gif\" /><br /> \
+        </div> \
+      </div> \
+    </div> \
+  ")
+  */
   return "OK";
 }
