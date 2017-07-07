@@ -207,12 +207,23 @@ END FUNCTION
 
 FUNCTION run_splash_screen() #Application Splashscreen window function
 
+    DEFINE
+        f_result STRING
+        
     IF m_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "splash_screen"
     ELSE
         OPEN WINDOW w WITH FORM "splash_screen"
     END IF
+
+    INITIALIZE f_result TO NULL
+    TRY 
+      CALL ui.Interface.frontCall("webcomponent","call",["formonly.splashwc","setLocale",g_language_short],[f_result])
+    CATCH
+      ERROR err_get(status)
+      DISPLAY err_get(status)
+    END TRY
     
     LET TERMINATE = FALSE
     INITIALIZE m_instruction TO NULL
