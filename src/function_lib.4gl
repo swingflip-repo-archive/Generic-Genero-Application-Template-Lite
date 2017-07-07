@@ -551,7 +551,7 @@ FUNCTION set_localised_image(f_image)
     ELSE
         IF g_local_images_available.search("",g_language_short.toUpperCase())
         THEN
-            RETURN f_image || "_" || g_language_short #Localisation found. Return localised image
+            RETURN f_image || "_" || g_language_short.toLowerCase() #Localisation found. Return localised image
         END IF
     END IF
     

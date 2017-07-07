@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Schema gstVersion="30a03" id="{cdb2e35d-d3dd-40c2-9dc4-54b36544b08d}" version="4.0">
+  <AGSettings version="1.1">
+    <DynamicProperties version="2">
+      <DynamicProperty description="Associated label when generating form" initialValue="" isDefaultInherited="false" isHidden="false" label="Label" name="label" readOnly="false" type="TEXT"/>
+      <DynamicProperty description="Associated widget" editorInfo="contains:ButtonEdit|CheckBox|ComboBox|DateEdit|DateTimeEdit|Edit|FFImage|FFLabel|Field|Phantom|ProgressBar|RadioGroup|Slider|SpinEdit|TextEdit|TimeEdit" initialValue="Edit" isDefaultInherited="false" isHidden="false" label="Widget" name="widget" readOnly="false" type="ENUM"/>
+      <DynamicPropertyGroup collapsed="false" description="Formfied properties" label="Formfield" name="formfieldGroup" properties="label;widget"/>
+    </DynamicProperties>
+    <NodeInfos version="1">
+      <NodeInfo mimeType="db/column" properties="widget;label"/>
+    </NodeInfos>
+  </AGSettings>
+  <ExtractionSettings/>
+  <Table active="true" name="local_accounts" status="U" uuid="db/table26">
+    <Column fglLength="4" fglType="2" name="l_u_index" notNull="true" order="1" status="U" uuid="db/column161"/>
+    <Column fglLength="255" fglType="201" name="username" notNull="true" order="2" status="U" uuid="db/column163"/>
+    <Column fglLength="255" fglType="201" name="password" notNull="true" order="3" status="U" uuid="db/column165"/>
+    <Column fglLength="255" fglType="201" name="email" notNull="false" order="4" status="U" uuid="db/column167"/>
+    <Column fglLength="4" fglType="2" name="phone" notNull="false" order="5" status="U" uuid="db/column169"/>
+    <Column fglLength="3594" fglType="10" name="last_login" notNull="false" order="6" status="U" uuid="db/column171"/>
+    <Column fglLength="5" fglType="201" name="user_type" notNull="false" order="7" status="U" uuid="db/column173"/>
+  </Table>
+  <Table active="true" name="local_remember" status="U" uuid="db/table28">
+    <Column fglLength="4" fglType="2" name="l_r_index" notNull="true" order="1" status="U" uuid="db/column175"/>
+    <Column fglLength="255" fglType="201" name="username" notNull="false" order="2" status="U" uuid="db/column177"/>
+    <Column fglLength="2" fglType="1" name="remember" notNull="true" order="3" status="U" uuid="db/column179"/>
+    <Column fglLength="3594" fglType="10" name="last_modified" notNull="false" order="4" status="U" uuid="db/column181"/>
+  </Table>
+  <Table active="true" name="local_stat" status="U" uuid="db/table30">
+    <Column fglLength="4" fglType="2" name="l_s_index" notNull="true" order="1" status="U" uuid="db/column183"/>
+    <Column fglLength="255" fglType="201" name="deployment_type" notNull="true" order="2" status="U" uuid="db/column185"/>
+    <Column fglLength="255" fglType="201" name="os_type" notNull="true" order="3" status="U" uuid="db/column187"/>
+    <Column fglLength="255" fglType="201" name="ip" notNull="false" order="4" status="U" uuid="db/column189"/>
+    <Column fglLength="255" fglType="201" name="device_name" notNull="false" order="5" status="U" uuid="db/column191"/>
+    <Column fglLength="255" fglType="201" name="resolution" notNull="false" order="6" status="U" uuid="db/column193"/>
+    <Column fglLength="255" fglType="201" name="geo_location" notNull="false" order="7" status="U" uuid="db/column195"/>
+    <Column fglLength="3594" fglType="10" name="last_load" notNull="true" order="8" status="U" uuid="db/column197"/>
+  </Table>
+  <Table active="true" name="payload_queue" status="U" uuid="db/table32">
+    <Column fglLength="4" fglType="2" name="p_q_index" notNull="true" order="1" status="U" uuid="db/column199"/>
+    <Column fglLength="255" fglType="201" name="requested_by" notNull="true" order="2" status="U" uuid="db/column201"/>
+    <Column fglLength="3594" fglType="10" name="requested_date" notNull="true" order="3" status="U" uuid="db/column203"/>
+    <Column fglLength="3594" fglType="10" name="last_attempted" notNull="false" order="4" status="U" uuid="db/column205"/>
+    <Column fglLength="255" fglType="201" name="destination" notNull="true" order="5" status="U" uuid="db/column207"/>
+    <Column fglLength="64" fglType="201" name="payload_type" notNull="true" order="6" status="U" uuid="db/column209"/>
+    <Column fglLength="56" fglType="11" name="payload" notNull="true" order="7" status="U" uuid="db/column211"/>
+  </Table>
+  <Views ActiveView="View-1" showLabels="true">
+    <View Name="View-1">
+      <Layout>
+        <![CDATA[AAAAAgAAABQAZABiAC8AdABhAGIAbABlADMAMkCMIAAAAAAAQDQAAAAAAAAAAAAAAAAAAAEAAAAUAGQAYgAvAHQAYQBiAGwAZQAyADhAcsAAAAAAAEA0AAAAAAAAAAAAAAAAAAABAAAAFABkAGIALwB0AGEAYgBsAGUAMwAwQILAAAAAAABANAAAAAAAAAAAAAAAAAAAAQAAABQAZABiAC8AdABhAGIAbABlADIANgAAAAAAAAAAQDQAAAAAAAAAAAAAAAAAAAE=]]>
+      </Layout>
+    </View>
+  </Views>
+</Schema>

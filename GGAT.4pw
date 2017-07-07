@@ -128,8 +128,8 @@
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
   </Group>
-  <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,dirlist:DBPATH=$(ProjectDir)/database;$(DBPATH)" label="Project" language="Genero">
-    <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" environment="dirlist:FGLIMAGEPATH=$(ProjectDir)/images/my_image2font.txt;$(ProjectDir)/images;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);.." id="400358049" label="Application">
+  <Group environment="value:FGLIMAGEPATH=$(ProjectDir)\\images\\my_image2font.txt;$(ProjectDir)\\images;$(FGLDIR)\\lib\\image2font.txt;$(FGLIMAGEPATH);..,filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,dirlist:DBPATH=$(ProjectDir)/database;$(DBPATH)" label="Project" language="Genero">
+    <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" id="400358049" label="Application">
       <VirtualFolder label="Forms">
         <File filePath="src/admin.per"/>
         <File filePath="src/admin_gdc.per"/>
@@ -152,7 +152,7 @@
       <File filePath="config/fglprofile"/>
     </Library>
     <Library binaryName="Database" id="455109296" label="Database">
-      <File filePath="database/local_db.4dbx"/>
+      <File filePath="database/local_db.4db"/>
       <File filePath="database/local_db.db"/>
     </Library>
     <Library binaryName="Library" dependencies="455109296" id="212784684" label="Library">
@@ -197,6 +197,10 @@
         <File filePath="webcomponents/gm/gm.html"/>
         <File filePath="webcomponents/gm/gm.js"/>
       </VirtualFolder>
+      <VirtualFolder label="signature">
+        <File filePath="webcomponents/signature/signature.html"/>
+        <File filePath="webcomponents/signature/signature.js"/>
+      </VirtualFolder>
       <VirtualFolder label="splash">
         <File filePath="webcomponents/splash/splash.html"/>
         <File filePath="webcomponents/splash/splash.js"/>
@@ -205,10 +209,6 @@
         <File filePath="webcomponents/video/video.html"/>
         <File filePath="webcomponents/video/video.js"/>
       </VirtualFolder>
-      <SourceDirectory label="signature">
-        <File filePath="webcomponents/signature/signature.html"/>
-        <File filePath="webcomponents/signature/signature.js"/>
-      </SourceDirectory>
     </Library>
   </Group>
   <Group label="ToolBox" language="Genero" targetDirectory="$(ProjectDir)/toolbin">
