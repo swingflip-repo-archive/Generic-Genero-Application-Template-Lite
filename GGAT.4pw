@@ -86,7 +86,7 @@
       <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="fglprofile" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
-      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
+      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin/bin/" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
       <Directory destinationDirectory="$(ProjectDir)/bin" includedFiles="*.xcf" label="GAS_Files" sourceDirectory="$(ProjectDir)/gas"/>
       <Directory description="Images" destinationDirectory="$(ProjectDir)/bin/bin/images" includedFiles="*.png,*.jpg,*.ttf,my_image2font.txt" label="Images" sourceDirectory="$(ProjectDir)/images"/>
       <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
