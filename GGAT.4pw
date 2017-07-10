@@ -81,6 +81,22 @@
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
+    <Package binaryName="GGAT_GAR" description="GAR Package" label="GGAT_GAR" platform="Genero Application Server">
+      <DynamicProperty name="packageId" value="GGAT"/>
+      <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
+      <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
+      <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="fglprofile" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
+      <Directory description="Database" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin" includedFiles="*.xcf" label="GAS_Files" sourceDirectory="$(ProjectDir)/gas"/>
+      <Directory description="Images" destinationDirectory="$(ProjectDir)/bin/bin/images" includedFiles="*.png,*.jpg,*.ttf,my_image2font.txt" label="Images" sourceDirectory="$(ProjectDir)/images"/>
+      <Directory description="Template Library" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="*.42?" label="libdbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/bin"/>
+      <Directory description="Studio Library" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="*.42?" label="libgst" recursive="false" sourceDirectory="$(GSTLIBRARYDIR)/bin"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/bin/defaults" includedFiles="*.42s" label="Localisation_Defaults" sourceDirectory="$(ProjectDir)/bin/defaults"/>
+      <Directory destinationDirectory="$(ProjectDir)/bin/bin/fr" includedFiles="*.42s" label="Localisation_FR" sourceDirectory="$(ProjectDir)/bin/fr"/>
+      <Directory description="Resources" destinationDirectory="$(ProjectDir)/bin/bin/resources" includedFiles="*.4ad,*.4st,*.42s" label="Resources" recursive="false" sourceDirectory="$(ProjectDir)/resources"/>
+      <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
+      <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
+    </Package>
     <Package binaryName="GGAT_iOS" dependencies="400358049,781919164,715422167,313644474" description="iOS Package" label="GGAT_iOS" platform="iOS">
       <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
       <DynamicProperty name="gma-actionbar-color" value="#5f5f5f"/>
@@ -154,6 +170,9 @@
     <Library binaryName="Database" id="455109296" label="Database">
       <File filePath="database/local_db.4db"/>
       <File filePath="database/local_db.db"/>
+    </Library>
+    <Library binaryName="GAS Files" id="391034" label="GAS Files">
+      <File filePath="gas/GGAT.xcf"/>
     </Library>
     <Library binaryName="Library" dependencies="455109296" id="212784684" label="Library">
       <File filePath="src/database_funcs.4gl"/>

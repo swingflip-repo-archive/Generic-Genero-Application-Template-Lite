@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<APPLICATION xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Parent="defaultwa" xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gas/3.00/cfextwa.xsd">
+  <RESOURCE Id="res.ver" Source="INTERNAL">fgl3.10.06</RESOURCE>
+  <RESOURCE Id="res.gre" Source="INTERNAL">C:/GENERO/gre</RESOURCE>
+  <RESOURCE Id="res.path.GGAT" Source="INTERNAL">$(res.deployment.path)</RESOURCE>
+  <EXECUTION>
+    <ENVIRONMENT_VARIABLE Id="FGLPROFILE">$(res.path.GGAT)/bin/fglprofile</ENVIRONMENT_VARIABLE>
+    <ENVIRONMENT_VARIABLE Id="FGLRESOURCEPATH">$(res.path.GGAT)/resources;$(res.path.GGAT)</ENVIRONMENT_VARIABLE>
+    <ENVIRONMENT_VARIABLE Id="FGLIMAGEPATH">$(res.path.GGAT)/images/my_image2font.txt;$(res.path.GGAT)/images;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);..</ENVIRONMENT_VARIABLE>
+    <ENVIRONMENT_VARIABLE Id="GREDIR">$(res.gre)</ENVIRONMENT_VARIABLE>
+    <ENVIRONMENT_VARIABLE Id="FGLLDPATH">$(res.gre)/lib</ENVIRONMENT_VARIABLE>
+    <ENVIRONMENT_VARIABLE Id="DBPATH">$(res.path.GGAT)/database;$(DBPATH)</ENVIRONMENT_VARIABLE>
+    <!--<ENVIRONMENT_VARIABLE Id="LANG">.fglutf-8</ENVIRONMENT_VARIABLE>-->
+    <PATH>$(res.path.GGAT)/bin</PATH>
+    <MODULE>Application.42r</MODULE>
+    <WEB_COMPONENT_DIRECTORY>$(res.path.GGAT)/webcomponents</WEB_COMPONENT_DIRECTORY>
+  </EXECUTION>
+</APPLICATION>
