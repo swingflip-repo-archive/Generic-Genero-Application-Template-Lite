@@ -26,7 +26,7 @@ MAIN
 
     LET g_language = m_info.locale
     
-    CALL load_localisation("FR",FALSE)
+    CALL load_localisation(m_info.locale,FALSE)
         RETURNING m_require_app_reload #Not needed yet, but will useful when we can change strings runtime properly.
 
     CALL initialise_app()
