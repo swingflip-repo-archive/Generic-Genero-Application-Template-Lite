@@ -218,7 +218,6 @@
       </VirtualFolder>
       <VirtualFolder label="signature">
         <File filePath="webcomponents/signature/signature.html"/>
-        <File filePath="webcomponents/signature/signature.js"/>
       </VirtualFolder>
       <VirtualFolder label="splash">
         <File filePath="webcomponents/splash/splash.html"/>
@@ -228,6 +227,7 @@
         <File filePath="webcomponents/video/video.html"/>
         <File filePath="webcomponents/video/video.js"/>
       </VirtualFolder>
+      <File filePath="webcomponents/signature/signature.js"/>
     </Library>
   </Group>
   <Group label="ToolBox" language="Genero" targetDirectory="$(ProjectDir)/toolbin">
