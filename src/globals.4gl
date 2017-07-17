@@ -50,13 +50,28 @@ GLOBALS
     #Global variables used within the application,
     #These variables contain useful data used during runtime, these variables aren't used for app configuration...
     DEFINE
+        g_title STRING,                        #Concatenated application title string
         g_online STRING,                       #BOOLEAN to determine if the application is online or offline
         g_user STRING,                         #Username of the user currently logged in
         g_user_type STRING,                    #User type currently logged in
         g_logged_in DATETIME YEAR TO SECOND,   #When the current user logged in to the system
         g_OK_uploads INTEGER,                  #Number of successful uploads just carried out
-        g_FAILED_uploads INTEGER,              #Number of failed uploads just carried out,
+        g_FAILED_uploads INTEGER,              #Number of failed uploads just carried out
         g_language STRING,                     #Current user's selected language
-        g_language_short STRING                #The two character language code i.e. en instead of en_GB
+        g_language_short STRING,               #The two character language code i.e. en instead of en_GB
+        g_instruction STRING,                  #This is used to swap between windows and forms
+        g_info RECORD                          #Used to store information regarding client deployment
+            deployment_type STRING,
+            os_type STRING,
+            ip STRING,
+            device_name STRING,
+            resolution STRING,
+            resolution_x STRING,
+            resolution_y STRING,
+            geo_status STRING,
+            geo_lat STRING,
+            geo_lon STRING,
+            locale STRING
+        END RECORD
     
 END GLOBALS

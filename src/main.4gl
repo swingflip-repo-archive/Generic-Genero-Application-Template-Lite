@@ -14,19 +14,16 @@ GLOBALS "globals.4gl"
         
         
     DEFINE
-        m_info RECORD
-            locale STRING
-        END RECORD,
         m_require_app_reload SMALLINT
     
 MAIN
 #******************************************************************************# 
     #Detect user's locale and set language accordingly depending on available language packs.
-    CALL ui.Interface.frontCall("standard", "feInfo", "userPreferredLang", m_info.locale)
+    CALL ui.Interface.frontCall("standard", "feInfo", "userPreferredLang", g_info.locale)
 
-    LET g_language = m_info.locale
+    LET g_language = g_info.locale
     
-    CALL load_localisation(m_info.locale,FALSE)
+    CALL load_localisation(g_info.locale,FALSE)
         RETURNING m_require_app_reload #Not needed yet, but will useful when we can change strings runtime properly.
 
     CALL initialise_app()
