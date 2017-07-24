@@ -158,12 +158,15 @@
         <File filePath="src/photo.per"/>
         <File filePath="src/splash_screen.per"/>
         <File filePath="src/tool_check_password.per"/>
+        <File filePath="src/tool_hash_generator.per"/>
         <File filePath="src/wc_google_maps.per"/>
         <File filePath="src/wc_signature.per"/>
         <File filePath="src/wc_video.per"/>
       </VirtualFolder>
+      <File filePath="src/application_demo.4gl"/>
       <File filePath="src/application_main.4gl"/>
       <File filePath="src/application_tools.4gl"/>
+      <File filePath="src/application_wc_demos.4gl"/>
       <File filePath="src/main.4gl"/>
     </Application>
     <Library binaryName="Config" id="362164715" label="Config">
@@ -196,6 +199,7 @@
         <File filePath="src/lang_defaults/main_strings.str"/>
         <File filePath="src/lang_defaults/photo_per.str"/>
         <File filePath="src/lang_defaults/tool_per.str"/>
+        <File filePath="src/lang_defaults/tool_strings.str"/>
       </VirtualFolder>
     </Library>
     <Library binaryName="Localisation Files (fr)" id="332504730" label="Localisation Files (fr)" targetDirectory="$(ProjectDir)/bin/fr">
@@ -208,6 +212,7 @@
         <File filePath="src/lang_fr/main_strings.str"/>
         <File filePath="src/lang_fr/photo_per.str"/>
         <File filePath="src/lang_fr/tool_per.str"/>
+        <File filePath="src/lang_fr/tool_strings.str"/>
       </VirtualFolder>
     </Library>
     <Library binaryName="Resources" id="159917928" label="Resources">
@@ -246,9 +251,6 @@
     </Application>
     <Application binaryName="DB_ReSync" dependencies="212784684,250541541,455109296" id="147366400" label="DB_ReSync">
       <File filePath="toolsrc/database_resync.4gl"/>
-    </Application>
-    <Application binaryName="HashGenerator" dependencies="212784684,455109296,250541541" id="12983004" label="HashGenerator">
-      <File filePath="toolsrc/hash_generator.4gl"/>
     </Application>
     <Application binaryName="StringExtractor" dependencies="212784684,455109296,250541541" id="95621097" label="StringExtractor">
       <File filePath="toolsrc/string_extract.4gl"/>

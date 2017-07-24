@@ -3,3 +3,5 @@
 "tool.per.Password" = "Password"
 "tool.per.Submit" = "Submit"
 "tool.per.Go_Back" = "Go Back"
+"tool.per.Hash_Generator" = "Hash Generator Tool"
+"tool.per.Plain_String" = "Plain text string"

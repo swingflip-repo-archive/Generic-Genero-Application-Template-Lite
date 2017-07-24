@@ -4,9 +4,7 @@
 #
 #This is the application launcher. We need to detect locale seperately from the
 #main application otherwise we will automatically load the default localisation
-#strings for main.4gl. If we loaded directly into the application, main.4gl will
-#always use the default (en) version of the strings. This is an oversight on Genero's
-#behalf that hopefully won't be an issue in the future...
+#strings for main.4gl.
 ################################################################################
 IMPORT os
 IMPORT util
@@ -23,7 +21,7 @@ MAIN
 
     LET g_language = g_info.locale
     
-    CALL load_localisation(g_info.locale,FALSE)
+    CALL load_localisation("FR",FALSE)
         RETURNING m_require_app_reload #Not needed yet, but will useful when we can change strings runtime properly.
 
     CALL initialise_app()
