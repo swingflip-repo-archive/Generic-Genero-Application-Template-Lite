@@ -1,10 +1,9 @@
-IMPORT OS
+IMPORT SECURITY
+IMPORT com
+IMPORT util
+IMPORT os
+GLOBALS "globals.4gl"
 
-{
-  db_create_tables
-
-  Create all tables in database.
-}
 FUNCTION db_create_tables()
     WHENEVER ERROR CONTINUE
 
@@ -55,12 +54,10 @@ FUNCTION db_create_tables()
 
     WHENEVER ERROR STOP
 END FUNCTION
-
-{
-  db_create_defaults
-
-  Create default values which should be existent in every new deployment
-}
+#
+#
+#
+#
 FUNCTION db_create_defaults()
     WHENEVER ERROR CONTINUE
 
@@ -69,12 +66,10 @@ FUNCTION db_create_defaults()
     
     WHENEVER ERROR STOP
 END FUNCTION
-
-{
-  db_drop_tables
-
-  Drop all tables from database.
-}
+#
+#
+#
+#
 FUNCTION db_drop_tables()
     WHENEVER ERROR CONTINUE
 
@@ -85,12 +80,10 @@ FUNCTION db_drop_tables()
     
     WHENEVER ERROR STOP
 END FUNCTION
-
-{
-  db_resync
-
-  Delete working database and copy over fresh database. (Obviously use with caution!)
-}
+#
+#
+#
+#
 FUNCTION db_resync(f_dbname)
     DEFINE
         f_dbname STRING,
@@ -108,4 +101,124 @@ FUNCTION db_resync(f_dbname)
             EXIT PROGRAM 9999
         END IF
         
+END FUNCTION
+#
+#
+#
+#
+FUNCTION openDB(f_dbname,f_debug)
+
+    DEFINE 
+        f_dbname STRING,
+        f_dbpath STRING,
+        f_db_dbname STRING,
+        f_msg STRING,
+        f_debug SMALLINT
+
+    LET f_dbpath = os.path.join(os.path.pwd(), f_dbname)
+    LET f_db_dbname = os.path.join("..","database")
+    LET f_db_dbname = os.path.join(base.Application.getProgramDir(),f_db_dbname)
+        
+    IF NOT os.path.exists(f_dbpath) #Check working directory for local_db.db
+    THEN
+        LET f_msg = "db missing, "
+        IF NOT os.path.exists(os.path.join(base.Application.getProgramDir(),f_dbname)) #Check app directory for local_db.db
+        THEN
+            IF NOT os.path.exists(os.path.join(f_db_dbname,f_dbname)) # Check app/../databse for local_db.db
+            THEN
+                #If you get to this point you have done something drastically wrong...
+                DISPLAY "FATAL ERROR: You don't have a database set up! Run the CreateDatabase application within the toolbox!"
+                EXIT PROGRAM 9999
+            ELSE
+                IF os.path.copy(os.path.join(f_db_dbname,f_dbname), f_dbpath)
+                THEN
+                    LET f_msg = f_msg.append("Copied ")
+                ELSE
+                    LET f_msg = f_msg.append("Database Copy failed! ")
+                END IF
+            END IF
+        ELSE
+            IF os.path.copy(os.path.join(base.Application.getProgramDir(),f_dbname), f_dbpath)
+            THEN
+                LET f_msg = f_msg.append("Copied ")
+            ELSE
+                LET f_msg = f_msg.append("Database Copy failed! ")
+            END IF
+        END IF
+    ELSE
+        LET f_msg = "db exists, "
+    END IF
+    TRY
+        DATABASE f_dbpath
+        LET f_msg = f_msg.append("Connected OK")
+        CALL check_database_version(FALSE)
+    CATCH
+        DISPLAY STATUS, f_msg||SQLERRMESSAGE
+    END TRY
+  
+    IF f_debug = TRUE
+    THEN
+        DISPLAY f_msg
+    END IF
+    
+END FUNCTION
+#
+#
+#
+#
+FUNCTION check_database_version (f_debug)
+    DEFINE
+        f_count INTEGER,
+        f_version INTEGER,
+        f_msg STRING,
+        f_debug SMALLINT
+
+    SELECT COUNT(*) INTO f_count FROM database_version WHERE 1 = 1
+
+    IF f_count = 0
+    THEN
+        LET f_msg = "No database version within working db, "
+        WHENEVER ERROR CONTINUE
+            INSERT INTO database_version VALUES(NULL, g_application_database_ver, CURRENT YEAR TO SECOND)
+        WHENEVER ERROR STOP
+
+        IF sqlca.sqlcode <> 0
+        THEN
+            LET f_msg = f_msg.append("Database version insert failed!")
+            DISPLAY "FATAL ERROR: You must have an invalid db version number set in the global config, please fix and try again!"
+            EXIT PROGRAM 9999
+        ELSE
+            LET f_msg = f_msg.append("Database version insert OK!\n")
+        END IF
+    ELSE
+        LET f_msg="Database Version OK,\n"
+    END IF
+
+    SELECT db_version INTO f_version FROM database_version WHERE 1 = 1
+
+    IF f_version != g_application_database_ver
+    THEN
+        LET f_msg = f_msg.append("Database version mismatch! Running db_create_tables()...\n")
+        CALL db_create_tables() #Before this runs, you need to be confident that this function will work the way you want it... You have been warned!
+        WHENEVER ERROR CONTINUE
+            UPDATE database_version SET db_version = g_application_database_ver, last_updated = CURRENT YEAR TO SECOND WHERE 1 = 1
+        WHENEVER ERROR STOP
+
+        IF sqlca.sqlcode <> 0
+        THEN
+            LET f_msg = f_msg.append("Database version update failed!")
+            DISPLAY "FATAL ERROR: DB version update failed, you must have an issue with your database_version table!"
+            EXIT PROGRAM 9999
+        ELSE
+            LET f_msg = f_msg.append("Database version updated OK!\n")
+        END IF
+    ELSE
+        LET f_msg = f_msg.append("Database is up to date!")
+    END IF
+  
+    IF f_debug = TRUE
+    THEN
+        DISPLAY f_msg
+    END IF      
+    
 END FUNCTION

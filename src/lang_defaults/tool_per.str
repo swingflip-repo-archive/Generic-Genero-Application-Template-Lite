@@ -5,3 +5,9 @@
 "tool.per.Go_Back" = "Go Back"
 "tool.per.Hash_Generator" = "Hash Generator Tool"
 "tool.per.Plain_String" = "Plain text string"
+"tool.per.Create_User" = "Create User"
+"tool.per.Confirm_Password" = "Confirm Password"
+"tool.per.User_Type" = "Select User Type"
+"tool.per.Email" = "Email (optional)"
+"tool.per.Telephone" = "Telephone (optional)"
+

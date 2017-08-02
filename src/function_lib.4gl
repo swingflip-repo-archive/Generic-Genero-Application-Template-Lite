@@ -2,6 +2,8 @@ IMPORT SECURITY
 IMPORT com
 IMPORT util
 IMPORT os
+IMPORT JAVA java.util.regex.Pattern
+IMPORT JAVA java.util.regex.Matcher
 GLOBALS "globals.4gl"
 SCHEMA local_db
 #
@@ -459,7 +461,7 @@ FUNCTION upload_image_payload(f_silent)
     DEFINE
         f_soapstatus INTEGER,
         f_soapresponse STRING,
-        f_queue_rec RECORD 
+        f_queue_rec RECORD
             p_q_index LIKE payload_queue.p_q_index,
             requested_by LIKE payload_queue.requested_by,
             requested_date LIKE payload_queue.requested_date,
@@ -562,6 +564,99 @@ END FUNCTION
 #
 #
 #
+FUNCTION validate_input_data(f_input,f_nulls,f_special_characters,f_safe_special_characters,f_numerals,f_letters,f_spaces,f_special_data_type)
+
+    DEFINE
+        f_input STRING,
+        f_nulls SMALLINT,
+        f_special_characters SMALLINT,
+        f_safe_special_characters SMALLINT,
+        f_numerals SMALLINT,
+        f_letters SMALLINT,
+        f_spaces SMALLINT,
+        f_special_data_type STRING
+
+    IF f_nulls = FALSE AND f_input IS NULL
+    THEN
+        RETURN f_input, FALSE, "BAD_NULLS"
+    END IF
+
+    IF f_special_data_type != "EMAIL" AND f_special_data_type != "URL"
+    THEN
+        IF f_special_characters = FALSE AND contains_characters(f_input,"\~\#\$\%\^\&\*\(\)\+\"\{\}\|\<\>\?\-\=\[\]\/")
+        THEN
+            RETURN f_input, FALSE, "BAD_CHARS"
+        END IF
+
+        IF f_safe_special_characters = FALSE AND contains_characters(f_input,"\@\_\,\.\!\'\:\;")
+        THEN
+            RETURN f_input, FALSE, "BAD_CHARS_2"
+        END IF
+
+        IF f_numerals = FALSE AND contains_characters(f_input,"123456789")
+        THEN
+            RETURN f_input, FALSE, "BAD_NUMERALS"
+        END IF
+
+        IF f_letters = FALSE AND contains_characters(f_input,"A-Za-z") #This should include foriegn letters too at some point.
+        THEN
+            RETURN f_input, FALSE, "BAD_LETTERS"
+        END IF
+
+        IF f_spaces = FALSE AND contains_characters(f_input," ")
+        THEN
+            RETURN f_input, FALSE, "BAD_SPACES"
+        END IF
+    END IF 
+    
+    IF f_special_data_type = "EMAIL" AND f_input MATCHES "*@*.*" = FALSE
+    THEN
+        IF contains_characters(f_input,"\S+@\S+\.\S+") = FALSE #A simple email regex to make sure it's somewhat valid
+        THEN
+            RETURN f_input, FALSE, "OK"
+        END IF
+    END IF
+
+    IF f_special_data_type = "URL"
+    THEN
+        LET f_input = util.Strings.urlEncode(f_input) #Encode the data so it's safe and computer friendly
+    END IF   
+
+    RETURN f_input, TRUE, "OK"
+    
+END FUNCTION
+#
+#
+#
+#
+FUNCTION contains_characters(f_string,f_characters) #Returns TRUE or FALSE if string starts, ends or contains f_characters
+
+    DEFINE
+        f_string STRING,
+        f_characters STRING,
+        f_parameter STRING,
+        f_pattern Pattern,
+        f_matcher Matcher,
+        f_ok SMALLINT
+
+    LET f_ok = FALSE
+
+    LET f_parameter = "[" || f_characters || "]" 
+    LET f_pattern = Pattern.compile(f_parameter)
+    LET f_matcher = f_pattern.matcher(f_string)
+
+    IF f_matcher.matches()
+    THEN
+        LET f_ok = TRUE
+    END IF
+
+    RETURN f_ok
+    
+END FUNCTION
+#
+#
+#
+#
 FUNCTION reply_yn(f_default,f_title,f_question)
 
     DEFINE
@@ -582,126 +677,6 @@ FUNCTION reply_yn(f_default,f_title,f_question)
      RETURN f_answer = "yes"
 
 END FUNCTION # reply_yn
-#
-#
-#
-#
-FUNCTION openDB(f_dbname,f_debug)
-
-    DEFINE 
-        f_dbname STRING,
-        f_dbpath STRING,
-        f_db_dbname STRING,
-        f_msg STRING,
-        f_debug SMALLINT
-
-    LET f_dbpath = os.path.join(os.path.pwd(), f_dbname)
-    LET f_db_dbname = os.path.join("..","database")
-    LET f_db_dbname = os.path.join(base.Application.getProgramDir(),f_db_dbname)
-        
-    IF NOT os.path.exists(f_dbpath) #Check working directory for local_db.db
-    THEN
-        LET f_msg = "db missing, "
-        IF NOT os.path.exists(os.path.join(base.Application.getProgramDir(),f_dbname)) #Check app directory for local_db.db
-        THEN
-            IF NOT os.path.exists(os.path.join(f_db_dbname,f_dbname)) # Check app/../databse for local_db.db
-            THEN
-                #If you get to this point you have done something drastically wrong...
-                DISPLAY "FATAL ERROR: You don't have a database set up! Run the CreateDatabase application within the toolbox!"
-                EXIT PROGRAM 9999
-            ELSE
-                IF os.path.copy(os.path.join(f_db_dbname,f_dbname), f_dbpath)
-                THEN
-                    LET f_msg = f_msg.append("Copied ")
-                ELSE
-                    LET f_msg = f_msg.append("Database Copy failed! ")
-                END IF
-            END IF
-        ELSE
-            IF os.path.copy(os.path.join(base.Application.getProgramDir(),f_dbname), f_dbpath)
-            THEN
-                LET f_msg = f_msg.append("Copied ")
-            ELSE
-                LET f_msg = f_msg.append("Database Copy failed! ")
-            END IF
-        END IF
-    ELSE
-        LET f_msg = "db exists, "
-    END IF
-    TRY
-        DATABASE f_dbpath
-        LET f_msg = f_msg.append("Connected OK")
-        CALL check_database_version(FALSE)
-    CATCH
-        DISPLAY STATUS, f_msg||SQLERRMESSAGE
-    END TRY
-  
-    IF f_debug = TRUE
-    THEN
-        DISPLAY f_msg
-    END IF
-    
-END FUNCTION
-#
-#
-#
-#
-FUNCTION check_database_version (f_debug)
-    DEFINE
-        f_count INTEGER,
-        f_version INTEGER,
-        f_msg STRING,
-        f_debug SMALLINT
-
-    SELECT COUNT(*) INTO f_count FROM database_version WHERE 1 = 1
-
-    IF f_count = 0
-    THEN
-        LET f_msg = "No database version within working db, "
-        WHENEVER ERROR CONTINUE
-            INSERT INTO database_version VALUES(NULL, g_application_database_ver, CURRENT YEAR TO SECOND)
-        WHENEVER ERROR STOP
-
-        IF sqlca.sqlcode <> 0
-        THEN
-            LET f_msg = f_msg.append("Database version insert failed!")
-            DISPLAY "FATAL ERROR: You must have an invalid db version number set in the global config, please fix and try again!"
-            EXIT PROGRAM 9999
-        ELSE
-            LET f_msg = f_msg.append("Database version insert OK!\n")
-        END IF
-    ELSE
-        LET f_msg="Database Version OK,\n"
-    END IF
-
-    SELECT db_version INTO f_version FROM database_version WHERE 1 = 1
-
-    IF f_version != g_application_database_ver
-    THEN
-        LET f_msg = f_msg.append("Database version mismatch! Running db_create_tables()...\n")
-        CALL db_create_tables() #Before this runs, you need to be confident that this function will work the way you want it... You have been warned!
-        WHENEVER ERROR CONTINUE
-            UPDATE database_version SET db_version = g_application_database_ver, last_updated = CURRENT YEAR TO SECOND WHERE 1 = 1
-        WHENEVER ERROR STOP
-
-        IF sqlca.sqlcode <> 0
-        THEN
-            LET f_msg = f_msg.append("Database version update failed!")
-            DISPLAY "FATAL ERROR: DB version update failed, you must have an issue with your database_version table!"
-            EXIT PROGRAM 9999
-        ELSE
-            LET f_msg = f_msg.append("Database version updated OK!\n")
-        END IF
-    ELSE
-        LET f_msg = f_msg.append("Database is up to date!")
-    END IF
-  
-    IF f_debug = TRUE
-    THEN
-        DISPLAY f_msg
-    END IF      
-    
-END FUNCTION
 #
 #
 #

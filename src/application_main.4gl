@@ -17,7 +17,8 @@ GLOBALS "globals.4gl"
         m_form ui.Form,
         m_dom_node1 om.DomNode,
         m_index INTEGER,
-        m_ok SMALLINT
+        m_ok SMALLINT,
+        m_status STRING
         
     DEFINE
         m_username STRING,
@@ -322,7 +323,7 @@ FUNCTION login_screen() #Local Login window function
                 RETURNING m_ok, m_remember, m_username
 
         ON CHANGE username
-            LET m_username = downshift(m_username)
+            LET m_username = m_username.toLowerCase()
             CALL refresh_local_remember(m_username, m_remember)
                 RETURNING m_ok
 
@@ -341,7 +342,20 @@ FUNCTION login_screen() #Local Login window function
             EXIT INPUT
             
         AFTER INPUT
-        
+          #Validate Input
+          CALL validate_input_data(m_username, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE, "") RETURNING m_username, m_ok, m_status 
+          IF m_ok = FALSE
+          THEN
+              CALL fgl_winmessage(" ",%"main.string.Bad_Username","stop")
+              NEXT FIELD username
+          END IF
+          CALL validate_input_data(m_password, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, "") RETURNING m_password, m_ok, m_status 
+          IF m_ok = FALSE
+          THEN
+              CALL fgl_winmessage(" ",%"main.string.Bad_Password","stop")
+              NEXT FIELD password
+          END IF
+          #Check Password
           CALL check_password(m_username,m_password) RETURNING m_ok
           INITIALIZE m_password TO NULL #Clean down the plain text password
           
@@ -548,7 +562,8 @@ FUNCTION admin_tools() #Rough Development Tools window function (Mainly to showc
 
     CASE g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
         WHEN "bt_create"
-            RUN "fglrun ../toolbin/CreateUser.42r"
+            CLOSE WINDOW w
+            CALL create_user()
         WHEN "bt_check"
             CLOSE WINDOW w
             CALL tool_check_password()

@@ -83,6 +83,8 @@ FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Par
 END FUNCTION
 #
 #
+#
+#
 FUNCTION wc_maps_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
 
     DEFINE
@@ -177,6 +179,8 @@ LABEL go_back_wc_maps_demo:
     END CASE
 
 END FUNCTION
+#
+#
 #
 #
 FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)

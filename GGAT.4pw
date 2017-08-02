@@ -147,26 +147,33 @@
   <Group environment="value:FGLIMAGEPATH=$(ProjectDir)\\images\\my_image2font.txt;$(ProjectDir)\\images;$(FGLDIR)\\lib\\image2font.txt;$(FGLIMAGEPATH);..,filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,dirlist:DBPATH=$(ProjectDir)/database;$(DBPATH)" label="Project" language="Genero">
     <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" id="400358049" label="Application">
       <VirtualFolder label="Forms">
-        <File filePath="src/admin.per"/>
-        <File filePath="src/admin_gdc.per"/>
-        <File filePath="src/connection.per"/>
-        <File filePath="src/connection_gdc.per"/>
-        <File filePath="src/interact.per"/>
-        <File filePath="src/interact_gdc.per"/>
-        <File filePath="src/main.per"/>
-        <File filePath="src/main_gdc.per"/>
-        <File filePath="src/photo.per"/>
-        <File filePath="src/splash_screen.per"/>
-        <File filePath="src/tool_check_password.per"/>
-        <File filePath="src/tool_hash_generator.per"/>
-        <File filePath="src/wc_google_maps.per"/>
-        <File filePath="src/wc_signature.per"/>
-        <File filePath="src/wc_video.per"/>
+        <VirtualFolder label="General Forms">
+          <File filePath="src/admin.per"/>
+          <File filePath="src/admin_gdc.per"/>
+          <File filePath="src/connection.per"/>
+          <File filePath="src/connection_gdc.per"/>
+          <File filePath="src/interact.per"/>
+          <File filePath="src/interact_gdc.per"/>
+          <File filePath="src/main.per"/>
+          <File filePath="src/main_gdc.per"/>
+          <File filePath="src/photo.per"/>
+          <File filePath="src/splash_screen.per"/>
+        </VirtualFolder>
+        <VirtualFolder label="Tool Forms">
+          <File filePath="src/tool_check_password.per"/>
+          <File filePath="src/tool_create_user.per"/>
+          <File filePath="src/tool_hash_generator.per"/>
+        </VirtualFolder>
+        <VirtualFolder label="Web Comp Forms">
+          <File filePath="src/wc_google_maps.per"/>
+          <File filePath="src/wc_signature.per"/>
+          <File filePath="src/wc_video.per"/>
+        </VirtualFolder>
       </VirtualFolder>
-      <File filePath="src/application_demo.4gl"/>
+      <File filePath="src/application_demos.4gl"/>
+      <File filePath="src/application_demos_wc.4gl"/>
       <File filePath="src/application_main.4gl"/>
       <File filePath="src/application_tools.4gl"/>
-      <File filePath="src/application_wc_demos.4gl"/>
       <File filePath="src/main.4gl"/>
     </Application>
     <Library binaryName="Config" id="362164715" label="Config">
@@ -227,6 +234,7 @@
       </VirtualFolder>
       <VirtualFolder label="signature">
         <File filePath="webcomponents/signature/signature.html"/>
+        <File filePath="webcomponents/signature/signature.js"/>
       </VirtualFolder>
       <VirtualFolder label="splash">
         <File filePath="webcomponents/splash/splash.html"/>
@@ -236,18 +244,14 @@
         <File filePath="webcomponents/video/video.html"/>
         <File filePath="webcomponents/video/video.js"/>
       </VirtualFolder>
-      <File filePath="webcomponents/signature/signature.js"/>
     </Library>
   </Group>
-  <Group label="ToolBox" language="Genero" targetDirectory="$(ProjectDir)/toolbin">
+  <Group label="Toolbox" language="Genero" targetDirectory="$(ProjectDir)/toolbin">
     <Library binaryName="____README____" id="685968248" label="____README____">
       <File filePath="toolsrc/Toolbox_Readme_EN.txt"/>
     </Library>
     <Application binaryName="CreateDatabase" dependencies="455109296,212784684,250541541" id="184075814" label="CreateDatabase">
       <File filePath="toolsrc/local_db_sqt_x.4gl"/>
-    </Application>
-    <Application binaryName="CreateUser" dependencies="212784684,455109296,250541541" id="441158400" label="CreateUser">
-      <File filePath="toolsrc/user_generator.4gl"/>
     </Application>
     <Application binaryName="DB_ReSync" dependencies="212784684,250541541,455109296" id="147366400" label="DB_ReSync">
       <File filePath="toolsrc/database_resync.4gl"/>

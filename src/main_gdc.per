@@ -17,9 +17,9 @@ END #VBOX
 END  #LAYOUT
 
 ATTRIBUTES
-IMAGE splash:splash, IMAGE="splash", STYLE="splash", AUTOSCALE;
-EDIT username=FORMONLY.username, COMMENT=%"main.per.Username", JUSTIFY=CENTER;
-EDIT password=FORMONLY.password, INVISIBLE, COMMENT=%"main.per.Password", JUSTIFY=CENTER;
+IMAGE splash:splash, IMAGE="splash", AUTOSCALE;
+EDIT username=FORMONLY.username, PLACEHOLDER=%"main.per.Username", JUSTIFY=CENTER;
+EDIT password=FORMONLY.password, INVISIBLE, PLACEHOLDER=%"main.per.Password", JUSTIFY=CENTER;
 CHECKBOX cb=FORMONLY.remember, NOT NULL, REQUIRED,VALUECHECKED="1", VALUEUNCHECKED="0", TEXT=%"main.per.Remember_Me";
 TEXTEDIT spacer=FORMONLY.spacer, NOENTRY, SCROLLBARS=NONE, SIZEPOLICY=FIXED,STRETCH=BOTH, STYLE="noBorder";
 BUTTON bt_login : bt_login, TEXT=%"main.per.Login";
