@@ -20,5 +20,5 @@
 "tool.string.Password" = "Mot de passe"
 "tool.string.Hashed_Password" = "Mot de passe Hashed"
 "tool.string.User_Type" = "Type d'utilisateur"
-"tool.per.Email" = "Email"
-"tool.per.Telephone" = "Téléphone"
+"tool.string.Email" = "Email"
+"tool.string.Telephone" = "Téléphone"

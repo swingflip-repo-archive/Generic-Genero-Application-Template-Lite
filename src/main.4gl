@@ -17,11 +17,11 @@ GLOBALS "globals.4gl"
 MAIN
 #******************************************************************************# 
     #Detect user's locale and set language accordingly depending on available language packs.
-    CALL ui.Interface.frontCall("standard", "feInfo", "userPreferredLang", g_info.locale)
+    CALL ui.Interface.frontCall("standard", "feInfo", "userPreferredLang", global.g_info.locale)
 
-    LET g_language = g_info.locale
+    LET global.g_language = global.g_info.locale
     
-    CALL load_localisation("FR",FALSE)
+    CALL load_localisation(global.g_info.locale,FALSE)
         RETURNING m_require_app_reload #Not needed yet, but will useful when we can change strings runtime properly.
 
     CALL initialise_app()
@@ -42,20 +42,20 @@ FUNCTION load_localisation(f_locale, f_pre_window) #This auto loads the user's l
 
     LET f_string_buffer = base.StringBuffer.create()
     CALL f_string_buffer.append(f_locale)
-    LET g_language_short = f_string_buffer.subString(1,2)
+    LET global.g_language_short = f_string_buffer.subString(1,2)
 
     IF os.Path.exists(os.Path.join(base.Application.getProgramDir(), f_locale)) #i.e. en_GB or en_US
     THEN
-        LET g_language = f_locale
-        LET f_localisation_path = os.Path.join(base.Application.getProgramDir(), g_language)
+        LET global.g_language = f_locale
+        LET f_localisation_path = os.Path.join(base.Application.getProgramDir(), global.g_language)
         CALL base.Application.reloadResources(f_localisation_path)
         LET f_require_reload = TRUE
     ELSE
         LET f_locale = f_string_buffer.subString(1,2)
         IF os.Path.exists(os.Path.join(base.Application.getProgramDir(), f_locale)) #i.e. en or fr or de
         THEN
-            LET g_language = f_locale
-            LET f_localisation_path = os.Path.join(base.Application.getProgramDir(), g_language)
+            LET global.g_language = f_locale
+            LET f_localisation_path = os.Path.join(base.Application.getProgramDir(), global.g_language)
             CALL base.Application.reloadResources(f_localisation_path)
             LET f_require_reload = TRUE
         END IF

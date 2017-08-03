@@ -178,6 +178,7 @@
     </Application>
     <Library binaryName="Config" id="362164715" label="Config">
       <File filePath="config/fglprofile"/>
+      <File filePath="config/GGAT.config"/>
     </Library>
     <Library binaryName="Database" id="455109296" label="Database">
       <File filePath="database/local_db.4db"/>
@@ -250,13 +251,16 @@
     <Library binaryName="____README____" id="685968248" label="____README____">
       <File filePath="toolsrc/Toolbox_Readme_EN.txt"/>
     </Library>
-    <Application binaryName="CreateDatabase" dependencies="455109296,212784684,250541541" id="184075814" label="CreateDatabase">
+    <Application binaryName="CreateConfigFile" dependencies="362164715,455109296,212784684,332504730,250541541" id="745036968" label="CreateConfigFile">
+      <File filePath="toolsrc/create_config.4gl"/>
+    </Application>
+    <Application binaryName="CreateDatabase" dependencies="455109296,212784684,362164715,332504730,250541541" id="184075814" label="CreateDatabase">
       <File filePath="toolsrc/local_db_sqt_x.4gl"/>
     </Application>
-    <Application binaryName="DB_ReSync" dependencies="212784684,250541541,455109296" id="147366400" label="DB_ReSync">
+    <Application binaryName="DB_ReSync" dependencies="212784684,455109296,362164715,332504730,250541541" id="147366400" label="DB_ReSync">
       <File filePath="toolsrc/database_resync.4gl"/>
     </Application>
-    <Application binaryName="StringExtractor" dependencies="212784684,455109296,250541541" id="95621097" label="StringExtractor">
+    <Application binaryName="StringExtractor" dependencies="212784684,455109296,362164715,332504730,250541541" id="95621097" label="StringExtractor">
       <File filePath="toolsrc/string_extract.4gl"/>
     </Application>
   </Group>

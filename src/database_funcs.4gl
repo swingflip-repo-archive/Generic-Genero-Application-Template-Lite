@@ -179,7 +179,7 @@ FUNCTION check_database_version (f_debug)
     THEN
         LET f_msg = "No database version within working db, "
         WHENEVER ERROR CONTINUE
-            INSERT INTO database_version VALUES(NULL, g_application_database_ver, CURRENT YEAR TO SECOND)
+            INSERT INTO database_version VALUES(NULL, global_config.g_application_database_ver, CURRENT YEAR TO SECOND)
         WHENEVER ERROR STOP
 
         IF sqlca.sqlcode <> 0
@@ -196,12 +196,12 @@ FUNCTION check_database_version (f_debug)
 
     SELECT db_version INTO f_version FROM database_version WHERE 1 = 1
 
-    IF f_version != g_application_database_ver
+    IF f_version != global_config.g_application_database_ver
     THEN
         LET f_msg = f_msg.append("Database version mismatch! Running db_create_tables()...\n")
         CALL db_create_tables() #Before this runs, you need to be confident that this function will work the way you want it... You have been warned!
         WHENEVER ERROR CONTINUE
-            UPDATE database_version SET db_version = g_application_database_ver, last_updated = CURRENT YEAR TO SECOND WHERE 1 = 1
+            UPDATE database_version SET db_version = global_config.g_application_database_ver, last_updated = CURRENT YEAR TO SECOND WHERE 1 = 1
         WHENEVER ERROR STOP
 
         IF sqlca.sqlcode <> 0

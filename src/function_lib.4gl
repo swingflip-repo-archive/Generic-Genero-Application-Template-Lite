@@ -12,16 +12,16 @@ SCHEMA local_db
 #
 FUNCTION generate_about()
 
-    IF g_enable_login = TRUE
+    IF global_config.g_enable_login = TRUE
     THEN
-        LET g_application_about = g_application_title || " " || g_application_version || "\n\n" ||
-                                  %"function.lib.string.Logged_In_As" || g_user || "\n" ||
-                                  %"function.lib.string.User_Type" || g_user_type || "\n" ||
-                                  %"function.lib.string.Logged_In_At" || util.Datetime.format(g_logged_in, g_date_format) || "\n" ||
+        LET global.g_application_about = global.g_application_title || " " || global.g_application_version || "\n\n" ||
+                                  %"function.lib.string.Logged_In_As" || global.g_user || "\n" ||
+                                  %"function.lib.string.User_Type" || global.g_user_type || "\n" ||
+                                  %"function.lib.string.Logged_In_At" || util.Datetime.format(global.g_logged_in, global_config.g_date_format) || "\n" ||
                                   %"function.lib.string.Genero_Version" || FGL_GETVERSION() || "\n\n" || 
                                   %"function.lib.string.About_Explanation"   
     ELSE
-        LET g_application_about = g_application_title || " " || g_application_version || "\n\n" ||
+        LET global.g_application_about = global.g_application_title || " " || global.g_application_version || "\n\n" ||
                                   %"function.lib.string.Genero_Version" || FGL_GETVERSION() || "\n\n" || 
                                   %"function.lib.string.About_Explanation"     
     END IF
@@ -30,54 +30,91 @@ END FUNCTION
 #
 #
 #
-FUNCTION initialize_globals(f_application_database_ver, f_enable_splash, f_splash_duration, f_enable_login,f_splash_w,f_splash_h,f_geo,f_mobile_title,f_local_limit,f_online_ping_URL,
-                            f_enable_timed_connect,f_timed_connect_time,f_date_format,f_image_dest, f_ws_end_point,
-                            f_enable_timed_image_upload, f_default_language, f_local_images_available) #Set up global variables
-    DEFINE
-        f_ok SMALLINT,
-        f_enable_login SMALLINT,
-        f_splash_w STRING,
-        f_splash_h STRING,
-        f_geo SMALLINT,
-        f_mobile_title SMALLINT,
-        f_local_limit INTEGER,
-        f_online_ping_URL STRING,
-        f_enable_timed_connect SMALLINT,
-        f_timed_connect_time INTEGER,
-        f_date_format STRING,
-        f_image_dest STRING,
-        f_enable_timed_image_upload SMALLINT,
-        f_application_database_ver INTEGER,
-        f_enable_splash SMALLINT,
-        f_splash_duration INTEGER,
-        f_ws_end_point STRING,
-        f_default_language CHAR(2),
-        f_local_images_available DYNAMIC ARRAY OF CHAR(2)
+FUNCTION sync_config(f_config_name,f_debug)
 
-    LET f_ok = FALSE
+    DEFINE 
+        f_config_name STRING,
+        f_configpath STRING,
+        f_config_configname STRING,
+        f_msg STRING,
+        f_debug SMALLINT
 
-    LET g_enable_splash = f_enable_splash
-    LET g_splash_duration = f_splash_duration
-    LET g_enable_login = f_enable_login
-    LET g_splash_width = f_splash_w
-    LET g_splash_height = f_splash_h
-    LET g_enable_geolocation = f_geo
-    LET g_enable_mobile_title = f_mobile_title
-    LET g_local_stat_limit = f_local_limit
-    LET g_online_ping_URL = f_online_ping_URL
-    LET g_enable_timed_connect = f_enable_timed_connect
-    LET g_timed_checks_time = f_timed_connect_time
-    LET g_date_format = f_date_format
-    LET g_image_dest = f_image_dest
-    LET g_enable_timed_image_upload = f_enable_timed_image_upload
-    LET g_application_database_ver = f_application_database_ver
-    LET g_ws_end_point = f_ws_end_point
-    LET g_default_language = f_default_language
-    LET g_local_images_available = f_local_images_available
-    
-    LET f_ok = TRUE
+    LET f_configpath = os.path.join(os.path.pwd(), f_config_name)
+    LET f_config_configname = os.path.join("..","config")
+    LET f_config_configname = os.path.join(base.Application.getProgramDir(),f_config_configname)
         
-    RETURN f_ok
+    IF NOT os.path.exists(f_configpath) #Check working directory for GGAT.config
+    THEN
+        LET f_msg = "Config file missing, "
+        IF NOT os.path.exists(os.path.join(base.Application.getProgramDir(),f_config_name)) #Check app directory for GGAT.config
+        THEN
+            IF NOT os.path.exists(os.path.join(f_config_configname,f_config_name)) # Check app/../config for GGAT.config
+            THEN
+                #If you get to this point you have done something drastically wrong...
+                DISPLAY "FATAL ERROR: You don't have a config file set up!"
+                EXIT PROGRAM 9999
+            ELSE
+                IF os.path.copy(os.path.join(f_config_configname,f_config_name), f_configpath)
+                THEN
+                    LET f_msg = f_msg.append("Copied config")
+                ELSE
+                    LET f_msg = f_msg.append("Config copy failed! ")
+                END IF
+            END IF
+        ELSE
+            IF os.path.copy(os.path.join(base.Application.getProgramDir(),f_config_name), f_configpath)
+            THEN
+                LET f_msg = f_msg.append("Copied config")
+            ELSE
+                LET f_msg = f_msg.append("Config copy failed! ")
+            END IF
+        END IF
+    ELSE
+        LET f_msg = "config exists, checking for master config for resync... "
+        IF os.path.exists(os.path.join(f_config_configname,f_config_name)) # Check app/../config for GGAT.config
+        THEN
+            IF os.path.copy(os.path.join(f_config_configname,f_config_name), f_configpath)
+            THEN
+                LET f_msg = f_msg.append("Re-synced the config OK")
+            ELSE
+                LET f_msg = f_msg.append("Config re-sync failed! ")
+            END IF
+        ELSE
+            LET f_msg = f_msg.append(" In production deployment. Contiuning as normal.")
+        END IF
+    END IF
+  
+    IF f_debug = TRUE
+    THEN
+        DISPLAY f_msg
+    END IF
+    
+END FUNCTION
+#
+#
+#
+#
+FUNCTION initialize_globals() #Set up global variables
+
+    DEFINE
+        f_channel base.Channel,
+        f_string_line STRING
+
+    LET f_channel = base.Channel.create()
+    TRY
+        CALL f_channel.openFile(os.path.join(os.path.pwd(),"GGAT.config"),"r")
+    CATCH
+        RETURN FALSE
+    END TRY
+    WHILE NOT f_channel.isEof()
+        LET f_string_line = f_string_line.append( f_channel.readLine() ) 
+    END WHILE
+    CALL f_channel.close() 
+  
+    CALL util.JSON.parse( f_string_line, global_config)
+
+    RETURN TRUE
+    
 END FUNCTION
 #
 #
@@ -90,29 +127,29 @@ FUNCTION print_debug_global_config()
     #FYI, these aren't ALL of the globals. I have only dumped what I believe could be of use...
     LET f_msg = %"function.lib.string.Config_Dump_Text" ||
                 # Current Session Global Variable Values #
-                "g_online = " || g_online || "\n" ||
-                "g_user = " || g_user || "\n" ||
-                "g_user_type = " || g_user_type || "\n" ||
-                "g_logged_in = " || g_logged_in || "\n" ||
-                "g_language = " || g_language || "\n" ||
-                "g_language_short = " || g_language_short || "\n" ||
-                "g_default_language = " || g_default_language || "\n" ||
+                "global.g_online = " || global.g_online || "\n" ||
+                "global.g_user = " || global.g_user || "\n" ||
+                "global.g_user_type = " || global.g_user_type || "\n" ||
+                "global.g_logged_in = " || global.g_logged_in || "\n" ||
+                "global.g_language = " || global.g_language || "\n" ||
+                "global.g_language_short = " || global.g_language_short || "\n" ||
                 # Application Global Variable Values #
-                "g_application_database_ver = " || g_application_database_ver || "\n" ||
-                "g_enable_splash = " || g_enable_splash || "\n" ||
-                "g_splash_duration = " || g_splash_duration || "\n" ||
-                "g_enable_login = " || g_enable_login || "\n" ||
-                "g_splash_width = " || g_splash_width || "\n" ||
-                "g_splash_height = " || g_splash_height || "\n" ||
-                "g_enable_geolocation = " || g_enable_geolocation || "\n" ||
-                "g_enable_mobile_title = " || g_enable_mobile_title || "\n" ||
-                "g_local_stat_limit = " || g_local_stat_limit || "\n" ||
-                "g_online_ping_URL = " || g_online_ping_URL || "\n" ||
-                "g_enable_timed_connect = " || g_enable_timed_connect || "\n" ||
-                "g_timed_checks_time = " || g_timed_checks_time || "\n" ||
-                "g_date_format = " || g_date_format || "\n" ||
-                "g_image_dest = " || g_image_dest || "\n" ||
-                "g_enable_timed_image_upload = " || g_enable_timed_image_upload
+                "global_config.g_default_language = " || global_config.g_default_language || "\n" ||
+                "global_config.g_application_database_ver = " || global_config.g_application_database_ver || "\n" ||
+                "global_config.g_enable_splash = " || global_config.g_enable_splash || "\n" ||
+                "global_config.g_splash_duration = " || global_config.g_splash_duration || "\n" ||
+                "global_config.g_enable_login = " || global_config.g_enable_login || "\n" ||
+                "global_config.g_splash_width = " || global_config.g_splash_width || "\n" ||
+                "global_config.g_splash_height = " || global_config.g_splash_height || "\n" ||
+                "global_config.g_enable_geolocation = " || global_config.g_enable_geolocation || "\n" ||
+                "global_config.g_enable_mobile_title = " || global_config.g_enable_mobile_title || "\n" ||
+                "global_config.g_local_stat_limit = " || global_config.g_local_stat_limit || "\n" ||
+                "global_config.g_online_pinglobal_config.g_URL = " || global_config.g_online_ping_URL || "\n" ||
+                "global_config.g_enable_timed_connect = " || global_config.g_enable_timed_connect || "\n" ||
+                "global_config.g_timed_checks_time = " || global_config.g_timed_checks_time || "\n" ||
+                "global_config.g_date_format = " || global_config.g_date_format || "\n" ||
+                "global_config.g_image_dest = " || global_config.g_image_dest || "\n" ||
+                "global_config.g_enable_timed_image_upload = " || global_config.g_enable_timed_image_upload
     DISPLAY f_msg 
     CALL fgl_winmessage(%"function.lib.string.global_dump",f_msg, "information")
 END FUNCTION
@@ -184,7 +221,6 @@ FUNCTION capture_local_stats(f_info)
     
     LET f_ok = FALSE
     LET f_concat_geo = f_info.geo_lat || "*" || f_info.geo_lon #* is the delimeter.
-
     #WHENEVER ERROR CONTINUE
         INSERT INTO local_stat VALUES(NULL, f_info.deployment_type, f_info.os_type, f_info.ip, f_info.device_name, f_info.resolution,  f_concat_geo, CURRENT YEAR TO SECOND)
     #WHENEVER ERROR STOP
@@ -200,7 +236,7 @@ FUNCTION capture_local_stats(f_info)
     #We don't want the local stat table getting too big so lets clear down old data as we go along...
     SELECT COUNT(*) INTO f_count FROM local_stat
 
-    IF f_count >= g_local_stat_limit
+    IF f_count >= global_config.g_local_stat_limit
     THEN
         WHENEVER ERROR CONTINUE
             DELETE FROM local_stat WHERE l_s_index = (SELECT MIN(l_s_index) FROM local_stat)
@@ -261,9 +297,9 @@ FUNCTION check_password(f_user,f_pass)
     ELSE
         IF Security.BCrypt.CheckPassword(f_pass, hashed_pass) THEN
             LET f_ok = TRUE
-            LET g_user = f_user
-            LET g_user_type = f_user_type
-            LET g_logged_in = CURRENT YEAR TO SECOND
+            LET global.g_user = f_user
+            LET global.g_user_type = f_user_type
+            LET global.g_logged_in = CURRENT YEAR TO SECOND
               
         ELSE
             LET f_ok = FALSE
@@ -352,7 +388,7 @@ FUNCTION test_connectivity(f_deployment_type)
         CALL ui.Interface.frontCall("mobile", "connectivity", [], [f_connectivity])
     ELSE
         TRY
-            LET f_req = com.HttpRequest.Create(g_online_ping_URL)
+            LET f_req = com.HttpRequest.Create(global_config.g_online_ping_URL)
             CALL f_req.setHeader("PingHeader","High Priority")
             CALL f_req.doRequest()
             LET f_resp = f_req.getResponse()
@@ -374,7 +410,7 @@ FUNCTION test_connectivity(f_deployment_type)
         END TRY
     END IF
 
-    LET g_online = f_connectivity
+    LET global.g_online = f_connectivity
 END FUNCTION
 #
 #
@@ -385,15 +421,15 @@ FUNCTION timed_upload_queue_data()
     DEFINE
         f_count INTEGER
 
-    IF g_enable_timed_image_upload = TRUE AND g_online != "NONE"
+    IF global_config.g_enable_timed_image_upload = TRUE AND global.g_online != "NONE"
     THEN
         SELECT COUNT(*) INTO f_count FROM payload_queue WHERE payload_type = 'IMAGE'
         IF f_count != 0
         THEN
             DISPLAY "Uploading images..."
             CALL upload_image_payload(TRUE)
-            #MESSAGE %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed"
-            MESSAGE SFMT(%"function.lib.string.Uploaded",g_OK_uploads,g_FAILED_uploads)
+            #MESSAGE %"function.lib.string.Uploaded" || global.g_OK_uploads || %"function.lib.string.Images_OK" || global.g_FAILED_uploads || %"function.lib.string.Images_Failed"
+            MESSAGE SFMT(%"function.lib.string.Uploaded",global.g_OK_uploads,global.g_FAILED_uploads)
         END IF
     END IF
     
@@ -446,7 +482,7 @@ FUNCTION get_payload_destination(f_type)
 
     CASE f_type
         WHEN "IMAGE"
-            RETURN g_image_dest
+            RETURN global_config.g_image_dest
         OTHERWISE
             RETURN "ERROR" #This will never happen.
     END CASE
@@ -493,7 +529,7 @@ FUNCTION upload_image_payload(f_silent)
             CALL fgl_winmessage(%"function.lib.string.Image_Upload", %"function.lib.string.No_Images_To_Upload", "information")
         END IF
     ELSE
-        CALL ws_funcs_check_service(g_client_key)
+        CALL ws_funcs_check_service(global_config.g_client_key)
             RETURNING f_soapstatus, f_soapresponse
 
         IF f_soapresponse <> "OK"
@@ -506,25 +542,25 @@ FUNCTION upload_image_payload(f_silent)
 
         IF f_soapresponse = "OK"
         THEN
-            LET g_OK_uploads = 0
-            LET g_FAILED_uploads = 0
+            LET global.g_OK_uploads = 0
+            LET global.g_FAILED_uploads = 0
             LET f_index = 1
             FOREACH c1 INTO f_queue_rec.*
                 #DISPLAY f_queue_rec.*
-                CALL ws_funcs_process_image(g_client_key,f_queue_rec.requested_by,f_queue_rec.requested_date,f_queue_rec.payload)
+                CALL ws_funcs_process_image(global_config.g_client_key,f_queue_rec.requested_by,f_queue_rec.requested_date,f_queue_rec.payload)
                     RETURNING f_soapstatus, f_soapresponse
                 IF f_soapresponse = "OK"
                 THEN
                     LET f_audit_rec[f_index].p_q_index = f_queue_rec.p_q_index
                     LET f_audit_rec[f_index].satatus = "OK"
                     LET f_index = f_index + 1
-                    LET g_OK_uploads = g_OK_uploads + 1
+                    LET global.g_OK_uploads = global.g_OK_uploads + 1
                     DELETE FROM payload_queue WHERE p_q_index = f_queue_rec.p_q_index
                 ELSE
                     LET f_audit_rec[f_index].p_q_index = f_queue_rec.p_q_index
                     LET f_audit_rec[f_index].satatus = "FAIL"
                     LET f_index = f_index + 1
-                    LET g_FAILED_uploads = g_FAILED_uploads + 1
+                    LET global.g_FAILED_uploads = global.g_FAILED_uploads + 1
                 END IF
             END FOREACH
             FOR f_index = 1 TO f_audit_rec.getLength()
@@ -532,8 +568,8 @@ FUNCTION upload_image_payload(f_silent)
             END FOR
             IF f_silent = FALSE
             THEN
-                #CALL fgl_winmessage(%"function.lib.string.Image_Upload", %"function.lib.string.Uploaded" || g_OK_uploads || %"function.lib.string.Images_OK" || g_FAILED_uploads || %"function.lib.string.Images_Failed", "information")
-                CALL fgl_winmessage(%"function.lib.string.Image_Upload", SFMT(%"function.lib.string.Uploaded",g_OK_uploads,g_FAILED_uploads), "information" )
+                #CALL fgl_winmessage(%"function.lib.string.Image_Upload", %"function.lib.string.Uploaded" || global.g_OK_uploads || %"function.lib.string.Images_OK" || global.g_FAILED_uploads || %"function.lib.string.Images_Failed", "information")
+                CALL fgl_winmessage(%"function.lib.string.Image_Upload", SFMT(%"function.lib.string.Uploaded",global.g_OK_uploads,global.g_FAILED_uploads), "information" )
             END IF
         END IF
     END IF
@@ -547,13 +583,13 @@ FUNCTION set_localised_image(f_image)
     DEFINE
         f_image STRING
 
-    IF g_default_language.toUpperCase() = g_language_short.toUpperCase()
+    IF global_config.g_default_language.toUpperCase() = global.g_language_short.toUpperCase()
     THEN
         RETURN f_image #Default language being used. Return default image
     ELSE
-        IF g_local_images_available.search("",g_language_short.toUpperCase())
+        IF global_config.g_local_images_available.search("",global.g_language_short.toUpperCase())
         THEN
-            RETURN f_image || "_" || g_language_short.toLowerCase() #Localisation found. Return localised image
+            RETURN f_image || "_" || global.g_language_short.toLowerCase() #Localisation found. Return localised image
         END IF
     END IF
     

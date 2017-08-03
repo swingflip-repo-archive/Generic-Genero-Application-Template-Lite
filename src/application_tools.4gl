@@ -26,7 +26,7 @@ FUNCTION tool_check_password() #Tool to check if a password for a user is correc
     DEFINE f_username STRING,
         f_password STRING
         
-    IF g_info.deployment_type = "GDC"
+    IF global.g_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "tool_check_password"
     ELSE
@@ -34,18 +34,18 @@ FUNCTION tool_check_password() #Tool to check if a password for a user is correc
     END IF
 
     LET TERMINATE = FALSE
-    INITIALIZE g_instruction TO NULL
+    INITIALIZE global.g_instruction TO NULL
     LET m_window = ui.Window.getCurrent()
 
-    IF g_info.deployment_type <> "GMA" AND g_info.deployment_type <> "GMI"
+    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
     THEN
-        CALL m_window.setText(g_title)
+        CALL m_window.setText(global.g_title)
     ELSE
-        IF g_enable_mobile_title = FALSE
+        IF global_config.g_enable_mobile_title = FALSE
         THEN
             CALL m_window.setText("")
         ELSE
-            CALL m_window.setText(g_title)
+            CALL m_window.setText(global.g_title)
         END IF
     END IF
 
@@ -62,11 +62,11 @@ FUNCTION tool_check_password() #Tool to check if a password for a user is correc
             ACCEPT INPUT
 
         ON ACTION bt_go_back
-            LET g_instruction = "go_back"
+            LET global.g_instruction = "go_back"
             EXIT INPUT
 
         ON ACTION CLOSE
-            LET g_instruction = "go_back"
+            LET global.g_instruction = "go_back"
             EXIT INPUT
             
         AFTER INPUT
@@ -98,13 +98,13 @@ FUNCTION tool_check_password() #Tool to check if a password for a user is correc
             
     END INPUT
 
-    CASE g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
         WHEN "go_back"
             CLOSE WINDOW w
             CALL admin_tools()
         WHEN "logout"
-            INITIALIZE g_user TO NULL
-            INITIALIZE g_logged_in TO NULL
+            INITIALIZE global.g_user TO NULL
+            INITIALIZE global.g_logged_in TO NULL
             DISPLAY "Logged out successfully!"
             CLOSE WINDOW w
             CALL login_screen()
@@ -127,7 +127,7 @@ FUNCTION tool_hash_generator() #Tool to generate a hashed value based off a clea
         f_hashed_string STRING,
         f_status STRING
         
-    IF g_info.deployment_type = "GDC"
+    IF global.g_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "tool_hash_generator"
     ELSE
@@ -135,18 +135,18 @@ FUNCTION tool_hash_generator() #Tool to generate a hashed value based off a clea
     END IF
 
     LET TERMINATE = FALSE
-    INITIALIZE g_instruction TO NULL
+    INITIALIZE global.g_instruction TO NULL
     LET m_window = ui.Window.getCurrent()
 
-    IF g_info.deployment_type <> "GMA" AND g_info.deployment_type <> "GMI"
+    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
     THEN
-        CALL m_window.setText(g_title)
+        CALL m_window.setText(global.g_title)
     ELSE
-        IF g_enable_mobile_title = FALSE
+        IF global_config.g_enable_mobile_title = FALSE
         THEN
             CALL m_window.setText("")
         ELSE
-            CALL m_window.setText(g_title)
+            CALL m_window.setText(global.g_title)
         END IF
     END IF
 
@@ -161,11 +161,11 @@ FUNCTION tool_hash_generator() #Tool to generate a hashed value based off a clea
             ACCEPT INPUT
 
         ON ACTION bt_go_back
-            LET g_instruction = "go_back"
+            LET global.g_instruction = "go_back"
             EXIT INPUT
 
         ON ACTION CLOSE
-            LET g_instruction = "go_back"
+            LET global.g_instruction = "go_back"
             EXIT INPUT
             
         AFTER INPUT
@@ -185,13 +185,13 @@ FUNCTION tool_hash_generator() #Tool to generate a hashed value based off a clea
             
     END INPUT
 
-    CASE g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
         WHEN "go_back"
             CLOSE WINDOW w
             CALL admin_tools()
         WHEN "logout"
-            INITIALIZE g_user TO NULL
-            INITIALIZE g_logged_in TO NULL
+            INITIALIZE global.g_user TO NULL
+            INITIALIZE global.g_logged_in TO NULL
             DISPLAY "Logged out successfully!"
             CLOSE WINDOW w
             CALL login_screen()
@@ -219,7 +219,7 @@ FUNCTION create_user() #Tool to check if a password for a user is correct or not
         f_hashed_string STRING,
         f_status STRING
         
-    IF g_info.deployment_type = "GDC"
+    IF global.g_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "tool_create_user"
     ELSE
@@ -227,18 +227,18 @@ FUNCTION create_user() #Tool to check if a password for a user is correct or not
     END IF
 
     LET TERMINATE = FALSE
-    INITIALIZE g_instruction TO NULL
+    INITIALIZE global.g_instruction TO NULL
     LET m_window = ui.Window.getCurrent()
 
-    IF g_info.deployment_type <> "GMA" AND g_info.deployment_type <> "GMI"
+    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
     THEN
-        CALL m_window.setText(g_title)
+        CALL m_window.setText(global.g_title)
     ELSE
-        IF g_enable_mobile_title = FALSE
+        IF global_config.g_enable_mobile_title = FALSE
         THEN
             CALL m_window.setText("")
         ELSE
-            CALL m_window.setText(g_title)
+            CALL m_window.setText(global.g_title)
         END IF
     END IF
 
@@ -256,11 +256,11 @@ FUNCTION create_user() #Tool to check if a password for a user is correct or not
             ACCEPT INPUT
 
         ON ACTION bt_go_back
-            LET g_instruction = "go_back"
+            LET global.g_instruction = "go_back"
             EXIT INPUT
 
         ON ACTION CLOSE
-            LET g_instruction = "go_back"
+            LET global.g_instruction = "go_back"
             EXIT INPUT
             
         AFTER INPUT
@@ -318,7 +318,6 @@ FUNCTION create_user() #Tool to check if a password for a user is correct or not
             CALL hash_password(f_password) RETURNING m_ok, f_hashed_string
              
             TRY
-                DISPLAY "INSERT INTO local_accounts VALUES(NULL,"||f_username||","||f_password||","||f_email||","||f_telephone||","||NULL||","||f_user_type||")"
                 INSERT INTO local_accounts VALUES(NULL,f_username,f_password,f_email,f_telephone,NULL,f_user_type)
             CATCH
                 CALL fgl_winmessage("User Create Tool","ERROR: could not create user in the database -" || sqlca.sqlcode,"stop")
@@ -331,19 +330,19 @@ FUNCTION create_user() #Tool to check if a password for a user is correct or not
             CALL fgl_winmessage(%"tool.string.Create_User",%"tool.string.Status" || ": " || "OK" || "\n" ||
                                                            %"tool.string.Username" || ": " || f_username || "\n" ||
                                                            %"tool.string.Password" || ": " || f_password || "\n" ||
-                                                           %"tool.string.Hashed.Password" || ": " || f_hashed_string || "\n" ||
+                                                           %"tool.string.Hashed_Password" || ": " || f_hashed_string || "\n" ||
                                                            %"tool.string.User_Type" || ": " || f_user_type || "\n" ||
                                                            %"tool.string.Email" || ": " || f_email || "\n" ||
                                                            %"tool.string.Telephone" || ": " || f_telephone, "information") 
     END INPUT
 
-    CASE g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
         WHEN "go_back"
             CLOSE WINDOW w
             CALL admin_tools()
         WHEN "logout"
-            INITIALIZE g_user TO NULL
-            INITIALIZE g_logged_in TO NULL
+            INITIALIZE global.g_user TO NULL
+            INITIALIZE global.g_logged_in TO NULL
             DISPLAY "Logged out successfully!"
             CLOSE WINDOW w
             CALL login_screen()

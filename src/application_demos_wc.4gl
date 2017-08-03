@@ -22,7 +22,7 @@ GLOBALS "globals.4gl"
 
 FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
 
-    IF g_info.deployment_type = "GDC"
+    IF global.g_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "wc_signature"
     ELSE
@@ -30,18 +30,18 @@ FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Par
     END IF
 
     LET TERMINATE = FALSE
-    INITIALIZE g_instruction TO NULL
+    INITIALIZE global.g_instruction TO NULL
     LET m_window = ui.Window.getCurrent()
 
-    IF g_info.deployment_type <> "GMA" AND g_info.deployment_type <> "GMI"
+    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
     THEN
-        CALL m_window.setText(g_title)
+        CALL m_window.setText(global.g_title)
     ELSE
-        IF g_enable_mobile_title = FALSE
+        IF global_config.g_enable_mobile_title = FALSE
         THEN
             CALL m_window.setText("")
         ELSE
-            CALL m_window.setText(g_title)
+            CALL m_window.setText(global.g_title)
         END IF
     END IF
 
@@ -50,7 +50,7 @@ FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Par
     WHILE TERMINATE = FALSE
         MENU
         
-            ON TIMER g_timed_checks_time
+            ON TIMER global_config.g_timed_checks_time
                 CALL connection_test()
                 CALL timed_upload_queue_data()
                 
@@ -58,20 +58,20 @@ FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Par
                 CALL connection_test()
               
             ON ACTION bt_go_back
-                LET g_instruction = "go_back"
+                LET global.g_instruction = "go_back"
                 LET TERMINATE = TRUE
                 EXIT MENU                
               
         END MENU
     END WHILE
 
-    CASE g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
         WHEN "go_back"
             CLOSE WINDOW w
             CALL interact_demo()
         WHEN "logout"
-            INITIALIZE g_user TO NULL
-            INITIALIZE g_logged_in TO NULL
+            INITIALIZE global.g_user TO NULL
+            INITIALIZE global.g_logged_in TO NULL
             DISPLAY "Logged out successfully!"
             CLOSE WINDOW w
             CALL login_screen()
@@ -96,25 +96,25 @@ FUNCTION wc_maps_demo() #Webcomponent Demo (Signature) window function (Part of 
         f_obj util.JSONObject,
         f_dummy STRING
         
-    IF g_info.deployment_type = "GDC"
+    IF global.g_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "wc_google_maps"
     ELSE
         OPEN WINDOW w WITH FORM "wc_google_maps"
     END IF
 
-    INITIALIZE g_instruction TO NULL
+    INITIALIZE global.g_instruction TO NULL
     LET m_window = ui.Window.getCurrent()
 
-    IF g_info.deployment_type <> "GMA" AND g_info.deployment_type <> "GMI"
+    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
     THEN
-        CALL m_window.setText(g_title)
+        CALL m_window.setText(global.g_title)
     ELSE
-        IF g_enable_mobile_title = FALSE
+        IF global_config.g_enable_mobile_title = FALSE
         THEN
             CALL m_window.setText("")
         ELSE
-            CALL m_window.setText(g_title)
+            CALL m_window.setText(global.g_title)
         END IF
     END IF
     
@@ -123,7 +123,7 @@ LABEL go_back_wc_maps_demo:
     INPUT f_dummy, f_latlng_record.lat, f_latlng_record.lng FROM wc_gm, lat, lng ATTRIBUTES(UNBUFFERED)
 
         #ON TIMER can cause some grief when running in an INPUT in terms of field validation. Disabled for now.
-        #ON TIMER g_timed_checks_time
+        #ON TIMER global_config.g_timed_checks_time
            #CALL connection_test()
             #CALL timed_upload_queue_data()
 
@@ -159,18 +159,18 @@ LABEL go_back_wc_maps_demo:
                 CALL ui.Interface.refresh() #Just incase...
             END IF
         ON ACTION bt_go_back
-            LET g_instruction = "go_back"
+            LET global.g_instruction = "go_back"
             EXIT INPUT   
 
     END INPUT  
 
-    CASE g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
         WHEN "go_back"
             CLOSE WINDOW w
             CALL interact_demo()
         WHEN "logout"
-            INITIALIZE g_user TO NULL
-            INITIALIZE g_logged_in TO NULL
+            INITIALIZE global.g_user TO NULL
+            INITIALIZE global.g_logged_in TO NULL
             DISPLAY "Logged out successfully!"
             CLOSE WINDOW w
             CALL login_screen()
@@ -185,7 +185,7 @@ END FUNCTION
 #
 FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of Interactivity Demo)
 
-    IF g_info.deployment_type = "GDC"
+    IF global.g_info.deployment_type = "GDC"
     THEN
         OPEN WINDOW w WITH FORM "wc_video"
     ELSE
@@ -193,18 +193,18 @@ FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of
     END IF
 
     LET TERMINATE = FALSE
-    INITIALIZE g_instruction TO NULL
+    INITIALIZE global.g_instruction TO NULL
     LET m_window = ui.Window.getCurrent()
 
-    IF g_info.deployment_type <> "GMA" AND g_info.deployment_type <> "GMI"
+    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
     THEN
-        CALL m_window.setText(g_title)
+        CALL m_window.setText(global.g_title)
     ELSE
-        IF g_enable_mobile_title = FALSE
+        IF global_config.g_enable_mobile_title = FALSE
         THEN
             CALL m_window.setText("")
         ELSE
-            CALL m_window.setText(g_title)
+            CALL m_window.setText(global.g_title)
         END IF
     END IF
 
@@ -213,7 +213,7 @@ FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of
     WHILE TERMINATE = FALSE
         MENU
         
-            ON TIMER g_timed_checks_time
+            ON TIMER global_config.g_timed_checks_time
                 CALL connection_test()
                 CALL timed_upload_queue_data()
                 
@@ -221,20 +221,20 @@ FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of
                 CALL connection_test()
               
             ON ACTION bt_go_back
-                LET g_instruction = "go_back"
+                LET global.g_instruction = "go_back"
                 LET TERMINATE = TRUE
                 EXIT MENU                
               
         END MENU
     END WHILE
 
-    CASE g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
         WHEN "go_back"
             CLOSE WINDOW w
             CALL interact_demo()
         WHEN "logout"
-            INITIALIZE g_user TO NULL
-            INITIALIZE g_logged_in TO NULL
+            INITIALIZE global.g_user TO NULL
+            INITIALIZE global.g_logged_in TO NULL
             DISPLAY "Logged out successfully!"
             CLOSE WINDOW w
             CALL login_screen()

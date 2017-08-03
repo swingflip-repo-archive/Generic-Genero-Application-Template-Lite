@@ -32,18 +32,18 @@ FUNCTION image_program() #Image Web Service Demo window function
     OPEN WINDOW w WITH FORM "photo"
 
     LET TERMINATE = FALSE
-    INITIALIZE g_instruction TO NULL
+    INITIALIZE global.g_instruction TO NULL
     LET m_window = ui.Window.getCurrent()
 
-    IF g_info.deployment_type <> "GMA" AND g_info.deployment_type <> "GMI"
+    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
     THEN
-        CALL m_window.setText(g_title)
+        CALL m_window.setText(global.g_title)
     ELSE
-        IF g_enable_mobile_title = FALSE
+        IF global_config.g_enable_mobile_title = FALSE
         THEN
             CALL m_window.setText("")
         ELSE
-            CALL m_window.setText(g_title)
+            CALL m_window.setText(global.g_title)
         END IF
     END IF
 
@@ -52,7 +52,7 @@ FUNCTION image_program() #Image Web Service Demo window function
     WHILE TERMINATE = FALSE
         MENU
         
-            ON TIMER g_timed_checks_time
+            ON TIMER global_config.g_timed_checks_time
                 CALL connection_test()
                 CALL timed_upload_queue_data()
                 
@@ -140,23 +140,23 @@ FUNCTION image_program() #Image Web Service Demo window function
                             DISPLAY "Encoding image into Base64 ready for transport..."
                             LET f_payload = util.Strings.base64Encode("imageupload_" || f_index)
                             DISPLAY "Loading payload into local delivery queue..."
-                            CALL load_payload(g_user,"IMAGE",f_payload)
+                            CALL load_payload(global.g_user,"IMAGE",f_payload)
                                 RETURNING m_ok
                         END IF
                     END FOR
                     IF reply_yn("Y"," ",%"main.string.Images_Loaded_Successfully")
                     THEN
                         CALL connection_test()
-                        IF g_online = "NONE"
+                        IF global.g_online = "NONE"
                         THEN
-                            IF g_enable_timed_image_upload = TRUE AND g_timed_checks_time > 0
+                            IF global_config.g_enable_timed_image_upload = TRUE AND global_config.g_timed_checks_time > 0
                             THEN
-                                CALL fgl_winmessage(%"main.string.Warning_Title", %"main.string.You_Are_Offline_Auto_Retry", "information")
+                                CALL fgl_winmessage(%"main.string.Warning_title", %"main.string.You_Are_Offline_Auto_Retry", "information")
                                 LET f_queue_count = 0
                                 INITIALIZE f_temp_img_queue TO NULL
                                 DISPLAY " " TO status 
                             ELSE
-                                CALL fgl_winmessage(%"main.string.Warning_Title", %"main.string.You_Are_Offline_Try_Again", "information")
+                                CALL fgl_winmessage(%"main.string.Warning_title", %"main.string.You_Are_Offline_Try_Again", "information")
                                 LET f_queue_count = 0
                                 INITIALIZE f_temp_img_queue TO NULL
                                 DISPLAY " " TO status
@@ -175,22 +175,22 @@ FUNCTION image_program() #Image Web Service Demo window function
                     END IF
                 END IF
             ON ACTION bt_viewpho
-                CALL ui.Interface.frontCall("standard", "launchURL", [g_ws_end_point], [])
+                CALL ui.Interface.frontCall("standard", "launchURL", [global_config.g_ws_end_point], [])
             ON ACTION bt_go_back
-                LET g_instruction = "go_back"
+                LET global.g_instruction = "go_back"
                 LET TERMINATE = TRUE
                 EXIT MENU                
               
         END MENU
     END WHILE
 
-    CASE g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
         WHEN "go_back"
             CLOSE WINDOW w
             CALL open_application()
         WHEN "logout"
-            INITIALIZE g_user TO NULL
-            INITIALIZE g_logged_in TO NULL
+            INITIALIZE global.g_user TO NULL
+            INITIALIZE global.g_logged_in TO NULL
             DISPLAY "Logged out successfully!"
             CLOSE WINDOW w
             CALL login_screen()
