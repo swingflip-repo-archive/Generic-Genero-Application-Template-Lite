@@ -61,7 +61,7 @@
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
   <Group label="Packages" language="Genero">
-    <Package binaryName="GGAT_Android" dependencies="400358049,781919164,715422167,313644474" description="Android Package" label="GGAT_Android" platform="Android">
+    <Package binaryName="GGAT_Android" dependencies="781919164,715422167,313644474,212784684,400358049" description="Android Package" label="GGAT_Android" platform="Android">
       <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
       <DynamicProperty name="gma-actionbar-color" value="#5f5f5f"/>
       <DynamicProperty name="gma-primary-color" value="#5f9f9f"/>
@@ -87,7 +87,7 @@
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="GGAT_GAR" description="GAR Package" label="GGAT_GAR" platform="Genero Application Server">
+    <Package binaryName="GGAT_GAR" dependencies="212784684,400358049" description="GAR Package" label="GGAT_GAR" platform="Genero Application Server">
       <DynamicProperty name="packageId" value="GGAT"/>
       <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
@@ -103,7 +103,7 @@
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="GGAT_iOS" dependencies="400358049,781919164,715422167,313644474" description="iOS Package" label="GGAT_iOS" platform="iOS">
+    <Package binaryName="GGAT_iOS" dependencies="781919164,715422167,313644474,212784684,400358049" description="iOS Package" label="GGAT_iOS" platform="iOS">
       <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
       <DynamicProperty name="gma-actionbar-color" value="#5f5f5f"/>
       <DynamicProperty name="gma-primary-color" value="#eeeeee"/>
@@ -134,7 +134,7 @@
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="GGAT_iOS_Simulator" dependencies="400358049,781919164,159917928,212784684,715422167,362164715,313644474" description="iOS Simulator Package" label="GGAT_iOS_Simulator" platform="iOS Simulator">
+    <Package binaryName="GGAT_iOS_Simulator" dependencies="781919164,212784684,715422167,313644474,400358049" description="iOS Simulator Package" label="GGAT_iOS_Simulator" platform="iOS Simulator">
       <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
       <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
@@ -151,7 +151,7 @@
     </Package>
   </Group>
   <Group environment="value:FGLIMAGEPATH=$(ProjectDir)\\images\\my_image2font.txt;$(ProjectDir)\\images;$(FGLDIR)\\lib\\image2font.txt;$(FGLIMAGEPATH);..,filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,dirlist:DBPATH=$(ProjectDir)/database;$(DBPATH)" label="Project" language="Genero">
-    <Application binaryName="Application" dependencies="159917928,212784684,362164715,455109296,250541541" id="400358049" label="Application">
+    <Application binaryName="Application" dependencies="212784684" id="400358049" label="Application">
       <VirtualFolder label="Forms">
         <VirtualFolder label="General Forms">
           <File filePath="src/admin.per"/>
@@ -193,7 +193,7 @@
     <Library binaryName="GAS Files" id="391034" label="GAS Files">
       <File filePath="gas/GGAT.xcf"/>
     </Library>
-    <Library binaryName="Library" dependencies="455109296" id="212784684" label="Library">
+    <Library binaryName="Library" dependencies="455109296,250541541,362164715,391034,327340596,332504730,159917928" id="212784684" label="Library">
       <File filePath="src/database_funcs.4gl"/>
       <File filePath="src/function_lib.4gl"/>
       <File filePath="src/globals.4gl"/>
@@ -257,16 +257,16 @@
     <Library binaryName="____README____" id="685968248" label="____README____">
       <File filePath="toolsrc/Toolbox_Readme_EN.txt"/>
     </Library>
-    <Application binaryName="CreateConfigFile" dependencies="362164715,455109296,212784684,332504730,250541541" id="745036968" label="CreateConfigFile">
+    <Application binaryName="CreateConfigFile" dependencies="212784684" id="745036968" label="CreateConfigFile">
       <File filePath="toolsrc/create_config.4gl"/>
     </Application>
-    <Application binaryName="CreateDatabase" dependencies="455109296,212784684,362164715,332504730,250541541" id="184075814" label="CreateDatabase">
+    <Application binaryName="CreateDatabase" dependencies="212784684" id="184075814" label="CreateDatabase">
       <File filePath="toolsrc/local_db_sqt_x.4gl"/>
     </Application>
-    <Application binaryName="DB_ReSync" dependencies="212784684,455109296,362164715,332504730,250541541" id="147366400" label="DB_ReSync">
+    <Application binaryName="DB_ReSync" dependencies="212784684" id="147366400" label="DB_ReSync">
       <File filePath="toolsrc/database_resync.4gl"/>
     </Application>
-    <Application binaryName="StringExtractor" dependencies="212784684,455109296,362164715,332504730,250541541" id="95621097" label="StringExtractor">
+    <Application binaryName="StringExtractor" dependencies="212784684" id="95621097" label="StringExtractor">
       <File filePath="toolsrc/string_extract.4gl"/>
     </Application>
   </Group>
