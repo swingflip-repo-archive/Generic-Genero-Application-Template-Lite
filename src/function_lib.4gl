@@ -2,8 +2,8 @@ IMPORT SECURITY
 IMPORT com
 IMPORT util
 IMPORT os
-IMPORT JAVA java.util.regex.Pattern
-IMPORT JAVA java.util.regex.Matcher
+#IMPORT JAVA java.util.regex.Pattern
+#IMPORT JAVA java.util.regex.Matcher
 GLOBALS "globals.4gl"
 SCHEMA local_db
 #
@@ -611,35 +611,35 @@ FUNCTION validate_input_data(f_input,f_nulls,f_special_characters,f_safe_special
         f_letters SMALLINT,
         f_spaces SMALLINT,
         f_special_data_type STRING
-
+        
     IF f_nulls = FALSE AND f_input IS NULL
     THEN
         RETURN f_input, FALSE, "BAD_NULLS"
     END IF
 
-    IF f_special_data_type != "EMAIL" AND f_special_data_type != "URL"
+    IF f_special_data_type IS NULL
     THEN
-        IF f_special_characters = FALSE AND contains_characters(f_input,"\~\#\$\%\^\&\*\(\)\+\"\{\}\|\<\>\?\-\=\[\]\/")
+        IF f_special_characters = FALSE AND fgl_regex(f_input,"\~\#\$\%\^\&\*\(\)\+\"\{\}\|\<\>\?\-\=\[\]\/")
         THEN
             RETURN f_input, FALSE, "BAD_CHARS"
         END IF
 
-        IF f_safe_special_characters = FALSE AND contains_characters(f_input,"\@\_\,\.\!\'\:\;")
+        IF f_safe_special_characters = FALSE AND fgl_regex(f_input,"\@\_\,\.\!\'\:\;")
         THEN
             RETURN f_input, FALSE, "BAD_CHARS_2"
         END IF
 
-        IF f_numerals = FALSE AND contains_characters(f_input,"123456789")
+        IF f_numerals = FALSE AND fgl_regex(f_input,"0123456789")
         THEN
             RETURN f_input, FALSE, "BAD_NUMERALS"
         END IF
 
-        IF f_letters = FALSE AND contains_characters(f_input,"A-Za-z") #This should include foriegn letters too at some point.
+        IF f_letters = FALSE AND fgl_regex(f_input,"abcdefghijklmnopqrstuvwxyz") #This should include foriegn letters too at some point.
         THEN
             RETURN f_input, FALSE, "BAD_LETTERS"
         END IF
 
-        IF f_spaces = FALSE AND contains_characters(f_input," ")
+        IF f_spaces = FALSE AND fgl_regex(f_input," ")
         THEN
             RETURN f_input, FALSE, "BAD_SPACES"
         END IF
@@ -647,10 +647,13 @@ FUNCTION validate_input_data(f_input,f_nulls,f_special_characters,f_safe_special
     
     IF f_special_data_type = "EMAIL" AND f_input MATCHES "*@*.*" = FALSE
     THEN
-        IF contains_characters(f_input,"\S+@\S+\.\S+") = FALSE #A simple email regex to make sure it's somewhat valid
+        RETURN f_input, FALSE, "BAD_EMAIL"
+    ELSE    
+        #Can't use this as JAVA is not supported in GMI...
+        {IF fgl_regex(f_input,"\S+@\S+\.\S+") = FALSE #A simple email regex to make sure it's somewhat valid
         THEN
-            RETURN f_input, FALSE, "OK"
-        END IF
+            RETURN f_input, FALSE, "BAD_EMAIL"
+        END IF}
     END IF
 
     IF f_special_data_type = "URL"
@@ -665,7 +668,9 @@ END FUNCTION
 #
 #
 #
-FUNCTION contains_characters(f_string,f_characters) #Returns TRUE or FALSE if string starts, ends or contains f_characters
+# This is the easiest way to regex input data however because JAVA is not currently supported by GMI,
+# we have to use a FGL work around. Hopefully we will get a native FGL regex in the future...
+{FUNCTION contains_characters(f_string,f_characters) #Returns TRUE or FALSE if string starts, ends or contains f_characters
 
     DEFINE
         f_string STRING,
@@ -687,6 +692,32 @@ FUNCTION contains_characters(f_string,f_characters) #Returns TRUE or FALSE if st
     END IF
 
     RETURN f_ok
+    
+END FUNCTION}
+#
+#
+#
+#
+FUNCTION fgl_regex(f_string,f_characters) #Not 100% correct but you get the idea...
+
+    DEFINE
+        f_string STRING,
+        f_characters STRING,
+        f_integer INTEGER,
+        f_integer2 INTEGER
+        
+    LET f_string = f_string.toUpperCase()
+    LET f_characters = f_characters.toUpperCase()
+    FOR f_integer = 1 TO f_string.getLength()
+        FOR f_integer2 = 1 TO f_characters.getLength()
+            IF f_characters.getCharAt( f_integer2 ) = f_string.getCharAt( f_integer )
+            THEN
+                RETURN TRUE 
+            END IF
+        END FOR
+    END FOR
+    
+    RETURN FALSE
     
 END FUNCTION
 #
