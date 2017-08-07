@@ -11,7 +11,6 @@ GLOBALS "globals.4gl"
 
     DEFINE #These are very useful module variables to have defined!
         TERMINATE SMALLINT,
-        m_string_buffer base.StringBuffer,
         m_string_tokenizer base.StringTokenizer,
         m_window ui.Window,
         m_form ui.Form,
@@ -24,8 +23,7 @@ GLOBALS "globals.4gl"
         m_username STRING,
         m_password STRING,
         m_remember STRING,
-        m_image STRING,
-        m_local_images_available DYNAMIC ARRAY OF CHAR(2)
+        m_image STRING
     
 FUNCTION initialise_app()
     #******************************************************************************#

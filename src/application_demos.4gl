@@ -12,12 +12,7 @@ GLOBALS "globals.4gl"
 
     DEFINE #These are very useful module variables to have defined!
         TERMINATE SMALLINT,
-        m_string_buffer base.StringBuffer,
-        m_string_tokenizer base.StringTokenizer,
         m_window ui.Window,
-        m_form ui.Form,
-        m_dom_node1 om.DomNode,
-        m_index INTEGER,
         m_ok SMALLINT
         
 FUNCTION image_program() #Image Web Service Demo window function

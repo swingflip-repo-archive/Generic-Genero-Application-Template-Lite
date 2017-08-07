@@ -12,11 +12,7 @@ GLOBALS "globals.4gl"
 
     DEFINE #These are very useful module variables to have defined!
         TERMINATE SMALLINT,
-        m_string_buffer base.StringBuffer,
-        m_string_tokenizer base.StringTokenizer,
         m_window ui.Window,
-        m_form ui.Form,
-        m_dom_node1 om.DomNode,
         m_index INTEGER,
         m_ok SMALLINT,
         m_status STRING
@@ -215,9 +211,7 @@ FUNCTION create_user() #Tool to check if a password for a user is correct or not
         f_user_type STRING,
         f_email STRING,
         f_telephone STRING,
-        f_salt STRING,
-        f_hashed_string STRING,
-        f_status STRING
+        f_hashed_string STRING
         
     IF global.g_info.deployment_type = "GDC"
     THEN

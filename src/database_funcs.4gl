@@ -87,8 +87,7 @@ END FUNCTION
 FUNCTION db_resync(f_dbname)
     DEFINE
         f_dbname STRING,
-        f_dbpath STRING,
-        f_status INTEGER
+        f_dbpath STRING
         
         LET f_dbpath = os.path.join(os.path.pwd(), f_dbname)
 
