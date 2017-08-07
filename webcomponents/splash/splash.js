@@ -34,9 +34,13 @@ function setLocale(lang_short_code) {
     loading_string = "Chargement...";
     powered_by_string = "Alimenté par...";
   }
-  document.write
-  (" <link rel=\"stylesheet\" type=\"text/css\" href=\"splash.css\" /> \
-    <div style=\"display:table; height:100%; width:100%;\"> \
+  var link = document.createElement("link");
+  link.href = "splash.css";
+  link.rel="stylesheet";
+  link.type="text/css";
+  document.head.appendChild(link);
+  document.body.innerHTML = 
+  " <div style=\"display:table; height:100%; width:100%;\"> \
       <div style=\"display:table-cell;vertical-align:middle; width:100%; text-align:center;\"> \
         <div style=\"margin-left:auto;margin-right:auto;\"> \
             <img src=\"" + banner_image + "\" width=\"75%\" /><br /> \
@@ -47,22 +51,7 @@ function setLocale(lang_short_code) {
         </div> \
       </div> \
     </div> \
-  ")
-  /* I have to include the stylesheet into the document.write again to get it to pull the CSS. I only need to do this in QT webkit. 
-  document.write
-  (" <link rel=\"stylesheet\" type=\"text/css\" href=\"splash.css\" /> \
-    <div style=\"display:table; height:100%; width:100%;\"> \
-      <div style=\"display:table-cell;vertical-align:middle; width:100%; text-align:center;\"> \
-        <div style=\"margin-left:auto;margin-right:auto;\"> \
-            <img src=\"" + banner_image + "\" width=\"75%\" /><br /> \
-            <h1 style=\"font-size: 200%;\">" + powered_by_string + "</h1> \
-            <img src=\"genero.png\" width=\"40%\" /><br /><br /> \
-            <h1 style=\"font-size: 250%;\">" + loading_string + "</h1><br /> \
-            <img src=\"box.gif\" /><br /> \
-        </div> \
-      </div> \
-    </div> \
-  ")
-  */
+  "
+  
   return "OK";
 }

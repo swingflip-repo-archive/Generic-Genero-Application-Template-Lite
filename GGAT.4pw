@@ -192,6 +192,7 @@
     </Library>
     <Library binaryName="GAS Files" id="391034" label="GAS Files">
       <File filePath="gas/GGAT.xcf"/>
+      <File filePath="gas/GGAT_Linux.xcf"/>
     </Library>
     <Library binaryName="Library" dependencies="455109296,250541541,362164715,391034,327340596,332504730,159917928" id="212784684" label="Library">
       <File filePath="src/database_funcs.4gl"/>
