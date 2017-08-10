@@ -9,6 +9,7 @@ IMPORT os
 IMPORT util
 IMPORT SECURITY
 GLOBALS "globals.4gl"
+SCHEMA local_db
 
     DEFINE #These are very useful module variables to have defined!
         TERMINATE SMALLINT,
@@ -19,7 +20,8 @@ GLOBALS "globals.4gl"
 
 FUNCTION tool_check_password() #Tool to check if a password for a user is correct or not
 
-    DEFINE f_username STRING,
+    DEFINE
+        f_username STRING,
         f_password STRING
         
     IF global.g_info.deployment_type = "GDC"
@@ -202,7 +204,7 @@ END FUNCTION
 #
 #
 #
-FUNCTION create_user() #Tool to check if a password for a user is correct or not
+FUNCTION tool_create_user() #Tool to check if a password for a user is correct or not
 
     DEFINE
         f_username STRING,
@@ -329,6 +331,82 @@ FUNCTION create_user() #Tool to check if a password for a user is correct or not
                                                            %"tool.string.Email" || ": " || f_email || "\n" ||
                                                            %"tool.string.Telephone" || ": " || f_telephone, "information") 
     END INPUT
+
+    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+        WHEN "go_back"
+            CLOSE WINDOW w
+            CALL admin_tools()
+        WHEN "logout"
+            INITIALIZE global.g_user TO NULL
+            INITIALIZE global.g_logged_in TO NULL
+            DISPLAY "Logged out successfully!"
+            CLOSE WINDOW w
+            CALL login_screen()
+        OTHERWISE
+            CLOSE WINDOW w
+            CALL ui.Interface.refresh()
+            CALL admin_tools()
+    END CASE
+
+END FUNCTION
+#
+#
+#
+#
+FUNCTION tool_user_management() #Tool to check if a password for a user is correct or not
+
+    DEFINE 
+        f_integer INTEGER,
+        f_sr_array DYNAMIC ARRAY OF RECORD
+            id LIKE local_accounts.l_u_index,
+            name LIKE local_accounts.username,
+            last_login LIKE local_accounts.last_login,
+            email LIKE local_accounts.email,
+            telephone LIKE local_accounts.phone
+        END RECORD
+        
+    IF global.g_info.deployment_type = "GDC"
+    THEN
+        OPEN WINDOW w WITH FORM "tool_user_management"
+    ELSE
+        OPEN WINDOW w WITH FORM "tool_user_management"
+    END IF
+
+    LET TERMINATE = FALSE
+    INITIALIZE global.g_instruction TO NULL
+    LET m_window = ui.Window.getCurrent()
+
+    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
+    THEN
+        CALL m_window.setText(global.g_title)
+    ELSE
+        IF global_config.g_enable_mobile_title = FALSE
+        THEN
+            CALL m_window.setText("")
+        ELSE
+            CALL m_window.setText(global.g_title)
+        END IF
+    END IF
+
+    CALL openDB("local_db.db",FALSE)
+
+    PREPARE s1
+        FROM "SELECT l_u_index, username, last_login, email, phone FROM local_accounts"
+    DECLARE c1 CURSOR FOR s1
+
+    LET f_integer = 1
+    
+    FOREACH c1 INTO f_sr_array[f_integer].*
+        LET f_integer = f_integer + 1
+    END FOREACH
+    CALL f_sr_array.deleteElement(f_integer)
+    
+    DISPLAY ARRAY f_sr_array TO scr.* ATTRIBUTES(ACCESSORYTYPE=DISCLOSUREINDICATOR)
+
+        ON ACTION b_edit
+            DISPLAY f_sr_array[arr_curr()].id
+
+    END DISPLAY
 
     CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
         WHEN "go_back"

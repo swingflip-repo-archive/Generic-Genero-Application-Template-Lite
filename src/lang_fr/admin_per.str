@@ -1,6 +1,7 @@
 "admin.per.Title"="Contrôles de l'administrateur"
 "admin.per.Dump_Env"="Imprimer le fichier de l'environnement"
 "admin.per.Dump_Config"="Imprimer le fichier de configuration"
+"admin.per.User_Management"="Gestion des utilisateurs"
 "admin.per.Create_User"="Créer un Utilisateur"
 "admin.per.Check_Password"="Vérifier le Mot de Passe"
 "admin.per.Hash_Generator"="Générateur de Clé"

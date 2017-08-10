@@ -1,0 +1,25 @@
+LAYOUT ( MINWIDTH=50, MINHEIGHT=40, STYLE="main" )
+VBOX 
+SCROLLGRID (WANTFIXEDPAGESIZE=NO)
+{
+["ID: ":f01 :", ":f02             : :b01:b02:b03]
+["Last Login: ":f03                             ]
+["Email: ":f04                                  ]
+["Telephone: ":f05                              ]
+}
+END
+END #VBOX
+END  #LAYOUT
+
+ATTRIBUTES
+LABEL f01 = formonly.id;
+LABEL f02 = formonly.name;
+LABEL f03 = formonly.last_login;
+LABEL f04 = formonly.EMAIL;
+LABEL f05 = formonly.telephone;
+BUTTON b01:b_edit, IMAGE="flaticon-edit";
+BUTTON b02:b_change_p, IMAGE="flaticon-unlocked-1";
+BUTTON b03:b_delete, IMAGE="flaticon-multiply";
+INSTRUCTIONS
+SCREEN RECORD scr(id, name, last_login, email, telephone);
+

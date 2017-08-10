@@ -513,6 +513,10 @@ FUNCTION admin_tools() #Rough Development Tools window function (Mainly to showc
                 CALL print_debug_env()
             ON ACTION bt_dump
                 CALL print_debug_global_config()
+            ON ACTION bt_user_manage
+                LET global.g_instruction = "bt_user_manage"
+                LET TERMINATE = TRUE
+                EXIT MENU                  
             ON ACTION bt_create
                 LET global.g_instruction = "bt_create"
                 LET TERMINATE = TRUE
@@ -529,14 +533,16 @@ FUNCTION admin_tools() #Rough Development Tools window function (Mainly to showc
                 LET global.g_instruction = "go_back"
                 LET TERMINATE = TRUE
                 EXIT MENU                
-              
         END MENU
     END WHILE
 
     CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+        WHEN "bt_user_manage"
+            CLOSE WINDOW w
+            CALL tool_user_management()
         WHEN "bt_create"
             CLOSE WINDOW w
-            CALL create_user()
+            CALL tool_create_user()
         WHEN "bt_check"
             CLOSE WINDOW w
             CALL tool_check_password()

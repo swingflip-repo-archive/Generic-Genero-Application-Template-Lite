@@ -169,6 +169,7 @@
           <File filePath="src/tool_check_password.per"/>
           <File filePath="src/tool_create_user.per"/>
           <File filePath="src/tool_hash_generator.per"/>
+          <File filePath="src/tool_user_management.per"/>
         </VirtualFolder>
         <VirtualFolder label="Web Comp Forms">
           <File filePath="src/wc_google_maps.per"/>

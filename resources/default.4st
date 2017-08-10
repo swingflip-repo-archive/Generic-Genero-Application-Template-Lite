@@ -119,4 +119,12 @@
   <Style name=".greenButton">
      <StyleAttribute value="#27AE60" name="textColor" />
   </Style>
+  <Style name=".tool_user_ID">
+     <StyleAttribute name="fontWeight" value="bold" />
+    <StyleAttribute name="fontSize" value="1.25em" />
+  </Style>
+  <Style name=".tool_user_info">
+     <StyleAttribute name="fontWeight" value="light" />
+  </Style>
+
 </StyleList>
