@@ -104,6 +104,17 @@
      <StyleAttribute name="toolBarPosition" value="none" />
      <StyleAttribute name="statusBarType" value="none" />
   </Style>
+  <Style name="Window.minesweeper">
+     <StyleAttribute name="windowType" value="normal" />
+     <StyleAttribute name="startMenuPosition" value="menu" />
+     <!--<StyleAttribute name="allowedOrientations" value="portrait_all" />-->
+     <StyleAttribute name="actionPanelPosition" value="none" />
+     <StyleAttribute name="ringMenuPosition" value="none" />
+     <StyleAttribute name="sizable" value="yes" />
+     <StyleAttribute name="position" value="center" />
+     <StyleAttribute name="forceDefaultSettings" value="yes" />
+     <StyleAttribute name="backgroundColor" value="#c0c0c0" />
+  </Style>
   <Style name=".noBorder">
      <StyleAttribute value="none" name="border" />
   </Style>

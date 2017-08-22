@@ -64,7 +64,7 @@
     <Package binaryName="GGAT_Android" dependencies="781919164,715422167,313644474,212784684,400358049" description="Android Package" label="GGAT_Android" platform="Android">
       <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
       <DynamicProperty name="gma-actionbar-color" value="#5f5f5f"/>
-      <DynamicProperty name="gma-primary-color" value="#5f9f9f"/>
+      <DynamicProperty name="gma-primary-color" value="#1c9f08"/>
       <DynamicProperty name="gma-primary-dark-color" value="#5f9f9f"/>
       <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/icon/hdpi.png"/>
       <DynamicProperty name="icon-ldpi" value="$(ProjectDir)/images/icon/ldpi.png"/>
@@ -173,6 +173,8 @@
         </VirtualFolder>
         <VirtualFolder label="Web Comp Forms">
           <File filePath="src/wc_google_maps.per"/>
+          <File filePath="src/wc_minesweeper.per"/>
+          <File filePath="src/wc_minesweeper_select.per"/>
           <File filePath="src/wc_signature.per"/>
           <File filePath="src/wc_video.per"/>
         </VirtualFolder>
@@ -240,6 +242,12 @@
       <VirtualFolder label="gm">
         <File filePath="webcomponents/gm/gm.html"/>
         <File filePath="webcomponents/gm/gm.js"/>
+      </VirtualFolder>
+      <VirtualFolder label="minesweeper">
+        <File filePath="webcomponents/minesweeper/minesweeper-c.js"/>
+        <File filePath="webcomponents/minesweeper/minesweeper.css"/>
+        <File filePath="webcomponents/minesweeper/minesweeper.html"/>
+        <File filePath="webcomponents/minesweeper/minesweeper.js"/>
       </VirtualFolder>
       <VirtualFolder label="signature">
         <File filePath="webcomponents/signature/signature.html"/>

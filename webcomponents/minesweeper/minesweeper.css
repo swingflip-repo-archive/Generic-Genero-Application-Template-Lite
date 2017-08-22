@@ -1,0 +1,145 @@
+body {
+	background-color:#c0c0c0;
+}
+
+@font-face {
+    font-family: Digital-7;
+    src: url(digital.ttf);
+}
+
+.topbar_container
+{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+	width:100%;
+	font-size:1.3em;
+	text-align:center;
+	height:35px;
+  display: table;
+  border: 3px inset #FFFFFF;
+  background-color:#c0c0c0;
+  
+}
+
+.left_div
+{
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 10px;
+  width:5%;
+  min-width:50px;
+}
+
+.timer_container
+{
+  background-color:#000000;
+  text-align:center;
+  border: 2px inset #FFFFFF;
+}
+
+.timer
+{
+	font-family: Digital-7;
+	color: #ff0000;
+	background-color:#000000;
+  margin: auto 0;
+  height:50%;
+  width:100%;
+}
+
+.right_div
+{
+  height: 100%;
+  display: table-cell;
+  vertical-align: middle;
+  padding-right: 10px;
+  width:5%;
+  min-width:50px;
+}
+
+.smiley_container
+{
+	
+	display: table-cell;
+	background-color:#c0c0c0;
+  vertical-align:middle;
+  text-align:center;
+}
+
+.smiley
+{
+  margin: auto auto;
+  height: 28px;
+  width: 28px;
+  background: #c0c0c0 url('happy.png') center no-repeat; background-size:cover;
+}
+
+.score
+{
+	font-family: Digital-7;
+	color: #ff0000;
+	background-color:#000000;
+  margin: auto 0;
+  width:100%;
+}
+
+.score_container
+{
+  background-color:#000000;
+  text-align:center;
+  border: 2px inset #FFFFFF;
+}
+
+.minesweeper
+{
+    width: 294px;
+	padding-top:35px;
+    margin: auto;
+	text-align:center;
+}
+
+.board
+{
+    margin-top: 10px;
+    border: 1px outset #666;
+	box-shadow: 4px 4px 4px #aaa;
+}
+
+.field
+{
+	width: 40px;
+	height: 40px;
+	border: 1px solid #7e7681;
+	float:left;
+	
+	text-align: center;
+	cursor: pointer;
+	line-height: 40px;
+	
+	background-color: #c0c0c0;
+	font-family: "Lucida Console", Monaco, monospace;
+	color: #0000FF;
+	font-weight: bold;
+}
+
+.field.hidden.flag { background: #c0c0c0 url('flag.png') center no-repeat !important; background-size:cover !important;}
+
+.field.hidden.flag > span { display: none; }
+
+.field.mine { background: #FF0000 url('mine.png') center no-repeat !important; background-size:cover !important; }
+
+.field.mine > span { display: none; }
+
+.field.hidden
+{
+	
+    background: #c0c0c0 url('border.png') center no-repeat !important;
+	color: #eee !important;
+	background-size:cover !important;
+}
+
+.field.hidden > span { display: none !important; }
+
+.clear { clear: both; }

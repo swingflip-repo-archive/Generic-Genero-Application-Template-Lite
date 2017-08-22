@@ -238,3 +238,102 @@ FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of
     END CASE
 
 END FUNCTION
+#
+#
+#
+#
+FUNCTION wc_minesweeper_demo() #Webcomponent Demo (Minesweeper) window function (Part of Interactivity Demo)
+
+    DEFINE
+        f_level STRING,
+        f_result STRING
+        
+    IF global.g_info.deployment_type = "GDC"
+    THEN
+        OPEN WINDOW w WITH FORM "wc_minesweeper"
+    ELSE
+        OPEN WINDOW w WITH FORM "wc_minesweeper"
+    END IF
+
+    LET TERMINATE = FALSE
+    INITIALIZE global.g_instruction TO NULL
+    LET m_window = ui.Window.getCurrent()
+
+    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
+    THEN
+        CALL m_window.setText(global.g_title)
+    ELSE
+        IF global_config.g_enable_mobile_title = FALSE
+        THEN
+            CALL m_window.setText("")
+        ELSE
+            CALL m_window.setText(global.g_title)
+        END IF
+    END IF
+
+    LET TERMINATE = FALSE
+
+    WHILE TERMINATE = FALSE
+        MENU
+        
+            ON TIMER global_config.g_timed_checks_time
+                CALL connection_test()
+                CALL timed_upload_queue_data()
+                
+            BEFORE MENU
+                CALL connection_test()
+
+            ON ACTION bt_new_game
+                OPEN WINDOW w2 WITH FORM "wc_minesweeper_select"
+                INPUT f_level FROM level ATTRIBUTES(UNBUFFERED)
+
+                    BEFORE INPUT
+                        CALL DIALOG.setActionHidden("cancel",1)
+                        CALL DIALOG.setActionHidden("gamewinner",1)
+                        CALL DIALOG.setActionHidden("gameover",1)
+
+                    ON ACTION ACCEPT
+                        ACCEPT INPUT
+                    ON ACTION CANCEL
+                        #Do Nothing
+                          
+                    AFTER INPUT
+                        END INPUT
+                        CLOSE WINDOW w2
+                        INITIALIZE f_result TO NULL
+                        TRY 
+                            CALL ui.Interface.frontCall("webcomponent","call",["formonly.sweeperwc","new_game",f_level],[f_result])
+                        CATCH
+                            ERROR err_get(status)
+                            DISPLAY err_get(status)
+                        END TRY
+
+            ON ACTION gamewinner
+                CALL fgl_winmessage("Congratulations!", "YOU WIN!", "informaion")
+            ON ACTION gameover
+                CALL fgl_winmessage("Uh Oh!", "Game Over!", "informaion")
+                
+            ON ACTION bt_go_back
+                LET global.g_instruction = "go_back"
+                LET TERMINATE = TRUE
+                EXIT MENU                
+              
+        END MENU
+    END WHILE
+
+    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+        WHEN "go_back"
+            CLOSE WINDOW w
+            CALL interact_demo()
+        WHEN "logout"
+            INITIALIZE global.g_user TO NULL
+            INITIALIZE global.g_logged_in TO NULL
+            DISPLAY "Logged out successfully!"
+            CLOSE WINDOW w
+            CALL login_screen()
+        OTHERWISE
+            CALL ui.Interface.refresh()
+            CALL close_app()
+    END CASE
+
+END FUNCTION

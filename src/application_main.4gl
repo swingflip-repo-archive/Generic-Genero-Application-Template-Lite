@@ -177,10 +177,10 @@ FUNCTION run_splash_screen() #Application Splashscreen window function
 
     INITIALIZE f_result TO NULL
     TRY 
-      CALL ui.Interface.frontCall("webcomponent","call",["formonly.splashwc","setLocale",global.g_language_short],[f_result])
+        CALL ui.Interface.frontCall("webcomponent","call",["formonly.splashwc","setLocale",global.g_language_short],[f_result])
     CATCH
-      ERROR err_get(status)
-      DISPLAY err_get(status)
+        ERROR err_get(status)
+        DISPLAY err_get(status)
     END TRY
     
     LET TERMINATE = FALSE
@@ -610,6 +610,10 @@ FUNCTION interact_demo() #Interactivity Demo window function
                 LET f_words = %"main.string.Interact_Explanation"
                 DISPLAY f_words TO words
 
+            ON ACTION bt_minesweeper
+                LET global.g_instruction = "bt_minesweeper"
+                LET TERMINATE = TRUE
+                EXIT MENU
             ON ACTION bt_sign
                 LET global.g_instruction = "bt_sign"
                 LET TERMINATE = TRUE
@@ -631,6 +635,9 @@ FUNCTION interact_demo() #Interactivity Demo window function
     END WHILE
 
     CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
+        WHEN "bt_minesweeper"
+            CLOSE WINDOW w
+            CALL wc_minesweeper_demo()
         WHEN "bt_sign"
             CLOSE WINDOW w
             CALL wc_signature_demo()
