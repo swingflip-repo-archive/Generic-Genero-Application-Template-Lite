@@ -1,4 +1,4 @@
 MAIN
-    CALL db_resync("local_db.db") #This will destroy any db located in your working directory and replace it from the database
+    CALL db_resync("local_db.db","bin") #This will destroy any db located in your working directory and replace it from the database
                                   #folder.
 END MAIN

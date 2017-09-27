@@ -5,92 +5,99 @@ IMPORT os
 GLOBALS "globals.4gl"
 
 FUNCTION db_create_tables()
-    WHENEVER ERROR CONTINUE
+    TRY
+        EXECUTE IMMEDIATE "CREATE TABLE local_stat (
+            l_s_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            deployment_type VARCHAR(255) NOT NULL,
+            os_type VARCHAR(255) NOT NULL,
+            ip VARCHAR(255),
+            device_name VARCHAR(255),
+            resolution VARCHAR(255),
+            geo_location VARCHAR(255),
+            last_load DATETIME NOT NULL
+            );"
 
-    EXECUTE IMMEDIATE "CREATE TABLE local_stat (
-        l_s_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        deployment_type VARCHAR(255) NOT NULL,
-        os_type VARCHAR(255) NOT NULL,
-        ip VARCHAR(255),
-        device_name VARCHAR(255),
-        resolution VARCHAR(255),
-        geo_location VARCHAR(255),
-        last_load DATETIME NOT NULL
-        );"
+        EXECUTE IMMEDIATE "CREATE TABLE local_accounts (
+            l_u_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            username VARCHAR(255) NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            email VARCHAR(255),
+            phone INTEGER,
+            last_login DATETIME,
+            user_type VARCHAR(5),
+            CONSTRAINT l_u_unique UNIQUE (username)
+            );"
 
-    EXECUTE IMMEDIATE "CREATE TABLE local_accounts (
-        l_u_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        username VARCHAR(255) NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        email VARCHAR(255),
-        phone INTEGER,
-        last_login DATETIME,
-        user_type VARCHAR(5),
-        CONSTRAINT l_u_unique UNIQUE (username)
-        );"
+        EXECUTE IMMEDIATE "CREATE TABLE local_remember (
+            l_r_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            username VARCHAR(255),
+            remember SMALLINT NOT NULL,
+            last_modified DATETIME
+            );"
 
-    EXECUTE IMMEDIATE "CREATE TABLE local_remember (
-        l_r_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        username VARCHAR(255),
-        remember SMALLINT NOT NULL,
-        last_modified DATETIME
-        );"
+        EXECUTE IMMEDIATE "CREATE TABLE payload_queue (
+            p_q_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            requested_by VARCHAR(255) NOT NULL,
+            requested_date DATETIME NOT NULL,
+            last_attempted DATETIME,
+            destination VARCHAR(255) NOT NULL,
+            payload_type VARCHAR(64) NOT NULL,
+            payload BLOB NOT NULL
+            );"
 
-    EXECUTE IMMEDIATE "CREATE TABLE payload_queue (
-        p_q_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        requested_by VARCHAR(255) NOT NULL,
-        requested_date DATETIME NOT NULL,
-        last_attempted DATETIME,
-        destination VARCHAR(255) NOT NULL,
-        payload_type VARCHAR(64) NOT NULL,
-        payload BLOB NOT NULL
-        );"
-
-    EXECUTE IMMEDIATE "CREATE TABLE database_version (
-        d_v_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        db_version INTEGER,
-        last_updated DATETIME
-        );"
-
-    WHENEVER ERROR STOP
+        EXECUTE IMMEDIATE "CREATE TABLE database_version (
+            d_v_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            db_version INTEGER,
+            last_updated DATETIME
+            );"
+    CATCH
+        DISPLAY "CREATE: " || STATUS || " " || SQLERRMESSAGE
+    END TRY
 END FUNCTION
 #
 #
 #
 #
 FUNCTION db_create_defaults()
-    WHENEVER ERROR CONTINUE
-
+    TRY
         EXECUTE IMMEDIATE "DELETE FROM local_remember WHERE 1 = 1"
         EXECUTE IMMEDIATE "INSERT INTO local_remember VALUES(NULL,NULL,0,NULL)"
-    
-    WHENEVER ERROR STOP
+        EXECUTE IMMEDIATE "INSERT INTO database_version VALUES(NULL,1,\""||CURRENT YEAR TO SECOND||"\")"
+    CATCH
+        DISPLAY "DEFAULTS: " || STATUS || " " || SQLERRMESSAGE
+    END TRY
 END FUNCTION
 #
 #
 #
 #
 FUNCTION db_drop_tables()
-    WHENEVER ERROR CONTINUE
-
-    #EXECUTE IMMEDIATE "DROP TABLE local_stat"
-    #EXECUTE IMMEDIATE "DROP TABLE local_accounts"
-    #EXECUTE IMMEDIATE "DROP TABLE local_remember"
-    EXECUTE IMMEDIATE "DROP TABLE payload_queue"
-    
+    WHENEVER ERROR CONTINUE #We don't know the integrety of the database so we won't use a TRY/CATCH
+        EXECUTE IMMEDIATE "DROP TABLE database_version"
+        EXECUTE IMMEDIATE "DROP TABLE local_stat"
+        EXECUTE IMMEDIATE "DROP TABLE local_accounts"
+        EXECUTE IMMEDIATE "DROP TABLE local_remember"
+        EXECUTE IMMEDIATE "DROP TABLE payload_queue"
     WHENEVER ERROR STOP
 END FUNCTION
 #
 #
 #
 #
-FUNCTION db_resync(f_dbname)
+FUNCTION db_resync(f_dbname,f_external_path)
     DEFINE
         f_dbname STRING,
-        f_dbpath STRING
-        
-        LET f_dbpath = os.path.join(os.path.pwd(), f_dbname)
+        f_dbpath STRING,
+        f_external_path STRING
 
+        IF f_external_path IS NOT NULL
+        THEN
+            LET f_dbpath = os.path.join(os.path.join(os.path.join(os.path.pwd(), ".."), f_external_path), f_dbname)
+        ELSE
+            LET f_dbpath = os.path.join(os.path.pwd(), f_dbname)
+        END IF
+
+        DISPLAY f_dbpath
         IF os.path.delete(f_dbpath)
         THEN
             DISPLAY "Working directory database deleted! Initiating openDB()"
@@ -152,7 +159,7 @@ FUNCTION openDB(f_dbname,f_debug)
         LET f_msg = f_msg.append("Connected OK")
         CALL check_database_version(FALSE)
     CATCH
-        DISPLAY STATUS, f_msg||SQLERRMESSAGE
+        DISPLAY STATUS || " " || f_msg || SQLERRMESSAGE
     END TRY
   
     IF f_debug = TRUE
@@ -177,9 +184,11 @@ FUNCTION check_database_version (f_debug)
     IF f_count = 0
     THEN
         LET f_msg = "No database version within working db, "
-        WHENEVER ERROR CONTINUE
+        TRY
             INSERT INTO database_version VALUES(NULL, global_config.g_application_database_ver, CURRENT YEAR TO SECOND)
-        WHENEVER ERROR STOP
+        CATCH
+            DISPLAY STATUS || " " || SQLERRMESSAGE
+        END TRY
 
         IF sqlca.sqlcode <> 0
         THEN
@@ -199,9 +208,11 @@ FUNCTION check_database_version (f_debug)
     THEN
         LET f_msg = f_msg.append("Database version mismatch! Running db_create_tables()...\n")
         CALL db_create_tables() #Before this runs, you need to be confident that this function will work the way you want it... You have been warned!
-        WHENEVER ERROR CONTINUE
+        TRY
             UPDATE database_version SET db_version = global_config.g_application_database_ver, last_updated = CURRENT YEAR TO SECOND WHERE 1 = 1
-        WHENEVER ERROR STOP
+        CATCH
+            DISPLAY STATUS || " " || SQLERRMESSAGE
+        END TRY
 
         IF sqlca.sqlcode <> 0
         THEN

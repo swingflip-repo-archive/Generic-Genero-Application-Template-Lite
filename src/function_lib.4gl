@@ -221,9 +221,11 @@ FUNCTION capture_local_stats(f_info)
     
     LET f_ok = FALSE
     LET f_concat_geo = f_info.geo_lat || "*" || f_info.geo_lon #* is the delimeter.
-    #WHENEVER ERROR CONTINUE
+    TRY
         INSERT INTO local_stat VALUES(NULL, f_info.deployment_type, f_info.os_type, f_info.ip, f_info.device_name, f_info.resolution,  f_concat_geo, CURRENT YEAR TO SECOND)
-    #WHENEVER ERROR STOP
+    CATCH
+        DISPLAY STATUS || " " || SQLERRMESSAGE
+    END TRY
 
     IF sqlca.sqlcode <> 0
     THEN
@@ -238,9 +240,11 @@ FUNCTION capture_local_stats(f_info)
 
     IF f_count >= global_config.g_local_stat_limit
     THEN
-        WHENEVER ERROR CONTINUE
+        TRY
             DELETE FROM local_stat WHERE l_s_index = (SELECT MIN(l_s_index) FROM local_stat)
-        WHENEVER ERROR STOP
+        CATCH
+            DISPLAY STATUS || " " || SQLERRMESSAGE
+        END TRY
 
         IF sqlca.sqlcode <> 0
         THEN
@@ -355,9 +359,11 @@ FUNCTION refresh_local_remember(f_username,f_remember)
     CALL openDB("local_db.db",FALSE)
 
     LET f_ok = FALSE
-    WHENEVER ERROR CONTINUE
+    TRY
         UPDATE local_remember SET remember = f_remember, username = f_username, last_modified = CURRENT YEAR TO SECOND WHERE 1 = 1
-    WHENEVER ERROR STOP
+    CATCH
+        DISPLAY STATUS || " " || SQLERRMESSAGE
+    END TRY
 
     IF sqlca.sqlcode <> 0
     THEN
@@ -455,9 +461,11 @@ FUNCTION load_payload(f_user,f_type,f_payload)
     CALL get_payload_destination(f_type)
         RETURNING f_destination
 
-    WHENEVER ERROR CONTINUE
+    TRY
       INSERT INTO payload_queue VALUES(NULL,f_user,CURRENT YEAR TO SECOND,NULL,f_destination,f_type,f_payload)
-    WHENEVER ERROR STOP
+    CATCH
+        DISPLAY STATUS || " " || SQLERRMESSAGE
+    END TRY
 
     IF sqlca.sqlcode <> 0
     THEN

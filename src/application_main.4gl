@@ -105,7 +105,7 @@ FUNCTION initialise_app()
     # Here are globals not included in initialize_globals function due to sheer size of the arguement data...
     #        global_config.g_client_key STRING,                              #Unique Client key for webservice purposes
 
-       CALL sync_config("GGAT.config",TRUE)
+       CALL sync_config("GGAT.config",FALSE)
        CALL initialize_globals()
           RETURNING m_ok
           
