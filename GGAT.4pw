@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Project defaultApplication="400358049" gstVersion="30a05" version="3.2">
+<Project defaultApplication="400358049" gstVersion="30a06" version="3.2">
   <Settings>
     <DynamicProperties version="2">
       <DynamicProperty description="Accent color (Android 5.0 and later)" initialValue="#9575CD" isDefaultInherited="false" isHidden="false" label="Accent color" name="gma-accent-color" readOnly="false" type="COLOR"/>
@@ -150,7 +150,7 @@
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
   </Group>
-  <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,value:FGLIMAGEPATH=$(ProjectDir)\\images\\my_image2font.txt;$(ProjectDir)\\images;$(FGLDIR)\\lib\\image2font.txt;$(FGLIMAGEPATH);..,value:LinuxMac_FGLIMAGEPATH=$(ProjectDir)/images/my_image2font.txt:$(ProjectDir)/images:$(FGLDIR)/lib/image2font.txt:$(FGLIMAGEPATH):..,value:DBPATH=$(ProjectDir)\\database;$(DBPATH),value:LinuxMac_DBPATH=$(ProjectDir)/database:$(DBPATH)" label="Project" language="Genero">
+  <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,value:FGLIMAGEPATH=..\\images\\my_image2font.txt;..\\images;$(FGLDIR)\\lib\\image2font.txt;$(FGLIMAGEPATH);..,value:LinuxMac_FGLIMAGEPATH=../images/my_image2font.txt:../images:$(FGLDIR)/lib/image2font.txt:$(FGLIMAGEPATH):..,value:DBPATH=$(ProjectDir)\\database;$(DBPATH),value:LinuxMac_DBPATH=$(ProjectDir)/database:$(DBPATH)" label="Project" language="Genero">
     <Application binaryName="Application" dependencies="212784684" id="400358049" label="Application">
       <VirtualFolder label="Forms">
         <VirtualFolder label="General Forms">
