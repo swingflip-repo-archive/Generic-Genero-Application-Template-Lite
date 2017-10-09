@@ -4,7 +4,7 @@
 "main.string.Bad_Username"="Mauvais nom d'utilisateur"
 "main.string.Bad_Password"="Mauvais mot de passe"
 "main.string.Incorrect_Username"="Identifiant ou Mot de Passe Incorrect"
-"main.string.Admin_Explanation"="Ceci est une sélection d'outils de développement \"TRES\" basiques, qui devraient être exécutés par le gdc.\n\n Ces fonctions n'ont pas de validation d'entrée et donc ne devraient être utilisées qu'à des fins de test! Elles risque de faire crash l'application si vous ne les utilisez pas correctement...\n\n L'objectif principal de cette section est de présenter une «section d'administration seulement» dans l'application."
+"main.string.Admin_Explanation"="Ceci est une sélection d'outils de base d'administration et de développement basiques qui devraient vous aider à développer et à maintenir."
 "main.string.Error_Title"="Erreur Fatale!"
 "main.string.Bad_Access"="Vous avez essayé d'accéder à une zone que vous ne devriez pas... Déconnexion!"
 "main.string.Photo_Explanation"="Ici, vous pouvez prendre des photos et les transférer dans le cloud. Lorsque vous confirmez votre sélection, les photos seront compressées et stockées dans une base de données locale prête à être transportées.\n\nLorsque vous avez une connexion réseau robuste et un accès au serveur Web, l'application enverra la charge utile au service Web et attendra la confirmation avant de supprimer l'image de la file d'attente.\n\nVous pouvez enregistrer autant de photos dans la file d'attente que vous le souhaitez et elles ne seront supprimées qu'après avoir été reçues avec succès par le cloud."
