@@ -33,6 +33,7 @@ GGAT was built using Genero Studio 3.10.xx and has been coded and thoroughly tes
     - Youtube Video Player
     - Signature Capture Demo
     - Google Maps Integration Demo
+    - Minesweeper Game Demo (90% complete...I'm intending on make this it's own project)
   - Admin controls (add users, remove users and other basic admin functions) 
   - Specific User Type or Device accessable areas
   - Network synchronisation tools for end user
@@ -60,7 +61,15 @@ To Develop using GGAT you must have a valid and active development license for G
 
   1) Use your prefered GIT method and fork to your development machine...
   2) Open the GGAT GST project file `projectdir/GGAT.4pl`
-  3) Hit Compile and Go! (The Default login details are... Username: Ryan Password: a)
+  3) Hit Compile and Go! 
+  
+### Important Notes
+
+When using GGAT please take note of the following:
+
+* Make sure your GST langauge settings are set to UTF-8 to ensure cross platform compatibility
+* Depending on what platform you are developing on, choose the correct FGLIMAGEPATH settings in the project environment settings (http://prntscr.com/gv8qaw)
+* When deploying via GAS, there are two bundled .xcf files, a Linux and a Windows file. Make sure you use the correct file according to your gas server platform. You might want to check the xcf file settings to ensure they match your server configuration
 
 ### Configuration 
 
