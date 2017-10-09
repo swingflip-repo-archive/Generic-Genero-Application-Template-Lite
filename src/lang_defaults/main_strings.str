@@ -4,9 +4,7 @@
 "main.string.Bad_Username"="Bad Username"
 "main.string.Bad_Password"="Bad Password"
 "main.string.Incorrect_Username"="Incorrect Username or Password"
-"main.string.Admin_Explanation"="This is a selection of basic admin and development tools which
-should assist you in developing and maintaining your application. You
-should change these tools to suit your production application."
+"main.string.Admin_Explanation"="This is a selection of basic admin and development tools which should assist you in developing and maintaining your application. You should change these tools to suit your production application."
 "main.string.Error_Title"="Fatal Error!"
 "main.string.Bad_Access"="You have tried to access an area you shouldn't...Logging out!"
 "main.string.Photo_Explanation"="Here you can take some photos, and upload them to the cloud. When you confirm your selection, the photos will be compressed and stored locally in a local database ready for transport.\n\nWhen you have a solid network connection and access to the webserver, the app will send the payload to the webservice and await confirmation before removing the image from the queue.\n\nYou can save as many photos in the queue as you wish and they will only be removed once they have been successfully recieved by the cloud."
