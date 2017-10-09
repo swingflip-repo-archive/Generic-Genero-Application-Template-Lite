@@ -5,7 +5,7 @@
   <EXECUTION>
     <ENVIRONMENT_VARIABLE Id="FGLPROFILE">fglprofile</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="FGLRESOURCEPATH">$(res.path.GGAT)/bin/resources;$(res.path.GGAT)/bin/defaults</ENVIRONMENT_VARIABLE>
-    <ENVIRONMENT_VARIABLE Id="FGLIMAGEPATH">$(res.path.GGAT)/bin/images/my_image2font.txt;$(res.path.GGAT)/bin/images;$(FGLDIR)/lib/image2font.txt;$(FGLIMAGEPATH);..</ENVIRONMENT_VARIABLE>
+    <ENVIRONMENT_VARIABLE Id="FGLIMAGEPATH">$(res.path.GGAT)/bin/images/my_image2font.txt;$(res.path.GGAT)/bin/images;$(res.fgldir)/lib/image2font.txt;$(FGLIMAGEPATH);..</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="GREDIR">$(res.gre)</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="FGLLDPATH">$(res.gre)/lib</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="DBPATH">$(res.path.GGAT)/bin/database;$(DBPATH)</ENVIRONMENT_VARIABLE>

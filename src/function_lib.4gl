@@ -604,6 +604,32 @@ FUNCTION set_localised_image(f_image)
     RETURN f_image #We should never reach this point but just incase...
     
 END FUNCTION
+
+FUNCTION check_new_install()
+
+    DEFINE
+        f_count INTEGER
+
+    #0-USERFOUND,#1-NEWINSTALL,#2-DBERROR
+
+    CALL openDB("local_db.db",FALSE)
+    
+    TRY
+        SELECT COUNT(*) INTO f_count FROM local_accounts
+    CATCH
+        DISPLAY STATUS || " " || SQLERRMESSAGE
+        CALL fgl_winmessage("ERROR", STATUS || " " || SQLERRMESSAGE, "stop")
+        RETURN 2
+    END TRY
+
+    IF f_count == 0 
+    THEN
+        RETURN 1
+    ELSE
+        RETURN 0
+    END IF
+    
+END FUNCTION
 #
 #
 #

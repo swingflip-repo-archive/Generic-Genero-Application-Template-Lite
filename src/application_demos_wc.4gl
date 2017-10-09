@@ -50,7 +50,11 @@ FUNCTION wc_signature_demo() #Webcomponent Demo (Signature) window function (Par
                 
             BEFORE MENU
                 CALL connection_test()
-              
+                
+            ON ACTION CLOSE
+                LET global.g_instruction = "go_back"
+                LET TERMINATE = TRUE
+                EXIT MENU           
             ON ACTION bt_go_back
                 LET global.g_instruction = "go_back"
                 LET TERMINATE = TRUE
@@ -125,7 +129,10 @@ LABEL go_back_wc_maps_demo:
             CALL DIALOG.setActionHidden("accept",1)
             CALL DIALOG.setActionHidden("cancel",1)
             CALL DIALOG.setActionHidden("mapclicked",1)
-
+            
+        ON ACTION CLOSE
+            LET global.g_instruction = "go_back"
+            EXIT INPUT
         ON ACTION ACCEPT
             #Do Nothing
         ON ACTION CANCEL
@@ -213,7 +220,11 @@ FUNCTION wc_video_demo() #Webcomponent Demo (Signature) window function (Part of
                 
             BEFORE MENU
                 CALL connection_test()
-              
+
+            ON ACTION CLOSE
+                LET global.g_instruction = "go_back"
+                LET TERMINATE = TRUE
+                EXIT MENU                
             ON ACTION bt_go_back
                 LET global.g_instruction = "go_back"
                 LET TERMINATE = TRUE
@@ -282,6 +293,11 @@ FUNCTION wc_minesweeper_demo() #Webcomponent Demo (Minesweeper) window function 
                 
             BEFORE MENU
                 CALL connection_test()
+
+            ON ACTION CLOSE
+                LET global.g_instruction = "go_back"
+                LET TERMINATE = TRUE
+                EXIT MENU  
 
             ON ACTION bt_new_game
                 OPEN WINDOW w2 WITH FORM "wc_minesweeper_select"

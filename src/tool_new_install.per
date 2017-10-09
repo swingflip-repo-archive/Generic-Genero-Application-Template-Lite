@@ -1,0 +1,34 @@
+LAYOUT ( STYLE="main" )
+VBOX 
+GROUP (TEXT=%"tool.per.New_Install")
+GRID
+{
+[username                                     ]
+[" "]
+[password                                     ]
+[confirm_password                             ]
+[" "]
+[user_type                                    ]
+[email                                        ]
+[telephone                                    ]
+[spacer                                       ]
+[bt_submit                                    ]
+}
+END
+END #GROUP
+END #VBOX
+END  #LAYOUT
+
+ATTRIBUTES
+EDIT username=FORMONLY.username, PLACEHOLDER=%"tool.per.Username", JUSTIFY=LEFT;
+EDIT password=FORMONLY.password, INVISIBLE, PLACEHOLDER=%"tool.per.Password", JUSTIFY=LEFT;
+EDIT confirm_password=FORMONLY.confirm_password, INVISIBLE, PLACEHOLDER=%"tool.per.Confirm_Password", JUSTIFY=LEFT;
+COMBOBOX user_type=FORMONLY.user_type, PLACEHOLDER=%"tool.per.User_Type", NOT NULL, JUSTIFY=LEFT, ITEMS = (("ADMIN","Admin"), ("USER1","User Group A"),
+                                                                                                          ("USER2","User Group B"), ("USER3","User Group C"));
+EDIT email=FORMONLY.email, PLACEHOLDER=%"tool.per.Email", JUSTIFY=LEFT;
+EDIT telephone=FORMONLY.telephone, PLACEHOLDER=%"tool.per.Telephone", JUSTIFY=LEFT;                                                                                           
+TEXTEDIT spacer=FORMONLY.spacer, NOENTRY, SCROLLBARS=NONE, SIZEPOLICY=FIXED,STRETCH=BOTH, STYLE="noBorder";
+BUTTON bt_submit : bt_submit, TEXT=%"tool.per.Submit";
+
+END
+

@@ -64,7 +64,7 @@
     <Package binaryName="GGAT_Android" dependencies="781919164,715422167,313644474,212784684,400358049" description="Android Package" label="GGAT_Android" platform="Android">
       <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
       <DynamicProperty name="gma-actionbar-color" value="#5f5f5f"/>
-      <DynamicProperty name="gma-primary-color" value="#1c9f08"/>
+      <DynamicProperty name="gma-primary-color" value="#5f9f9f"/>
       <DynamicProperty name="gma-primary-dark-color" value="#5f9f9f"/>
       <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/icon/hdpi.png"/>
       <DynamicProperty name="icon-ldpi" value="$(ProjectDir)/images/icon/ldpi.png"/>
@@ -73,7 +73,6 @@
       <DynamicProperty name="icon-xxhdpi" value="$(ProjectDir)/images/icon/xxhdpi.png"/>
       <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
       <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
-      <DynamicProperty name="packageVersionName" value="0.8"/>
       <DynamicProperty name="permissions" value="ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;CHANGE_NETWORK_STATE;INSTALL_SHORTCUT;INTERNET;MOUNT_FORMAT_FILESYSTEMS;READ_LOGS;READ_PHONE_STATE"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile,*.config" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
@@ -121,7 +120,6 @@
       <DynamicProperty name="icon87x87" value="$(ProjectDir)/images/icon/Icon-Small@3x.png"/>
       <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
       <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
-      <DynamicProperty name="packageVersionName" value="0.8"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile,*.config" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
@@ -150,7 +148,7 @@
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
   </Group>
-  <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,value:FGLIMAGEPATH=..\\images\\my_image2font.txt;..\\images;$(FGLDIR)\\lib\\image2font.txt;$(FGLIMAGEPATH);..,value:LinuxMac_FGLIMAGEPATH=../images/my_image2font.txt:../images:$(FGLDIR)/lib/image2font.txt:$(FGLIMAGEPATH):..,value:DBPATH=$(ProjectDir)\\database;$(DBPATH),value:LinuxMac_DBPATH=$(ProjectDir)/database:$(DBPATH)" label="Project" language="Genero">
+  <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,value:win_FGLIMAGEPATH=..\\images\\my_image2font.txt;..\\images;$(FGLDIR)\\lib\\image2font.txt;$(FGLIMAGEPATH);..,value:FGLIMAGEPATH=../images/my_image2font.txt:../images:$(FGLDIR)/lib/image2font.txt:$(FGLIMAGEPATH):..,value:DBPATH=$(ProjectDir)\\database;$(DBPATH),value:LinuxMac_DBPATH=$(ProjectDir)/database:$(DBPATH)" label="Project" language="Genero">
     <Application binaryName="Application" dependencies="212784684" id="400358049" label="Application">
       <VirtualFolder label="Forms">
         <VirtualFolder label="General Forms">
@@ -169,6 +167,7 @@
           <File filePath="src/tool_check_password.per"/>
           <File filePath="src/tool_create_user.per"/>
           <File filePath="src/tool_hash_generator.per"/>
+          <File filePath="src/tool_new_install.per"/>
           <File filePath="src/tool_user_management.per"/>
         </VirtualFolder>
         <VirtualFolder label="Web Comp Forms">

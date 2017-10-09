@@ -10,4 +10,5 @@
 "tool.per.User_Type" = "Select User Type"
 "tool.per.Email" = "Email (optional)"
 "tool.per.Telephone" = "Telephone (optional)"
+"tool.per.New_Install" = "New Installation"
 

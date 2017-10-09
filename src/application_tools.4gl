@@ -314,7 +314,7 @@ FUNCTION tool_create_user() #Tool to check if a password for a user is correct o
             CALL hash_password(f_password) RETURNING m_ok, f_hashed_string
              
             TRY
-                INSERT INTO local_accounts VALUES(NULL,f_username,f_password,f_email,f_telephone,NULL,f_user_type)
+                INSERT INTO local_accounts VALUES(NULL,f_username,f_hashed_string,f_email,f_telephone,NULL,f_user_type)
             CATCH
                 CALL fgl_winmessage("User Create Tool","ERROR: could not create user in the database -" || sqlca.sqlcode,"stop")
                 EXIT PROGRAM 999
