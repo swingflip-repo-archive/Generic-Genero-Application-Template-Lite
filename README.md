@@ -13,6 +13,13 @@ GGAT was built using Genero Studio 3.10.xx and has been coded and thoroughly tes
   - Android Devices
   - Javascript enabled web browsers
 
+### NEW "Lite" Version available!
+The new Lite version of GGAT comes without any of the demos and comes with the bare bones basics making it a perfect template for your mobile applications. You can find the "lite" version by clicking on the icon below...
+[![GGAT Standard Version](https://i.imgur.com/BIDaNRF.png)](https://github.com/swingflip/Generic-Genero-Application-Template)&nbsp;&nbsp;[![GGAT Lite Version](https://i.imgur.com/zcEMnbm.png)](https://github.com/swingflip/Generic-Genero-Application-Template-Lite)
+
+Standard Version Repo&nbsp;&nbsp;Lite Version
+
+
 ### GGAT's Main Features
   - Fully structured GST project with all configs already set up. Just compile and go!
   - Built in app and db maintenance tools with DB modification scripts.
@@ -76,37 +83,27 @@ When using GGAT please take note of the following:
 GGAT comes packed with a load of different configurable variables for you to tweak to adapt the template so it will function the way you want it. Currently the configurable variables are listed below:
 
 ```
-    #Application Information
-        g_application_title STRING,            #Application Title
-        g_application_version STRING,          #Application Version
-        g_application_about STRING,            #Application About Blurb
-        g_application_database_ver INTEGER,    #Application Database Version (This is useful to force database additions to pre-existing db instances) 
-
-    #Webservice variables
-        g_client_key STRING,                  #Unique Client key for webservice purposes
-        g_image_dest STRING,                  #Webserver destination for image payloads. i.e. "Webservice_1" (Not used as of yet, because you should be able to fglWSDL this is pretty redundant)
-        g_ws_end_point STRING,                #The webservice end point. 
-        
-    #Application Image variables
-        g_splash_width STRING,                #Login menu splash width when not in mobile
-        g_splash_height STRING,               #Login menu splash height when not in mobile
-
-    #Application on/off toggles
-        g_enable_geolocation SMALLINT,        #Toggle to enable geolocation
-        g_enable_mobile_title SMALLINT,       #Toggle application title on mobile
-
-    #Timed event toggles and variables
-        g_timed_checks_time INTEGER,          #Time in seconds before running auto checks, uploads or refreshes (0 disables this globally)
-        g_enable_timed_connect SMALLINT,      #Enable timed connectivity checks
-        g_enable_timed_image_upload SMALLINT, #Enable timed image queue uploads (Could have a performance impact!)
-
-    #General application variables
-        g_enable_splash SMALLINT,             #Open splashscreen when opening the application.
-        g_splash_duration SMALLINT,           #Splashscreen duration (seconds) g_enable_splash needs to be enabled!
-        g_enable_login SMALLINT,              #Boot in to login menu or straight into application (open_application())
-        g_local_stat_limit INTEGER,           #Number of max local stat records before pruning
-        g_online_ping_URL STRING,             #URL of public site to test internet connectivity (i.e. http://www.google.com)
-        g_date_format STRING                  #Datetime format. i.e. "%d/%m/%Y %H:%M"
+{
+    "g_application_database_ver": 1,
+    "g_client_key": "znbi58mCGZXSBNkJ5GouFuKPLqByReHvtrGj7aXXuJmHGFr89Xp7uCqDcVCv",
+    "g_image_dest": "webserver1",
+    "g_ws_end_point": "http://www.ryanhamlin.co.uk/ws",
+    "g_splash_width": "500px",
+    "g_splash_height": "281px",
+    "g_enable_geolocation": 0,
+    "g_enable_mobile_title": 0,
+    "g_timed_checks_time": 10,
+    "g_enable_timed_connect": 1,
+    "g_enable_timed_image_upload": 1,
+    "g_enable_splash": 1,
+    "g_splash_duration": 4,
+    "g_enable_login": 1,
+    "g_local_stat_limit": 100,
+    "g_online_ping_URL": "http://www.google.com",
+    "g_date_format": "%d/%m/%Y %H:%M",
+    "g_default_language": "EN",
+    "g_local_images_available": ["EN","FR"]
+}
 ```
 To set the values of the config variables look for the `initialize_globals()` function which is located near the top of `main.4gl`
 
