@@ -35,16 +35,6 @@ FUNCTION db_create_tables()
             last_modified DATETIME
             );"
 
-        EXECUTE IMMEDIATE "CREATE TABLE payload_queue (
-            p_q_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            requested_by VARCHAR(255) NOT NULL,
-            requested_date DATETIME NOT NULL,
-            last_attempted DATETIME,
-            destination VARCHAR(255) NOT NULL,
-            payload_type VARCHAR(64) NOT NULL,
-            payload BLOB NOT NULL
-            );"
-
         EXECUTE IMMEDIATE "CREATE TABLE database_version (
             d_v_index INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             db_version INTEGER,
@@ -77,7 +67,6 @@ FUNCTION db_drop_tables()
         EXECUTE IMMEDIATE "DROP TABLE local_stat"
         EXECUTE IMMEDIATE "DROP TABLE local_accounts"
         EXECUTE IMMEDIATE "DROP TABLE local_remember"
-        EXECUTE IMMEDIATE "DROP TABLE payload_queue"
     WHENEVER ERROR STOP
 END FUNCTION
 #

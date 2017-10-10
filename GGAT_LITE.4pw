@@ -61,7 +61,7 @@
   <LanguageList version="1.0"/>
   <PlatformList version="1.0"/>
   <Group label="Packages" language="Genero">
-    <Package binaryName="GGAT_Android" dependencies="781919164,715422167,313644474,212784684,400358049" description="Android Package" label="GGAT_Android" platform="Android">
+    <Package binaryName="GGAT_Android_LITE" dependencies="781919164,715422167,313644474,212784684,400358049" description="Android Package" label="GGAT_Android_LITE" platform="Android">
       <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
       <DynamicProperty name="gma-actionbar-color" value="#5f5f5f"/>
       <DynamicProperty name="gma-primary-color" value="#5f9f9f"/>
@@ -71,8 +71,8 @@
       <DynamicProperty name="icon-mdpi" value="$(ProjectDir)/images/icon/mdpi.png"/>
       <DynamicProperty name="icon-xhdpi" value="$(ProjectDir)/images/icon/xhdpi.png"/>
       <DynamicProperty name="icon-xxhdpi" value="$(ProjectDir)/images/icon/xxhdpi.png"/>
-      <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
-      <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
+      <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT_LITE"/>
+      <DynamicProperty name="packageLabel" value="Generic Genero App Template LITE"/>
       <DynamicProperty name="permissions" value="ACCESS_NETWORK_STATE;ACCESS_WIFI_STATE;CHANGE_NETWORK_STATE;INSTALL_SHORTCUT;INTERNET;MOUNT_FORMAT_FILESYSTEMS;READ_LOGS;READ_PHONE_STATE"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile,*.config" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
@@ -86,9 +86,9 @@
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="GGAT_GAR" dependencies="212784684,400358049" description="GAR Package" label="GGAT_GAR" platform="Genero Application Server">
-      <DynamicProperty name="packageId" value="GGAT"/>
-      <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
+    <Package binaryName="GGAT_GAR_LITE" dependencies="212784684,400358049" description="GAR Package" label="GGAT_GAR_LITE" platform="Genero Application Server">
+      <DynamicProperty name="packageId" value="GGAT_LITE"/>
+      <DynamicProperty name="packageLabel" value="Generic Genero App Template LITE "/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="fglprofile,*.config" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin/bin/" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
@@ -102,7 +102,7 @@
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="GGAT_iOS" dependencies="781919164,715422167,313644474,212784684,400358049" description="iOS Package" label="GGAT_iOS" platform="iOS">
+    <Package binaryName="GGAT_iOS_LITE" dependencies="781919164,715422167,313644474,212784684,400358049" description="iOS Package" label="GGAT_iOS_LITE" platform="iOS">
       <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
       <DynamicProperty name="gma-actionbar-color" value="#5f5f5f"/>
       <DynamicProperty name="gma-primary-color" value="#eeeeee"/>
@@ -118,8 +118,8 @@
       <DynamicProperty name="icon76x76" value="$(ProjectDir)/images/icon/Icon-76.png"/>
       <DynamicProperty name="icon80x80" value="$(ProjectDir)/images/icon/AppIcon40x40@2x.png"/>
       <DynamicProperty name="icon87x87" value="$(ProjectDir)/images/icon/Icon-Small@3x.png"/>
-      <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
-      <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
+      <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT_LITE"/>
+      <DynamicProperty name="packageLabel" value="Generic Genero App Template LITE"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile,*.config" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
@@ -132,9 +132,9 @@
       <Directory description="Template Resources" destinationDirectory="$(ProjectDir)/bin" includedFiles="mobile_dbapp.4ad,dbapp.4st" label="Resources_dbapp" recursive="false" sourceDirectory="$(GSTSETUPDIR)/styles"/>
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
-    <Package binaryName="GGAT_iOS_Simulator" dependencies="781919164,212784684,715422167,313644474,400358049" description="iOS Simulator Package" label="GGAT_iOS_Simulator" platform="iOS Simulator">
-      <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT"/>
-      <DynamicProperty name="packageLabel" value="Generic Genero App Template"/>
+    <Package binaryName="GGAT_iOS_Simulator_LITE" dependencies="781919164,212784684,715422167,313644474,400358049" description="iOS Simulator Package" label="GGAT_iOS_Simulator_LITE" platform="iOS Simulator">
+      <DynamicProperty name="packageId" value="com.ryanhamlin.GGAT_LITE"/>
+      <DynamicProperty name="packageLabel" value="Generic Genero App Template_LITE"/>
       <Directory description="Binaries" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.42?" label="Binaries" recursive="false" sourceDirectory="$(ProjectDir)/bin"/>
       <Directory description="Configuration Files" destinationDirectory="$(ProjectDir)/bin" includedFiles="fglprofile,*.config" label="Config" recursive="false" sourceDirectory="$(ProjectDir)/config"/>
       <Directory description="Database" destinationDirectory="$(ProjectDir)/bin" includedFiles="*.db" label="Database" recursive="false" sourceDirectory="$(ProjectDir)/database"/>
@@ -156,11 +156,8 @@
           <File filePath="src/admin_gdc.per"/>
           <File filePath="src/connection.per"/>
           <File filePath="src/connection_gdc.per"/>
-          <File filePath="src/interact.per"/>
-          <File filePath="src/interact_gdc.per"/>
           <File filePath="src/main.per"/>
           <File filePath="src/main_gdc.per"/>
-          <File filePath="src/photo.per"/>
           <File filePath="src/splash_screen.per"/>
         </VirtualFolder>
         <VirtualFolder label="Tool Forms">
@@ -170,16 +167,7 @@
           <File filePath="src/tool_new_install.per"/>
           <File filePath="src/tool_user_management.per"/>
         </VirtualFolder>
-        <VirtualFolder label="Web Comp Forms">
-          <File filePath="src/wc_google_maps.per"/>
-          <File filePath="src/wc_minesweeper.per"/>
-          <File filePath="src/wc_minesweeper_select.per"/>
-          <File filePath="src/wc_signature.per"/>
-          <File filePath="src/wc_video.per"/>
-        </VirtualFolder>
       </VirtualFolder>
-      <File filePath="src/application_demos.4gl"/>
-      <File filePath="src/application_demos_wc.4gl"/>
       <File filePath="src/application_main.4gl"/>
       <File filePath="src/application_tools.4gl"/>
       <File filePath="src/main.4gl"/>
@@ -200,8 +188,6 @@
       <File filePath="src/database_funcs.4gl"/>
       <File filePath="src/function_lib.4gl"/>
       <File filePath="src/globals.4gl"/>
-      <File filePath="src/imageWS_imageWSPort.4gl"/>
-      <File filePath="src/imageWS_imageWSPort.inc"/>
     </Library>
     <Library binaryName="Localisation Files (defaults)" id="250541541" label="Localisation Files (defaults)" targetDirectory="$(ProjectDir)/bin/defaults">
       <VirtualFolder label="____README____">
@@ -211,10 +197,8 @@
         <File filePath="src/lang_defaults/admin_per.str"/>
         <File filePath="src/lang_defaults/connection_per.str"/>
         <File filePath="src/lang_defaults/function_lib_strings.str"/>
-        <File filePath="src/lang_defaults/interact_per.str"/>
         <File filePath="src/lang_defaults/main_per.str"/>
         <File filePath="src/lang_defaults/main_strings.str"/>
-        <File filePath="src/lang_defaults/photo_per.str"/>
         <File filePath="src/lang_defaults/tool_per.str"/>
         <File filePath="src/lang_defaults/tool_strings.str"/>
       </VirtualFolder>
@@ -224,10 +208,8 @@
         <File filePath="src/lang_fr/admin_per.str"/>
         <File filePath="src/lang_fr/connection_per.str"/>
         <File filePath="src/lang_fr/function_lib_strings.str"/>
-        <File filePath="src/lang_fr/interact_per.str"/>
         <File filePath="src/lang_fr/main_per.str"/>
         <File filePath="src/lang_fr/main_strings.str"/>
-        <File filePath="src/lang_fr/photo_per.str"/>
         <File filePath="src/lang_fr/tool_per.str"/>
         <File filePath="src/lang_fr/tool_strings.str"/>
       </VirtualFolder>
@@ -238,27 +220,9 @@
       <File filePath="images/my_image2font.txt"/>
     </Library>
     <Library binaryName="Webcomponents" excludeFromBuild="true" id="327340596" label="Webcomponents">
-      <VirtualFolder label="gm">
-        <File filePath="webcomponents/gm/gm.html"/>
-        <File filePath="webcomponents/gm/gm.js"/>
-      </VirtualFolder>
-      <VirtualFolder label="minesweeper">
-        <File filePath="webcomponents/minesweeper/minesweeper-c.js"/>
-        <File filePath="webcomponents/minesweeper/minesweeper.css"/>
-        <File filePath="webcomponents/minesweeper/minesweeper.html"/>
-        <File filePath="webcomponents/minesweeper/minesweeper.js"/>
-      </VirtualFolder>
-      <VirtualFolder label="signature">
-        <File filePath="webcomponents/signature/signature.html"/>
-        <File filePath="webcomponents/signature/signature.js"/>
-      </VirtualFolder>
       <VirtualFolder label="splash">
         <File filePath="webcomponents/splash/splash.html"/>
         <File filePath="webcomponents/splash/splash.js"/>
-      </VirtualFolder>
-      <VirtualFolder label="video">
-        <File filePath="webcomponents/video/video.html"/>
-        <File filePath="webcomponents/video/video.js"/>
       </VirtualFolder>
     </Library>
   </Group>

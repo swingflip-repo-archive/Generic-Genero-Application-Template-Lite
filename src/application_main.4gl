@@ -103,7 +103,6 @@ FUNCTION initialise_app()
     #        global_config.g_local_images_available DYNAMIC ARRAY OF CHAR(2) #Available localisations for images.
     #        global_config.g_default_language STRING,                        #The default language used within the application (i.e. EN)
     # Here are globals not included in initialize_globals function due to sheer size of the arguement data...
-    #        global_config.g_client_key STRING,                              #Unique Client key for webservice purposes
 
        CALL sync_config("GGAT.config",FALSE)
        CALL initialize_globals()
@@ -437,7 +436,6 @@ FUNCTION login_screen() #Local Login window function
 
             ON TIMER global_config.g_timed_checks_time
                 CALL connection_test()
-                CALL timed_upload_queue_data()
             
             BEFORE INPUT
                 CALL connection_test()
@@ -541,7 +539,6 @@ FUNCTION open_application() #First Application window function (Demo purposes lo
         
             ON TIMER global_config.g_timed_checks_time
                 CALL connection_test()
-                CALL timed_upload_queue_data()
                 CALL update_connection_image("splash")
                 
             BEFORE MENU
@@ -554,24 +551,9 @@ FUNCTION open_application() #First Application window function (Demo purposes lo
                     LET m_form = m_window.getForm() #Just to be consistent
                     CALL m_form.setElementHidden("bt_admint",0)
                 END IF
-                IF global.g_info.deployment_type = "GMA" OR global.g_info.deployment_type = "GMI"
-                THEN
-                    LET m_form = m_window.getForm() #Just to be consistent
-                    CALL m_form.setElementHidden("bt_photo",0) #Photo uploads exclusive to mobile
-                END IF
             ON ACTION CLOSE
                 LET TERMINATE = TRUE
                 EXIT MENU
-            ON ACTION bt_inter
-                LET global.g_instruction = "bt_inter"
-                LET TERMINATE = TRUE
-                EXIT MENU
-            ON ACTION bt_photo
-                LET global.g_instruction = "bt_photo"
-                LET TERMINATE = TRUE
-                EXIT MENU
-            ON ACTION bt_sync
-                CALL upload_image_payload(FALSE)
             ON ACTION bt_admint
                 LET global.g_instruction = "admint"
                 LET TERMINATE = TRUE
@@ -585,12 +567,6 @@ FUNCTION open_application() #First Application window function (Demo purposes lo
     END WHILE
 
     CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
-        WHEN "bt_inter"
-            CLOSE WINDOW w
-            CALL interact_demo()
-        WHEN "bt_photo"
-            CLOSE WINDOW w
-            CALL image_program()
         WHEN "admint"
             CLOSE WINDOW w
             CALL admin_tools()
@@ -645,7 +621,6 @@ FUNCTION admin_tools() #Rough Development Tools window function (Mainly to showc
         
             ON TIMER global_config.g_timed_checks_time
                 CALL connection_test()
-                CALL timed_upload_queue_data()
                 
             BEFORE MENU
                 CALL connection_test()
@@ -702,107 +677,6 @@ FUNCTION admin_tools() #Rough Development Tools window function (Mainly to showc
         WHEN "bt_hash"
             CLOSE WINDOW w
             CALL tool_hash_generator()
-        WHEN "go_back"
-            CLOSE WINDOW w
-            CALL open_application()
-        WHEN "logout"
-            INITIALIZE global.g_user TO NULL
-            INITIALIZE global.g_logged_in TO NULL
-            DISPLAY "Logged out successfully!"
-            CLOSE WINDOW w
-            CALL login_screen()
-        OTHERWISE
-            CALL ui.Interface.refresh()
-            CALL close_app()
-    END CASE
-
-END FUNCTION
-#
-#
-#
-#
-FUNCTION interact_demo() #Interactivity Demo window function
-
-    DEFINE
-        f_words STRING
-
-    IF global.g_info.deployment_type = "GDC"
-    THEN
-        OPEN WINDOW w WITH FORM "interact_gdc"
-    ELSE
-        OPEN WINDOW w WITH FORM "interact"
-    END IF
-
-    LET TERMINATE = FALSE
-    INITIALIZE global.g_instruction TO NULL
-    LET m_window = ui.Window.getCurrent()
-
-    IF global.g_info.deployment_type <> "GMA" AND global.g_info.deployment_type <> "GMI"
-    THEN
-        CALL m_window.setText(global.g_title)
-    ELSE
-        IF global_config.g_enable_mobile_title = FALSE
-        THEN
-            CALL m_window.setText("")
-        ELSE
-            CALL m_window.setText(global.g_title)
-        END IF
-    END IF
-
-    LET TERMINATE = FALSE
-
-    WHILE TERMINATE = FALSE
-        MENU
-        
-            ON TIMER global_config.g_timed_checks_time
-                CALL connection_test()
-                CALL timed_upload_queue_data()
-                
-            BEFORE MENU
-                CALL connection_test()
-                LET f_words = %"main.string.Interact_Explanation"
-                DISPLAY f_words TO words
-
-            ON ACTION CLOSE
-                LET TERMINATE = TRUE
-                EXIT MENU
-            ON ACTION bt_minesweeper
-                LET global.g_instruction = "bt_minesweeper"
-                LET TERMINATE = TRUE
-                EXIT MENU
-            ON ACTION bt_sign
-                LET global.g_instruction = "bt_sign"
-                LET TERMINATE = TRUE
-                EXIT MENU  
-            ON ACTION bt_video
-                LET global.g_instruction = "bt_video"
-                LET TERMINATE = TRUE
-                EXIT MENU
-            ON ACTION bt_maps
-                LET global.g_instruction = "bt_maps"
-                LET TERMINATE = TRUE
-                EXIT MENU
-            ON ACTION bt_go_back
-                LET global.g_instruction = "go_back"
-                LET TERMINATE = TRUE
-                EXIT MENU                
-              
-        END MENU
-    END WHILE
-
-    CASE global.g_instruction #Depending on the instruction, we load up new windows/forms within the application whithout unloading.
-        WHEN "bt_minesweeper"
-            CLOSE WINDOW w
-            CALL wc_minesweeper_demo()
-        WHEN "bt_sign"
-            CLOSE WINDOW w
-            CALL wc_signature_demo()
-        WHEN "bt_maps"
-            CLOSE WINDOW w
-            CALL wc_maps_demo()
-        WHEN "bt_video"
-            CLOSE WINDOW w
-            CALL wc_video_demo()
         WHEN "go_back"
             CLOSE WINDOW w
             CALL open_application()
