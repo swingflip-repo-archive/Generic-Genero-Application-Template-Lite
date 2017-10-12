@@ -64,6 +64,7 @@
     <Package binaryName="GGAT_Android_LITE" dependencies="781919164,715422167,313644474,212784684,400358049" description="Android Package" label="GGAT_Android_LITE" platform="Android">
       <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
       <DynamicProperty name="gma-actionbar-color" value="#5f5f5f"/>
+      <DynamicProperty name="gma-navigationBarBackground-color" value="#5f9f9f"/>
       <DynamicProperty name="gma-primary-color" value="#5f9f9f"/>
       <DynamicProperty name="gma-primary-dark-color" value="#5f9f9f"/>
       <DynamicProperty name="icon-hdpi" value="$(ProjectDir)/images/icon/hdpi.png"/>
@@ -103,10 +104,6 @@
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
     <Package binaryName="GGAT_iOS_LITE" dependencies="781919164,715422167,313644474,212784684,400358049" description="iOS Package" label="GGAT_iOS_LITE" platform="iOS">
-      <DynamicProperty name="gma-accent-color" value="#afcfcf"/>
-      <DynamicProperty name="gma-actionbar-color" value="#5f5f5f"/>
-      <DynamicProperty name="gma-primary-color" value="#eeeeee"/>
-      <DynamicProperty name="gma-primary-dark-color" value="#5f9f9f"/>
       <DynamicProperty name="icon120x120" value="$(ProjectDir)/images/icon/Icon-60@2x.png"/>
       <DynamicProperty name="icon152x152" value="$(ProjectDir)/images/icon/Icon-76@2x.png"/>
       <DynamicProperty name="icon167x167" value="$(ProjectDir)/images/icon/Icon-83.5@2x.png"/>
@@ -148,7 +145,7 @@
       <Directory description="Web Components" destinationDirectory="$(ProjectDir)/bin/webcomponents" label="Webcomponents" sourceDirectory="$(ProjectDir)/webcomponents"/>
     </Package>
   </Group>
-  <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,value:win_FGLIMAGEPATH=..\\images\\my_image2font.txt;..\\images;$(FGLDIR)\\lib\\image2font.txt;$(FGLIMAGEPATH);..,value:FGLIMAGEPATH=../images/my_image2font.txt:../images:$(FGLDIR)/lib/image2font.txt:$(FGLIMAGEPATH):..,value:DBPATH=$(ProjectDir)\\database;$(DBPATH),value:LinuxMac_DBPATH=$(ProjectDir)/database:$(DBPATH)" label="Project" language="Genero">
+  <Group environment="filelist:FGLPROFILE=$(ProjectDir)/config/fglprofile,value:FGLIMAGEPATH=..\\images\\my_image2font.txt;..\\images;$(FGLDIR)\\lib\\image2font.txt;$(FGLIMAGEPATH);..,value:LinuxMac_FGLIMAGEPATH=../images/my_image2font.txt:../images:$(FGLDIR)/lib/image2font.txt:$(FGLIMAGEPATH):..,value:DBPATH=$(ProjectDir)\\database;$(DBPATH),value:LinuxMac_DBPATH=$(ProjectDir)/database:$(DBPATH)" label="Project" language="Genero">
     <Application binaryName="Application" dependencies="212784684" id="400358049" label="Application">
       <VirtualFolder label="Forms">
         <VirtualFolder label="General Forms">
@@ -181,8 +178,8 @@
       <File filePath="database/local_db.db"/>
     </Library>
     <Library binaryName="GAS Files" id="391034" label="GAS Files">
-      <File filePath="gas/GGAT.xcf"/>
-      <File filePath="gas/GGAT_Linux.xcf"/>
+      <File filePath="gas/GGAT_Linux_lite.xcf"/>
+      <File filePath="gas/GGAT_lite.xcf"/>
     </Library>
     <Library binaryName="Library" dependencies="455109296,250541541,362164715,391034,327340596,332504730,159917928" id="212784684" label="Library">
       <File filePath="src/database_funcs.4gl"/>
